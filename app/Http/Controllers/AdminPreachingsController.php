@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Preaching;
+use App\Registration;
 
 class AdminPreachingsController extends Controller
 {
@@ -27,7 +28,9 @@ class AdminPreachingsController extends Controller
      */
     public function create()
     {
-        //
+        $registrations = Registration::pluck('regnumber', 'id')->all();
+
+        return view('admin.app.preaching.create', compact('registrations'));
     }
 
     /**

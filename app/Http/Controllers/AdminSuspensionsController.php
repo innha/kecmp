@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Suspension;
+use App\Registration;
 
 class AdminSuspensionsController extends Controller
 {
@@ -17,7 +18,7 @@ class AdminSuspensionsController extends Controller
         // return 'AdminSuspensionsController@index';
         $suspensions = Suspension::paginate(5);
 
-        return view('admin.app.suspension.index', compact('suspensions'));        
+        return view('admin.app.suspension.index', compact('suspensions'));      
     }
 
     /**
@@ -27,7 +28,10 @@ class AdminSuspensionsController extends Controller
      */
     public function create()
     {
-        //
+        $registrations = Registration::pluck('regNumber', 'id')->all();
+        $regNums = Registration::pluck('regNumber', 'id')->all();
+
+        return view('admin.app.suspension.create', compact('registrations', 'regNums'));
     }
 
     /**

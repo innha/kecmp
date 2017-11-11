@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Reception;
+use App\Registration;
+use App\Cell;
+use App\Parish;
 
 class AdminReceptionsController extends Controller
 {
@@ -27,7 +30,11 @@ class AdminReceptionsController extends Controller
      */
     public function create()
     {
-        //
+        $registrations = Registration::pluck('regnumber', 'id')->all();
+        $cells = Cell::pluck('name', 'id')->all();
+        $parishes = Parish::pluck('name', 'id')->all();
+
+        return view('admin.app.reception.create', compact('registrations', 'cells', 'parishes'));
     }
 
     /**

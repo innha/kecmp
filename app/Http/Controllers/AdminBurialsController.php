@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Burial;
+use App\Registration;
 
 class AdminBurialsController extends Controller
 {
@@ -27,7 +28,9 @@ class AdminBurialsController extends Controller
      */
     public function create()
     {
-        //
+        $registrations = Registration::pluck('regnumber', 'id')->all();
+
+        return view('admin.app.burial.create', compact('registrations'));
     }
 
     /**

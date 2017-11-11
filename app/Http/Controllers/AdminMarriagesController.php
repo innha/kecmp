@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Marriage;
+use App\Registration;
 
 class AdminMarriagesController extends Controller
 {
@@ -27,7 +28,9 @@ class AdminMarriagesController extends Controller
      */
     public function create()
     {
-        //
+        $registrations = Registration::pluck('regnumber', 'id')->all();
+
+        return view('admin.app.marriage.create', compact('registrations'));
     }
 
     /**

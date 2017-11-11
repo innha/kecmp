@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Literacy;
+use App\Registration;
 
 class AdminLiteraciesController extends Controller
 {
@@ -27,7 +28,9 @@ class AdminLiteraciesController extends Controller
      */
     public function create()
     {
-        //
+        $registrations = Registration::pluck('regnumber', 'id')->all();
+
+        return view('admin.app.literacy.create', compact('registrations'));
     }
 
     /**

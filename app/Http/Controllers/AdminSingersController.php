@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Singer;
+use App\Registration;
+use App\Choir;
 
 class AdminSingersController extends Controller
 {
@@ -13,7 +16,10 @@ class AdminSingersController extends Controller
      */
     public function index()
     {
-        //
+        // return 'AdminSingersController@index';
+        $singers = Singer::paginate(5);
+
+        return view('admin.app.singer.index', compact('singers'));
     }
 
     /**
@@ -23,7 +29,10 @@ class AdminSingersController extends Controller
      */
     public function create()
     {
-        //
+        $registrations = Registration::pluck('regnumber', 'id')->all();
+        $choirs = Choir::pluck('name', 'id')->all();
+
+        return view('admin.app.singer.create', compact('registrations', 'choirs'));
     }
 
     /**

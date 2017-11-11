@@ -161,7 +161,7 @@ User
 						</div>
 						<div class="form-check form-check-inline">
 							<label class="form-check-label">
-							{!! Form::radio('is_active', false, null, ['class' => 'form-check-input']) !!} Inactive</label>
+							{!! Form::radio('is_active', 0, null, ['class' => 'form-check-input']) !!} Inactive</label>
 						</div>
 						<span class="text-danger">{{ $errors->first('is_active') }}</span>
 					</div>

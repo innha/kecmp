@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Kid;
+use App\Registration;
 
 class AdminKidsController extends Controller
 {
@@ -27,7 +28,9 @@ class AdminKidsController extends Controller
      */
     public function create()
     {
-        //
+        $registrations = Registration::pluck('regnumber', 'id')->all();
+
+        return view('admin.app.kid.create', compact('registrations'));
     }
 
     /**
