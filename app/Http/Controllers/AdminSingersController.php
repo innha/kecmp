@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Commission;
-use Session;
 
-class AdminCommissionsController extends Controller
+class AdminSingersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +13,7 @@ class AdminCommissionsController extends Controller
      */
     public function index()
     {
-        // return 'AdminCommissionsController@index';
-        $commissions = Commission::paginate(5);
-
-        return view('admin.param.commission.index', compact('commissions'));
+        //
     }
 
     /**
@@ -39,16 +34,7 @@ class AdminCommissionsController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        $this->validate($request, [
-            'name' => 'required|alpha_spaces'
-        ]);        
-
-        Commission::create($request->all());
-
-        Session::flash('created_commission', 'Commission created');
-
-        return redirect(route('admin.commissions.index'));        
+        //
     }
 
     /**
@@ -93,12 +79,6 @@ class AdminCommissionsController extends Controller
      */
     public function destroy($id)
     {
-        // dd($id);
-
-        $deleted = Commission::findOrFail($id)->delete();
-
-        Session::flash('deleted_commission', 'Commission id ' . $id . ' deleted');
-        
-        return redirect(route('admin.commissions.index'));
+        //
     }
 }

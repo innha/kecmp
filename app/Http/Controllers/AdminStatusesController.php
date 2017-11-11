@@ -43,7 +43,7 @@ class AdminStatusesController extends Controller
 
         $this->validate($request, [
 
-            'name' => 'required|alpha'
+            'name' => 'required|alpha_spaces'
         ]);        
 
         Status::create($request->all());

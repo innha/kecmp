@@ -194,6 +194,11 @@ class Registration extends Model
     public function teachings()
     {
         return $this->hasMany('App\Teaching');
-    }    
+    }
+
+    public function singers()
+    {
+        return $this->hasMany('App\Singer');
+    }
 
 }

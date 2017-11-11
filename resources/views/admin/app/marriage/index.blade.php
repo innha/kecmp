@@ -9,8 +9,9 @@ Marriages
 @section('content')
 
 <!-- ACTIONS -->
+<!--
 <section id="action" class="py-4 mb-4 bg-light">
-  <div class="container">
+  <div class="container">            
     <div class="row">
       <div class="col-md-3 ml-3">
         <a href="{{ route('admin.marriages.create') }}" class="btn btn-primary btn-block">
@@ -25,12 +26,12 @@ Marriages
     </div>
   </div>
 </section>
-
+-->
 {{-- dd($marriages) --}}
 
 <!-- PEOPLE -->
 <section  id="posts">
-  <div class="container">
+  <div class="container">  
     <div class="row">
       <div class="col">
           <div class="scrollx">
@@ -38,26 +39,32 @@ Marriages
               <thead class="thead-default">
                 <tr>
                   <th>ID</th>
-                  <th>REG ID</th>
-                  <th>DATE MARRIED</th>
+                  <th></th>                  
+                  <th>REG #</th>
+                  <th>DATE</th>
                   <th>PLACE</th>
                   <th>USER</th>
                   <th>CREATED</th>
                   <th>UPDATED</th>
-                  <th colspan="2">Ops</th>
                 </tr>
               </thead>
               <tbody>
               @foreach($marriages as $marriage)
                 <tr>
                   <td scope="row">{{ $marriage->id }}</td>
+                  <td>
+                    <div class="text-center">
+                    {!! Form::open(['method' => 'DELETE', 'action' => ['AdminMarriagesController@destroy', $marriage->id]]) !!}        
+                        {!! Form::submit('x', ['class' => 'btn btn-sm btn-danger']) !!}
+                    {!! Form::close() !!}
+                    </div>
+                  </td>                  
                   <td>{{ $marriage->registration_id }}</td>
                   <td>{{ $marriage->date_married }}</td>
                   <td>{{ $marriage->marriagePlace }}</td>
                   <td>{{ $marriage->user_id }}</td>
                   <td>{{ $marriage->created_at }}</td>
                   <td>{{ $marriage->updated_at }}</td>
-                  <td colspan="2"><a href="#">Edit</a>&nbsp;<a href="#">Delete</a></td>
                   <!--
                   <td><a href="details.html" class="btn btn-scondary">
                     <i class="fa fa-angle-double-right"></i> Details
@@ -68,7 +75,7 @@ Marriages
               </tbody>
             </table>
             <div class="text-center text-sm-right">
-					   {{ $marriages->render("pagination::bootstrap-4") }}
+        {{ $marriages->render("pagination::bootstrap-4") }}
             </div>
           </div>
         <!-- </div> -->

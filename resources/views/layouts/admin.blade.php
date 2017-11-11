@@ -48,11 +48,10 @@
             <a href="{{ route('admin.bridals.index') }}" class="dropdown-item">Bridal</a>
             <a href="{{ route('admin.kids.index') }}" class="dropdown-item">Prayers</a>
             <a href="{{ route('admin.preachings.index') }}" class="dropdown-item">Preaching</a>
-            <a href="{{ route('admin.choirs.index') }}" class="dropdown-item">Choirs</a>
-            <a href="{{ route('admin.recommendations.index') }}" class="dropdown-item">Recommendations</a>
-            <a href="{{ route('admin.burials.index') }}" class="dropdown-item">Burials</a>
-            <a href="{{ route('admin.choirs.index') }}" class="dropdown-item">Choirs</a>
+            <a href="{{ route('admin.recommendations.index') }}" class="dropdown-item">Recommendations</a>            
+            <a href="{{ route('admin.singers.index') }}" class="dropdown-item">Singers</a>
             <a href="{{ route('admin.repentings.index') }}" class="dropdown-item">Repenting</a>
+            <a href="{{ route('admin.burials.index') }}" class="dropdown-item">Burials</a>
           </div>
         </li>
         <li class="nav-item dropdown px-2">
@@ -65,6 +64,7 @@
             <a href="{{ route('admin.duties.index') }}" class="dropdown-item">Duties</a>
             <a href="{{ route('admin.services.index') }}" class="dropdown-item">Services</a>
             <a href="{{ route('admin.commissions.index') }}" class="dropdown-item">Commissions</a>            
+            <a href="{{ route('admin.choirs.index') }}" class="dropdown-item">Choirs</a>            
             <a href="{{ route('admin.degrees.index') }}" class="dropdown-item">Education</a>
             <a href="{{ route('admin.zones.index') }}" class="dropdown-item">Zones</a>
             <a href="{{ route('admin.chapelles.index') }}" class="dropdown-item">Chapelles</a>

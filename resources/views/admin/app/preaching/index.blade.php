@@ -9,8 +9,9 @@ Preaching
 @section('content')
 
 <!-- ACTIONS -->
+<!--
 <section id="action" class="py-4 mb-4 bg-light">
-  <div class="container">
+  <div class="container">            
     <div class="row">
       <div class="col-md-3 ml-3">
         <a href="{{ route('admin.preachings.create') }}" class="btn btn-primary btn-block">
@@ -25,12 +26,12 @@ Preaching
     </div>
   </div>
 </section>
-
+-->
 {{-- dd($preachings) --}}
 
 <!-- PEOPLE -->
 <section  id="posts">
-  <div class="container">
+  <div class="container">  
     <div class="row">
       <div class="col">
           <div class="scrollx">
@@ -38,20 +39,27 @@ Preaching
               <thead class="thead-default">
                 <tr>
                   <th>ID</th>
-                  <th>REG ID</th>
+                  <th></th>                  
+                  <th>REG #</th>
                   <th>TOPIC</th>
-                  <th>DATE ARRIVED</th>
+                  <th>DATE PREACHED</th>
                   <th>REPENTED</th>
                   <th>USER</th>
                   <th>CREATED</th>
                   <th>UPDATED</th>
-                  <th colspan="2">Ops</th>
                 </tr>
               </thead>
               <tbody>
               @foreach($preachings as $preaching)
                 <tr>
                   <td scope="row">{{ $preaching->id }}</td>
+                  <td>
+                    <div class="text-center">
+                    {!! Form::open(['method' => 'DELETE', 'action' => ['AdminPreachingsController@destroy', $preaching->id]]) !!}        
+                        {!! Form::submit('x', ['class' => 'btn btn-sm btn-danger']) !!}
+                    {!! Form::close() !!}
+                    </div>
+                  </td>                  
                   <td>{{ $preaching->registration_id }}</td>
                   <td>{{ $preaching->topic }}</td>
                   <td>{{ $preaching->date_preached }}</td>
@@ -59,7 +67,6 @@ Preaching
                   <td>{{ $preaching->user_id }}</td>
                   <td>{{ $preaching->created_at }}</td>
                   <td>{{ $preaching->updated_at }}</td>
-                  <td colspan="2"><a href="#">Edit</a>&nbsp;<a href="#">Delete</a></td>
                   <!--
                   <td><a href="details.html" class="btn btn-scondary">
                     <i class="fa fa-angle-double-right"></i> Details
@@ -70,7 +77,7 @@ Preaching
               </tbody>
             </table>
             <div class="text-center text-sm-right">
-					   {{ $preachings->render("pagination::bootstrap-4") }}
+        {{ $preachings->render("pagination::bootstrap-4") }}
             </div>
           </div>
         <!-- </div> -->

@@ -9,8 +9,9 @@ Suspensions
 @section('content')
 
 <!-- ACTIONS -->
+<!--
 <section id="action" class="py-4 mb-4 bg-light">
-  <div class="container">
+  <div class="container">            
     <div class="row">
       <div class="col-md-3 ml-3">
         <a href="{{ route('admin.suspensions.create') }}" class="btn btn-primary btn-block">
@@ -25,12 +26,12 @@ Suspensions
     </div>
   </div>
 </section>
-
+-->
 {{-- dd($suspensions) --}}
 
 <!-- PEOPLE -->
 <section  id="posts">
-  <div class="container">
+  <div class="container">  
     <div class="row">
       <div class="col">
           <div class="scrollx">
@@ -38,24 +39,32 @@ Suspensions
               <thead class="thead-default">
                 <tr>
                   <th>ID</th>
-                  <th>REASON</th>
+                  <th></th>                  
                   <th>REG #</th>
+                  <th>REASON</th>
+                  <th>AUTHORIZER</th>
                   <th>USER</th>
                   <th>CREATED</th>
                   <th>UPDATED</th>
-                  <th colspan="2">Ops</th>
                 </tr>
               </thead>
               <tbody>
               @foreach($suspensions as $suspension)
                 <tr>
                   <td scope="row">{{ $suspension->id }}</td>
+                  <td>
+                    <div class="text-center">
+                    {!! Form::open(['method' => 'DELETE', 'action' => ['AdminSuspensionsController@destroy', $suspension->id]]) !!}        
+                        {!! Form::submit('x', ['class' => 'btn btn-sm btn-danger']) !!}
+                    {!! Form::close() !!}
+                    </div>
+                  </td>                  
+                  <td>{{ $suspension->registration_id }}</td>
                   <td>{{ $suspension->reason }}</td>
                   <td>{{ $suspension->authRegNum }}</td>
                   <td>{{ $suspension->user_id }}</td>
                   <td>{{ $suspension->created_at }}</td>
                   <td>{{ $suspension->updated_at }}</td>
-                  <td colspan="2"><a href="#">Edit</a>&nbsp;<a href="#">Delete</a></td>
                   <!--
                   <td><a href="details.html" class="btn btn-scondary">
                     <i class="fa fa-angle-double-right"></i> Details
@@ -66,7 +75,7 @@ Suspensions
               </tbody>
             </table>
             <div class="text-center text-sm-right">
-					   {{ $suspensions->render("pagination::bootstrap-4") }}
+        {{ $suspensions->render("pagination::bootstrap-4") }}
             </div>
           </div>
         <!-- </div> -->

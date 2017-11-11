@@ -65,11 +65,11 @@ class AdminRegistrationsController extends Controller
         $duties = Duty::pluck('name', 'id')->all();
         $categories = Category::pluck('name', 'id')->all();
         $services = Service::pluck('name', 'id')->all();
-        $commisions = Commission::pluck('name', 'id')->all();
+        $commissions = Commission::pluck('name', 'id')->all();
         $choirs = Choir::pluck('name', 'id')->all();
         $statuses = Status::pluck('name', 'id')->all();
 
-        return view('admin.app.registration.create', compact('types', 'degrees', 'provinces', 'districts', 'sectors', 'cells', 'villages', 'dioceses', 'parishes', 'chapelles', 'zones', 'duties', 'categories', 'services', 'commisions', 'choirs', 'statuses'));
+        return view('admin.app.registration.create', compact('types', 'degrees', 'provinces', 'districts', 'sectors', 'cells', 'villages', 'dioceses', 'parishes', 'chapelles', 'zones', 'duties', 'categories', 'services', 'commissions', 'choirs', 'statuses'));
     }
 
     /**

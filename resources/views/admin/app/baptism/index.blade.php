@@ -6,12 +6,12 @@ Baptism
 
 @endsection
 
-
 @section('content')
 
 <!-- ACTIONS -->
+<!--
 <section id="action" class="py-4 mb-4 bg-light">
-  <div class="container">
+  <div class="container">            
     <div class="row">
       <div class="col-md-3 ml-3">
         <a href="{{ route('admin.baptisms.create') }}" class="btn btn-primary btn-block">
@@ -26,12 +26,12 @@ Baptism
     </div>
   </div>
 </section>
-
+-->
 {{-- dd($baptisms) --}}
 
 <!-- PEOPLE -->
 <section  id="posts">
-  <div class="container">
+  <div class="container">  
     <div class="row">
       <div class="col">
           <div class="scrollx">
@@ -39,24 +39,30 @@ Baptism
               <thead class="thead-default">
                 <tr>
                   <th>ID</th>
-                  <th>REG ID</th>
+                  <th></th>                  
+                  <th>REG #</th>
                   <th>DATE BAPTIZED</th>
                   <th>USER</th>
                   <th>CREATED</th>
                   <th>UPDATED</th>
-                  <th colspan="2">Ops</th>
                 </tr>
               </thead>
               <tbody>
               @foreach($baptisms as $baptism)
                 <tr>
                   <td scope="row">{{ $baptism->id }}</td>
+                  <td>
+                    <div class="text-center">
+                    {!! Form::open(['method' => 'DELETE', 'action' => ['AdminBaptismsController@destroy', $baptism->id]]) !!}        
+                        {!! Form::submit('x', ['class' => 'btn btn-sm btn-danger']) !!}
+                    {!! Form::close() !!}
+                    </div>
+                  </td>                  
                   <td>{{ $baptism->registration_id }}</td>
                   <td>{{ $baptism->date_baptized }}</td>
                   <td>{{ $baptism->user_id }}</td>
                   <td>{{ $baptism->created_at }}</td>
                   <td>{{ $baptism->updated_at }}</td>
-                  <td colspan="2"><a href="#">Edit</a>&nbsp;<a href="#">Delete</a></td>
                   <!--
                   <td><a href="details.html" class="btn btn-scondary">
                     <i class="fa fa-angle-double-right"></i> Details
@@ -67,7 +73,7 @@ Baptism
               </tbody>
             </table>
             <div class="text-center text-sm-right">
-				{{ $baptisms->render("pagination::bootstrap-4") }}
+        {{ $baptisms->render("pagination::bootstrap-4") }}
             </div>
           </div>
         <!-- </div> -->

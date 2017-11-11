@@ -9,8 +9,9 @@ Recommendations
 @section('content')
 
 <!-- ACTIONS -->
+<!--
 <section id="action" class="py-4 mb-4 bg-light">
-  <div class="container">
+  <div class="container">            
     <div class="row">
       <div class="col-md-3 ml-3">
         <a href="{{ route('admin.recommendations.create') }}" class="btn btn-primary btn-block">
@@ -25,12 +26,12 @@ Recommendations
     </div>
   </div>
 </section>
-
+-->
 {{-- dd($recommendations) --}}
 
 <!-- PEOPLE -->
 <section  id="posts">
-  <div class="container">
+  <div class="container">  
     <div class="row">
       <div class="col">
           <div class="scrollx">
@@ -38,32 +39,38 @@ Recommendations
               <thead class="thead-default">
                 <tr>
                   <th>ID</th>
-                  <th>REG ID</th>
+                  <th></th>                  
+                  <th>REG #</th>
                   <th>DATE ISSUED</th>
                   <th>OWNER</th>
-                  <th>DESTINATION</th>
                   <th>HOLDER</th>
+                  <th>DESTINATION</th>
                   <th>DATE ARRIVED</th>
                   <th>USER</th>
                   <th>CREATED</th>
                   <th>UPDATED</th>
-                  <th colspan="2">Ops</th>
                 </tr>
               </thead>
               <tbody>
               @foreach($recommendations as $recommendation)
                 <tr>
                   <td scope="row">{{ $recommendation->id }}</td>
+                  <td>
+                    <div class="text-center">
+                    {!! Form::open(['method' => 'DELETE', 'action' => ['AdminRecommendationsController@destroy', $recommendation->id]]) !!}        
+                        {!! Form::submit('x', ['class' => 'btn btn-sm btn-danger']) !!}
+                    {!! Form::close() !!}
+                    </div>
+                  </td>                  
                   <td>{{ $recommendation->registration_id }}</td>
                   <td>{{ $recommendation->date_issued }}</td>
                   <td>{{ $recommendation->ownerName }}</td>
-                  <td>{{ $recommendation->destination }}</td>
                   <td>{{ $recommendation->holderName }}</td>
+                  <td>{{ $recommendation->destination }}</td>
                   <td>{{ $recommendation->date_arrived }}</td>
                   <td>{{ $recommendation->user_id }}</td>
                   <td>{{ $recommendation->created_at }}</td>
                   <td>{{ $recommendation->updated_at }}</td>
-                  <td colspan="2"><a href="#">Edit</a>&nbsp;<a href="#">Delete</a></td>
                   <!--
                   <td><a href="details.html" class="btn btn-scondary">
                     <i class="fa fa-angle-double-right"></i> Details
@@ -74,7 +81,7 @@ Recommendations
               </tbody>
             </table>
             <div class="text-center text-sm-right">
-					   {{ $recommendations->render("pagination::bootstrap-4") }}
+        {{ $recommendations->render("pagination::bootstrap-4") }}
             </div>
           </div>
         <!-- </div> -->

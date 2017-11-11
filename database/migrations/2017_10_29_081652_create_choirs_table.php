@@ -16,6 +16,7 @@ class CreateChoirsTable extends Migration
         Schema::create('choirs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name'); //->unique();
+            $table->text('equipment');
             $table->timestamps();
         });
     }

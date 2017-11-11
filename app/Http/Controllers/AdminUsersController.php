@@ -70,7 +70,7 @@ class AdminUsersController extends Controller
         $this->validate($request, [
             'role_id' => 'required|numeric',
             'privilege_id' => 'required|numeric',
-            'name' => 'required|alpha',
+            'name' => 'required|alpha_spaces',
             'email' => 'required|email',
             'phone' => 'required|numeric',
             'password' => 'required|min:6|confirmed',
@@ -85,7 +85,7 @@ class AdminUsersController extends Controller
             'chapelle_id' => 'required|numeric',
             'zone_id' => 'required|numeric',
             'is_active' => 'required|boolean',
-            'photo_id' => 'required|numeric'
+            'photo_id' => 'required'
         ]);       
 
         $input = $request->all();

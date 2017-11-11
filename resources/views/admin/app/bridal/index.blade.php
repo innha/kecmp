@@ -9,8 +9,9 @@ Bridals
 @section('content')
 
 <!-- ACTIONS -->
+<!--
 <section id="action" class="py-4 mb-4 bg-light">
-  <div class="container">
+  <div class="container">            
     <div class="row">
       <div class="col-md-3 ml-3">
         <a href="{{ route('admin.bridals.create') }}" class="btn btn-primary btn-block">
@@ -25,12 +26,12 @@ Bridals
     </div>
   </div>
 </section>
-
+-->
 {{-- dd($bridals) --}}
 
 <!-- PEOPLE -->
 <section  id="posts">
-  <div class="container">
+  <div class="container">  
     <div class="row">
       <div class="col">
           <div class="scrollx">
@@ -38,26 +39,31 @@ Bridals
               <thead class="thead-default">
                 <tr>
                   <th>ID</th>
-                  <th>REG ID</th>
-                  <th>NAME</th>
+                  <th></th>                  
+                  <th>REG #</th>
+                  <th>BRIDAL NAME</th>
                   <th>ORIGIN</th>
                   <th>USER</th>
                   <th>CREATED</th>
                   <th>UPDATED</th>
-                  <th colspan="2">Ops</th>
                 </tr>
               </thead>
               <tbody>
               @foreach($bridals as $bridal)
                 <tr>
                   <td scope="row">{{ $bridal->id }}</td>
+                  <td>
+                    <div class="text-center">
+                    {!! Form::open(['method' => 'DELETE', 'action' => ['AdminBridalsController@destroy', $bridal->id]]) !!}        
+                        {!! Form::submit('x', ['class' => 'btn btn-sm btn-danger']) !!}
+                    {!! Form::close() !!}
+                    </div>
+                  </td>                  
                   <td>{{ $bridal->registration_id }}</td>
                   <td>{{ $bridal->bridalName }}</td>
                   <td>{{ $bridal->origin }}</td>
-                  <td>{{ $bridal->user_id }}</td>
                   <td>{{ $bridal->created_at }}</td>
                   <td>{{ $bridal->updated_at }}</td>
-                  <td colspan="2"><a href="#">Edit</a>&nbsp;<a href="#">Delete</a></td>
                   <!--
                   <td><a href="details.html" class="btn btn-scondary">
                     <i class="fa fa-angle-double-right"></i> Details
@@ -68,7 +74,7 @@ Bridals
               </tbody>
             </table>
             <div class="text-center text-sm-right">
-				{{ $bridals->render("pagination::bootstrap-4") }}
+        {{ $bridals->render("pagination::bootstrap-4") }}
             </div>
           </div>
         <!-- </div> -->

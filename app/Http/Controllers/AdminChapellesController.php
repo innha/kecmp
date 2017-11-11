@@ -45,7 +45,7 @@ class AdminChapellesController extends Controller
 
         $this->validate($request, [
             'parish_id' => 'required|numeric',
-            'name' => 'required|alpha'
+            'name' => 'required|alpha_spaces'
         ]);        
 
         Chapelle::create($request->all());

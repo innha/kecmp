@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Choir;
+use Session;
 
 class AdminChoirsController extends Controller
 {
@@ -17,7 +18,7 @@ class AdminChoirsController extends Controller
         // return 'AdminChoirsController@index';
         $choirs = Choir::paginate(5);
 
-        return view('admin.app.choir.index', compact('choirs'));
+        return view('admin.param.choir.index', compact('choirs'));
     }
 
     /**
@@ -27,7 +28,7 @@ class AdminChoirsController extends Controller
      */
     public function create()
     {
-        return view('admin.app.choir.create');
+        // 
     }
 
     /**
@@ -38,7 +39,18 @@ class AdminChoirsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
+
+        $this->validate($request, [
+            'name' => 'required|alpha_spaces',
+            'equipment' => 'required'
+        ]);
+
+        Choir::create($request->all());
+
+        Session::flash('created_choir', 'Choir created');
+
+        return redirect(route('admin.choirs.index'));
     }
 
     /**
@@ -83,6 +95,13 @@ class AdminChoirsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // dd($id);
+
+        $deleted = Choir::findOrFail($id)->delete();
+
+        Session::flash('deleted_choir', 'Choir id ' . $id . ' deleted');
+
+        return redirect(route('admin.choirs.index'));
+
     }
 }

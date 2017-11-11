@@ -2,15 +2,16 @@
 
 @section('header')
 
-Kids prayers
+Kids
 
 @endsection
 
 @section('content')
 
 <!-- ACTIONS -->
+<!--
 <section id="action" class="py-4 mb-4 bg-light">
-  <div class="container">
+  <div class="container">            
     <div class="row">
       <div class="col-md-3 ml-3">
         <a href="{{ route('admin.kids.create') }}" class="btn btn-primary btn-block">
@@ -25,12 +26,12 @@ Kids prayers
     </div>
   </div>
 </section>
-
+-->
 {{-- dd($kids) --}}
 
 <!-- PEOPLE -->
 <section  id="posts">
-  <div class="container">
+  <div class="container">  
     <div class="row">
       <div class="col">
           <div class="scrollx">
@@ -38,24 +39,30 @@ Kids prayers
               <thead class="thead-default">
                 <tr>
                   <th>ID</th>
-                  <th>REG ID</th>
-                  <th>PRAYER DATE</th>
+                  <th></th>                  
+                  <th>REG #</th>
+                  <th>DATE PRAYED</th>
                   <th>USER</th>
                   <th>CREATED</th>
                   <th>UPDATED</th>
-                  <th colspan="2">Ops</th>
                 </tr>
               </thead>
               <tbody>
               @foreach($kids as $kid)
                 <tr>
                   <td scope="row">{{ $kid->id }}</td>
+                  <td>
+                    <div class="text-center">
+                    {!! Form::open(['method' => 'DELETE', 'action' => ['AdminKidsController@destroy', $kid->id]]) !!}        
+                        {!! Form::submit('x', ['class' => 'btn btn-sm btn-danger']) !!}
+                    {!! Form::close() !!}
+                    </div>
+                  </td>                  
                   <td>{{ $kid->registration_id }}</td>
                   <td>{{ $kid->date_prayed }}</td>
                   <td>{{ $kid->user_id }}</td>
                   <td>{{ $kid->created_at }}</td>
                   <td>{{ $kid->updated_at }}</td>
-                  <td colspan="2"><a href="#">Edit</a>&nbsp;<a href="#">Delete</a></td>
                   <!--
                   <td><a href="details.html" class="btn btn-scondary">
                     <i class="fa fa-angle-double-right"></i> Details
@@ -66,7 +73,7 @@ Kids prayers
               </tbody>
             </table>
             <div class="text-center text-sm-right">
-					   {{ $kids->render("pagination::bootstrap-4") }}
+        {{ $kids->render("pagination::bootstrap-4") }}
             </div>
           </div>
         <!-- </div> -->

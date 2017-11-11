@@ -153,6 +153,7 @@ $factory->define(App\Commission::class, function (Faker\Generator $faker) {
 $factory->define(App\Choir::class, function (Faker\Generator $faker) {
 	return [
 		'name' => $faker->randomElement(['Rehoboth']),
+		'equipment' => $faker->randomElement(['2 Piono, 3 Guitars, Drums']),
 	];
 });
 

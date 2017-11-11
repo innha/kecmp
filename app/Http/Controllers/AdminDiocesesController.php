@@ -42,7 +42,7 @@ class AdminDiocesesController extends Controller
         // dd($request->all());
 
         $this->validate($request, [
-            'name' => 'required|alpha'
+            'name' => 'required|alpha_spaces'
         ]);        
 
         Diocese::create($request->all());

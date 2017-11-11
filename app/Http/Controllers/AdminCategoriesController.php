@@ -40,7 +40,7 @@ class AdminCategoriesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|alpha'
+            'name' => 'required|alpha_spaces'
         ]);
 
         // dd($request->all());

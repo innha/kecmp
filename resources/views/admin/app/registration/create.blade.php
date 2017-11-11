@@ -241,7 +241,7 @@ Registration
 						</div>
 						<div class="form-check form-check-inline">
 							<label class="form-check-label">
-							{!! Form::radio('ownsHouse', false, null, ['class' => 'form-check-input']) !!} No</label>
+							{!! Form::radio('ownsHouse', 0, null, ['class' => 'form-check-input']) !!} No</label>
 						</div>										
 						<span class="text-danger">{{ $errors->first('ownsHouse') }}</span>
 					</div>
@@ -311,11 +311,11 @@ Registration
 					</div>
 				</div>
 
-				<div class="form-group {{$errors->has('commision_id') ? 'has-error' : '' }} row">			
-					{!! Form::label('commision_id', 'Commission:', ['class' => 'col-4 col-form-label']) !!}
+				<div class="form-group {{$errors->has('commission_id') ? 'has-error' : '' }} row">			
+					{!! Form::label('commission_id', 'Commission:', ['class' => 'col-4 col-form-label']) !!}
 					<div class="col-8">
-					{!! Form::select('commission_id', array('' => 'Choose commission') + $commisions, null, ['class' => 'form-control']) !!}
-					<span class="text-danger">{{ $errors->first('commision_id') }}</span>
+					{!! Form::select('commission_id', array('' => 'Choose commission') + $commissions, null, ['class' => 'form-control']) !!}
+					<span class="text-danger">{{ $errors->first('commission_id') }}</span>
 					</div>
 				</div>
 
@@ -346,7 +346,7 @@ Registration
 						</div>
 						<div class="form-check form-check-inline">
 							<label class="form-check-label">
-							{!! Form::radio('confirmed', false, null, ['class' => 'form-check-input']) !!} No</label>
+							{!! Form::radio('confirmed', 0, null, ['class' => 'form-check-input']) !!} No</label>
 						</div>										
 						<span class="text-danger">{{ $errors->first('confirmed') }}</span>
 					</div>

@@ -461,3 +461,16 @@ Route::resource('/admin/users', 'AdminUsersController', ['as' => 'admin'],
 		'destroy' => 'admin.users.destroy'
 	]]
 );
+
+Route::resource('/admin/singers', 'AdminSingersController', ['as' => 'admin'], 
+	['name' => [
+
+		'admin/singers' => 'admin.singers.index',
+		'create' => 'admin.singers.create',
+		'store' => 'admin.singers.store',
+		'show' => 'admin.singers.show',
+		'edit' => 'admin.singers.edit',
+		'update' => 'admin.singers.update',
+		'destroy' => 'admin.singers.destroy'
+	]]
+);

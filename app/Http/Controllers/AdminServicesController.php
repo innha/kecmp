@@ -43,7 +43,7 @@ class AdminServicesController extends Controller
 
         $this->validate($request, [
 
-            'name' => 'required|alpha'
+            'name' => 'required|alpha_spaces'
         ]);        
 
         Service::create($request->all());
