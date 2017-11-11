@@ -2,7 +2,7 @@
 
 @section('header')
 
-Receptions
+Reception
 
 @endsection
 
