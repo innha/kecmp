@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Literacy;
 use App\Registration;
+use Auth;
+use Session;
 
 class AdminLiteraciesController extends Controller
 {
@@ -41,7 +43,23 @@ class AdminLiteraciesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            
+            'registration_id' => 'required|numeric',
+            'period' => 'required|alpha_spaces'
+        ]);
+
+        $input = $request->all();
+
+        $user = Auth::user();
+
+        $input['user_id'] = $user->id;
+
+        Literacy::create($input);
+
+        Session::flash('created_literacy', 'Literacy added');
+
+        return redirect(route('admin.literacies.index'));        
     }
 
     /**
@@ -86,6 +104,10 @@ class AdminLiteraciesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = Literacy::findOrFail($id)->delete();
+
+        Session::flash('deleted_literacy', 'Literacy id ' . $id . ' deleted');
+        
+        return redirect(route('admin.literacies.index'));
     }
 }

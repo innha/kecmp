@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Baptism;
 use App\Registration;
+use Auth;
+use Session;
 
 class AdminBaptismsController extends Controller
 {
@@ -42,7 +44,23 @@ class AdminBaptismsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            
+            'registration_id' => 'required|numeric',
+            'date_baptized' => 'required|date'
+        ]);
+
+        $input = $request->all();
+
+        $user = Auth::user();
+
+        $input['user_id'] = $user->id;
+
+        Baptism::create($input);
+
+        Session::flash('created_baptism', 'Baptism added');
+
+        return redirect(route('admin.baptisms.index'));
     }
 
     /**
@@ -87,6 +105,10 @@ class AdminBaptismsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = Baptism::findOrFail($id)->delete();
+
+        Session::flash('deleted_baptism', 'Baptism id ' . $id . ' deleted');
+        
+        return redirect(route('admin.baptisms.index'));
     }
 }

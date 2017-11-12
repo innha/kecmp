@@ -31,7 +31,7 @@ Repenting
 				</div>
 
 				<div class="form-group {{$errors->has('authRegNum') ? 'has-error' : '' }} row">			
-					{!! Form::label('authRegNum', 'Reg #:', ['class' => 'col-4 col-form-label']) !!}
+					{!! Form::label('authRegNum', 'Approved By:', ['class' => 'col-4 col-form-label']) !!}
 					<div class="col-8">
 					{!! Form::select('authRegNum', array('' => 'Choose reg #') + $regNums, null, ['class' => 'form-control']) !!}
 					<span class="text-danger">{{ $errors->first('authRegNum') }}</span>

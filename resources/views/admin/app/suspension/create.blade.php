@@ -25,13 +25,13 @@ Suspension
 				<div class="form-group row">			
 					{!! Form::label('registration_id', 'Registration:', ['class' => 'col-4 col-form-label']) !!}
 					<div class="col-8">
-					{!! Form::select('registration_id', array('' => 'Choose role', '0' => 'New') + $registrations, null, ['class' => 'form-control']) !!}
+					{!! Form::select('registration_id', array('' => 'Choose registration', '0' => 'New') + $registrations, null, ['class' => 'form-control']) !!}
 					<span class="text-danger">{{ $errors->first('registration_id') }}</span>
 					</div>
 				</div>
 
 				<div class="form-group {{$errors->has('authRegNum') ? 'has-error' : '' }} row">			
-					{!! Form::label('authRegNum', 'Reg #:', ['class' => 'col-4 col-form-label']) !!}
+					{!! Form::label('authRegNum', 'Decided By:', ['class' => 'col-4 col-form-label']) !!}
 					<div class="col-8">
 					{!! Form::select('authRegNum', array('' => 'Choose reg #') + $regNums, null, ['class' => 'form-control']) !!}
 					<span class="text-danger">{{ $errors->first('authRegNum') }}</span>

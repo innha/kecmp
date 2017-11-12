@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Burial;
 use App\Registration;
+use Auth;
+use Session;
 
 class AdminBurialsController extends Controller
 {
@@ -41,7 +43,24 @@ class AdminBurialsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            
+            'registration_id' => 'required|numeric',
+            'date_died' => 'required|date',
+            'burialPlace' => 'required|alpha_spaces'
+        ]);
+
+        $input = $request->all();
+
+        $user = Auth::user();
+
+        $input['user_id'] = $user->id;
+
+        Burial::create($input);
+
+        Session::flash('created_burial', 'Burial added');
+
+        return redirect(route('admin.burials.index'));        
     }
 
     /**
@@ -86,6 +105,10 @@ class AdminBurialsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = Burial::findOrFail($id)->delete();
+
+        Session::flash('deleted_burial', 'Burial id ' . $id . ' deleted');
+        
+        return redirect(route('admin.burials.index'));
     }
 }

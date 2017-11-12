@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Marriage;
 use App\Registration;
+use Auth;
+use Session;
 
 class AdminMarriagesController extends Controller
 {
@@ -41,7 +43,24 @@ class AdminMarriagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            
+            'registration_id' => 'required|numeric',
+            'date_married' => 'required|date',
+            'marriagePlace' => 'required|alpha_spaces'
+        ]);
+
+        $input = $request->all();
+
+        $user = Auth::user();
+
+        $input['user_id'] = $user->id;
+
+        Marriage::create($input);
+
+        Session::flash('created_marriage', 'Marriage added');
+
+        return redirect(route('admin.marriages.index'));        
     }
 
     /**
@@ -86,6 +105,10 @@ class AdminMarriagesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = Marriage::findOrFail($id)->delete();
+
+        Session::flash('deleted_marriage', 'Marriage id ' . $id . ' deleted');
+        
+        return redirect(route('admin.marriages.index'));
     }
 }

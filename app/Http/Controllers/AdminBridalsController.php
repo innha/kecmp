@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Bridal;
 use App\Registration;
+use Auth;
+use Session;
 
 class AdminBridalsController extends Controller
 {
@@ -41,7 +43,24 @@ class AdminBridalsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            
+            'registration_id' => 'required|numeric',
+            'bridalName' => 'required|alpha_spaces',
+            'origin' => 'required|alpha_spaces'
+        ]);
+
+        $input = $request->all();
+
+        $user = Auth::user();
+
+        $input['user_id'] = $user->id;
+
+        Bridal::create($input);
+
+        Session::flash('created_bridal', 'Bridal added');
+
+        return redirect(route('admin.bridals.index'));        
     }
 
     /**
@@ -86,6 +105,10 @@ class AdminBridalsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = Bridal::findOrFail($id)->delete();
+
+        Session::flash('deleted_bridal', 'Bridal id ' . $id . ' deleted');
+        
+        return redirect(route('admin.bridals.index'));
     }
 }

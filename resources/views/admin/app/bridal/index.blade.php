@@ -9,7 +9,7 @@ Bridals
 @section('content')
 
 <!-- ACTIONS -->
-<!--
+
 <section id="action" class="py-4 mb-4 bg-light">
   <div class="container">            
     <div class="row">
@@ -26,7 +26,7 @@ Bridals
     </div>
   </div>
 </section>
--->
+
 {{-- dd($bridals) --}}
 
 <!-- PEOPLE -->
@@ -62,6 +62,7 @@ Bridals
                   <td>{{ $bridal->registration_id }}</td>
                   <td>{{ $bridal->bridalName }}</td>
                   <td>{{ $bridal->origin }}</td>
+                  <td>{{ $bridal->user_id }}</td>
                   <td>{{ $bridal->created_at }}</td>
                   <td>{{ $bridal->updated_at }}</td>
                   <!--

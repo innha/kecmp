@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Kid;
 use App\Registration;
+use Auth;
+use Session;
 
 class AdminKidsController extends Controller
 {
@@ -41,7 +43,23 @@ class AdminKidsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            
+            'registration_id' => 'required|numeric',
+            'date_prayed' => 'required|date',
+        ]);
+
+        $input = $request->all();
+
+        $user = Auth::user();
+
+        $input['user_id'] = $user->id;
+
+        Kid::create($input);
+
+        Session::flash('created_kid', 'Kid added');
+
+        return redirect(route('admin.kids.index'));        
     }
 
     /**
@@ -86,6 +104,10 @@ class AdminKidsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = Kid::findOrFail($id)->delete();
+
+        Session::flash('deleted_kid', 'Kid id ' . $id . ' deleted');
+        
+        return redirect(route('admin.kids.index'));
     }
 }

@@ -9,7 +9,7 @@ Recommendations
 @section('content')
 
 <!-- ACTIONS -->
-<!--
+
 <section id="action" class="py-4 mb-4 bg-light">
   <div class="container">            
     <div class="row">
@@ -26,7 +26,7 @@ Recommendations
     </div>
   </div>
 </section>
--->
+
 {{-- dd($recommendations) --}}
 
 <!-- PEOPLE -->

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repenting;
 use App\Registration;
+use Auth;
+use Session;
 
 class AdminRepentingsController extends Controller
 {
@@ -42,7 +44,24 @@ class AdminRepentingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            
+            'registration_id' => 'required|numeric',
+            'date_returned' => 'required|date',
+            'authRegNum' => 'required|numeric'
+        ]);
+
+        $input = $request->all();
+
+        $user = Auth::user();
+
+        $input['user_id'] = $user->id;
+
+        Repenting::create($input);
+
+        Session::flash('created_repenting', 'Repenting added');
+
+        return redirect(route('admin.repentings.index'));        
     }
 
     /**
@@ -87,6 +106,10 @@ class AdminRepentingsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = Repenting::findOrFail($id)->delete();
+
+        Session::flash('deleted_repenting', 'Repenting id ' . $id . ' deleted');
+        
+        return redirect(route('admin.repentings.index'));
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Suspension;
 use App\Registration;
+use Auth;
+use Session;
 
 class AdminSuspensionsController extends Controller
 {
@@ -42,7 +44,24 @@ class AdminSuspensionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            
+            'registration_id' => 'required|numeric',
+            'reason' => 'required|alpha_spaces',
+            'authRegNum' => 'required|numeric'
+        ]);
+
+        $input = $request->all();
+
+        $user = Auth::user();
+
+        $input['user_id'] = $user->id;
+
+        Suspension::create($input);
+
+        Session::flash('created_suspension', 'Suspension added');
+
+        return redirect(route('admin.suspensions.index'));        
     }
 
     /**
@@ -87,6 +106,10 @@ class AdminSuspensionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = Suspension::findOrFail($id)->delete();
+
+        Session::flash('deleted_suspension', 'Suspension id ' . $id . ' deleted');
+        
+        return redirect(route('admin.suspensions.index'));
     }
 }

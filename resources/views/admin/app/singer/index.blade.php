@@ -9,7 +9,7 @@ Singers
 @section('content')
 
 <!-- ACTIONS -->
-<!--
+
 <section id="action" class="py-4 mb-4 bg-light">
   <div class="container">            
     <div class="row">
@@ -26,7 +26,7 @@ Singers
     </div>
   </div>
 </section>
--->
+
 {{-- dd($singers) --}}
 
 <!-- PEOPLE -->
@@ -60,6 +60,8 @@ Singers
                     </div>
                   </td>
                   <td>{{ $singer->registration_id }}</td>
+                  <td>{{ $singer->choir_id }}</td>
+                  <td>{{ $singer->role }}</td>                  
                   <td>{{ $singer->user_id }}</td>
                   <td>{{ $singer->created_at }}</td>
                   <td>{{ $singer->updated_at }}</td>

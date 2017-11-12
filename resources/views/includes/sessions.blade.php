@@ -377,4 +377,251 @@
             </button>
             {{ session('created_user') }}
           </div>
-        @endif                                                                                                                                                        
+        @endif  
+
+      @if(Session::has('deleted_baptism'))
+
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('deleted_baptism') }}
+          </div>
+
+        @elseif(Session::has('created_baptism'))
+
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('created_baptism') }}
+          </div>
+        @endif
+
+      @if(Session::has('deleted_bridal'))
+
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('deleted_bridal') }}
+          </div>
+
+        @elseif(Session::has('created_bridal'))
+
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('created_bridal') }}
+          </div>
+        @endif
+
+      @if(Session::has('deleted_burial'))
+
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('deleted_burial') }}
+          </div>
+
+        @elseif(Session::has('created_burial'))
+
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('created_burial') }}
+          </div>
+        @endif
+
+      @if(Session::has('deleted_kid'))
+
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('deleted_kid') }}
+          </div>
+
+        @elseif(Session::has('created_kid'))
+
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('created_kid') }}
+          </div>
+        @endif
+
+      @if(Session::has('deleted_literacy'))
+
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('deleted_literacy') }}
+          </div>
+
+        @elseif(Session::has('created_literacy'))
+
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('created_literacy') }}
+          </div>
+        @endif
+
+      @if(Session::has('deleted_marriage'))
+
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('deleted_marriage') }}
+          </div>
+
+        @elseif(Session::has('created_marriage'))
+
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('created_marriage') }}
+          </div>
+        @endif
+
+      @if(Session::has('deleted_preaching'))
+
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('deleted_preaching') }}
+          </div>
+
+        @elseif(Session::has('created_preaching'))
+
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('created_preaching') }}
+          </div>
+        @endif
+
+      @if(Session::has('deleted_reception'))
+
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('deleted_reception') }}
+          </div>
+
+        @elseif(Session::has('created_reception'))
+
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('created_reception') }}
+          </div>
+        @endif
+
+      @if(Session::has('deleted_recommendation'))
+
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('deleted_recommendation') }}
+          </div>
+
+        @elseif(Session::has('created_recommendation'))
+
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('created_recommendation') }}
+          </div>
+        @endif
+
+      @if(Session::has('deleted_repenting'))
+
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('deleted_repenting') }}
+          </div>
+
+        @elseif(Session::has('created_repenting'))
+
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('created_repenting') }}
+          </div>
+        @endif
+
+      @if(Session::has('deleted_singer'))
+
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('deleted_singer') }}
+          </div>
+
+        @elseif(Session::has('created_singer'))
+
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('created_singer') }}
+          </div>
+        @endif
+
+      @if(Session::has('deleted_suspension'))
+
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('deleted_suspension') }}
+          </div>
+
+        @elseif(Session::has('created_suspension'))
+
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('created_suspension') }}
+          </div>
+        @endif
+
+      @if(Session::has('deleted_teaching'))
+
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('deleted_teaching') }}
+          </div>
+
+        @elseif(Session::has('created_teaching'))
+
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('created_teaching') }}
+          </div>
+        @endif                                                                                                                                                                                                           

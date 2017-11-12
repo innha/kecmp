@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Preaching;
 use App\Registration;
+use Auth;
+use Session;
 
 class AdminPreachingsController extends Controller
 {
@@ -41,7 +43,25 @@ class AdminPreachingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            
+            'registration_id' => 'required|numeric',
+            'topic' => 'required|alpha_spaces',
+            'date_preached' => 'required|date',
+            'hasRepented' => 'required|boolean'
+        ]);
+
+        $input = $request->all();
+
+        $user = Auth::user();
+
+        $input['user_id'] = $user->id;
+
+        Preaching::create($input);
+
+        Session::flash('created_preaching', 'Preaching added');
+
+        return redirect(route('admin.preachings.index'));        
     }
 
     /**
@@ -86,6 +106,10 @@ class AdminPreachingsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = Preaching::findOrFail($id)->delete();
+
+        Session::flash('deleted_preaching', 'Preaching id ' . $id . ' deleted');
+        
+        return redirect(route('admin.preachings.index'));
     }
 }

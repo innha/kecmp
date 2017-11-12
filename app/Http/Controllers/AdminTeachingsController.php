@@ -7,6 +7,8 @@ use App\Teaching;
 use App\Registration;
 use App\Cell;
 use App\Parish;
+use Auth;
+use Session;
 
 class AdminTeachingsController extends Controller
 {
@@ -45,7 +47,24 @@ class AdminTeachingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            
+            'registration_id' => 'required|numeric',
+            'cell_id' => 'required|numeric',
+            'parish_id' => 'required|numeric'
+        ]);
+
+        $input = $request->all();
+
+        $user = Auth::user();
+
+        $input['user_id'] = $user->id;
+
+        Teaching::create($input);
+
+        Session::flash('created_teaching', 'Teaching added');
+
+        return redirect(route('admin.teachings.index'));                
     }
 
     /**
@@ -90,6 +109,10 @@ class AdminTeachingsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = Teaching::findOrFail($id)->delete();
+
+        Session::flash('deleted_teaching', 'Teaching id ' . $id . ' deleted');
+        
+        return redirect(route('admin.teachings.index'));
     }
 }

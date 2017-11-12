@@ -25,7 +25,7 @@ Teaching
 				<div class="form-group row">			
 					{!! Form::label('registration_id', 'Registration:', ['class' => 'col-4 col-form-label']) !!}
 					<div class="col-8">
-					{!! Form::select('registration_id', array('' => 'Choose role', '0' => 'New') + $registrations, null, ['class' => 'form-control']) !!}
+					{!! Form::select('registration_id', array('' => 'Choose registration', '0' => 'New') + $registrations, null, ['class' => 'form-control']) !!}
 					<span class="text-danger">{{ $errors->first('registration_id') }}</span>
 					</div>
 				</div>

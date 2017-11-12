@@ -7,6 +7,8 @@ use App\Reception;
 use App\Registration;
 use App\Cell;
 use App\Parish;
+use Auth;
+use Session;
 
 class AdminReceptionsController extends Controller
 {
@@ -45,7 +47,24 @@ class AdminReceptionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            
+            'registration_id' => 'required|numeric',
+            'cell_id' => 'required|numeric',
+            'parish_id' => 'required|numeric'
+        ]);
+
+        $input = $request->all();
+
+        $user = Auth::user();
+
+        $input['user_id'] = $user->id;
+
+        Reception::create($input);
+
+        Session::flash('created_reception', 'Reception added');
+
+        return redirect(route('admin.receptions.index'));        
     }
 
     /**
@@ -90,6 +109,10 @@ class AdminReceptionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = Reception::findOrFail($id)->delete();
+
+        Session::flash('deleted_reception', 'Reception id ' . $id . ' deleted');
+        
+        return redirect(route('admin.receptions.index'));
     }
 }

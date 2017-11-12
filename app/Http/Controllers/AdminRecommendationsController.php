@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Recommendation;
 use App\Registration;
+use Auth;
+use Session;
 
 class AdminRecommendationsController extends Controller
 {
@@ -41,7 +43,27 @@ class AdminRecommendationsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            
+            'registration_id' => 'required|numeric',
+            'date_issued' => 'required|date',
+            'ownerName' => 'required|alpha_spaces',
+            'destination' => 'required|alpha_spaces',
+            'holderName' => 'required|alpha_spaces',
+            'date_arrived' => 'required|date'
+        ]);
+
+        $input = $request->all();
+
+        $user = Auth::user();
+
+        $input['user_id'] = $user->id;
+
+        Recommendation::create($input);
+
+        Session::flash('created_recommendation', 'Recommendation added');
+
+        return redirect(route('admin.recommendations.index'));        
     }
 
     /**
@@ -86,6 +108,10 @@ class AdminRecommendationsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = Recommendation::findOrFail($id)->delete();
+
+        Session::flash('deleted_recommendation', 'Recommendation id ' . $id . ' deleted');
+        
+        return redirect(route('admin.recommendations.index'));
     }
 }

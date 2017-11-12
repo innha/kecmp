@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Singer;
 use App\Registration;
 use App\Choir;
+use Auth;
+use Session;
 
 class AdminSingersController extends Controller
 {
@@ -43,7 +45,24 @@ class AdminSingersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            
+            'registration_id' => 'required|numeric',
+            'choir_id' => 'required|numeric',
+            'role' => 'required|alpha_spaces'
+        ]);
+
+        $input = $request->all();
+
+        $user = Auth::user();
+
+        $input['user_id'] = $user->id;
+
+        Singer::create($input);
+
+        Session::flash('created_singer', 'Singer added');
+
+        return redirect(route('admin.singers.index'));        
     }
 
     /**
@@ -88,6 +107,10 @@ class AdminSingersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = Singer::findOrFail($id)->delete();
+
+        Session::flash('deleted_singer', 'Singer id ' . $id . ' deleted');
+        
+        return redirect(route('admin.singers.index'));
     }
 }
