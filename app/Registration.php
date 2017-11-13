@@ -7,7 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Registration extends Model
 {
     protected $fillable = [
-    	'type_id',
+        'type_id',
+        'degree_id',
+        'duty_id',
+        'category_id',
+        'service_id',
+        'commission_id',
+        'status_id',        
     	'regNumber',
     	'lastName',
     	'firstName',
@@ -20,9 +26,7 @@ class Registration extends Model
     	'phoneOne',
     	'phoneTwo',
     	'gender',
-    	'idNumber',
-    	'degree_id',
-    	'school',
+    	'idNumber',    	
     	'maritalStatus',
     	'email',
     	'village_id',
@@ -39,42 +43,47 @@ class Registration extends Model
     	'employer',
     	'jobLocation',
     	'baptismDate',
-    	'baptismParish',
-    	'duty_id',
-    	'category_id',
-    	'service_id',
-    	'commission_id',
+    	'baptismParish',    	    	    	    	
     	'choir_id',
-    	'user_id',
-    	'status_id',
+    	'user_id',    	
     	'confirmed',
     	'notes',    	
-    ];
+    ];  
 
     public function type()
     {
-    	return $this->belongsTo('App\Type');
+        return $this->belongsTo('App\Type');
     }
 
     public function category()
     {
-    	return $this->belongsTo('App\Category');
+        return $this->belongsTo('App\Category');
+    }
+
+    public function degree()
+    {
+        return $this->belongsTo('App\Degree');
     }
 
     public function duty()
     {
-    	return $this->belongsTo('App\Duty');
+        return $this->belongsTo('App\Duty');
     }
 
     public function commission()
     {
-    	return $this->belongsTo('App\Commission');
+        return $this->belongsTo('App\Commission');
     }   
 
     public function service()
     {
         return $this->belongsTo('App\Service');
     }
+
+    public function status()
+    {
+        return $this->belongsTo('App\Status');
+    }    
 
     public function village()
     {
@@ -121,19 +130,9 @@ class Registration extends Model
     	return $this->belongsTo('App\Diocese');
     }
 
-    public function degree()
-    {
-        return $this->belongsTo('App\Degree');
-    }
-
     public function choir()
     {
         return $this->belongsTo('App\Choir');
-    }        
-
-    public function status()
-    {
-    	return $this->belongsTo('App\Status');
     }
 
     public function user()
@@ -201,4 +200,10 @@ class Registration extends Model
         return $this->hasMany('App\Singer');
     }
 
+    /*
+    public function member()
+    {
+        return $this->hasOne('App\Member');
+    }
+    */
 }

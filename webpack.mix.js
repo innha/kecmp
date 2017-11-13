@@ -11,9 +11,9 @@ mix.js('resources/assets/js/app.js', 'public/js')
 mix.autoload({
     jquery: ['$', 'window.jQuery',"jQuery","window.$","jquery","window.jquery"],
     'popper.js/dist/umd/popper.js': ['Popper']
-})
+});
 
-.js(['node_modules/jquery/dist/jquery.min.js', 
+mix.js(['node_modules/jquery/dist/jquery.min.js', 
 		'node_modules/bootstrap/dist/js/bootstrap.min.js', 
 		'resources/assets/js/app.js'], 'public/js')
 

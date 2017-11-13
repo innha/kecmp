@@ -26,11 +26,22 @@ Sectors
                   
               {!! Form::open(['method' => 'POST', 'action' => 'AdminSectorsController@store']) !!}
 
-                <div class="form-group {{$errors->has('district_id') ? 'has-error' : '' }} row">      
-                  {!! Form::label('district_id', 'District:', ['class' => 'col-4 col-form-label']) !!}
+                <div class="form-group {{$errors->has('province_id') ? 'has-error' : '' }} row">      
+                  {!! Form::label('province_id', 'Province:', ['class' => 'col-4 col-form-label']) !!}
                   <div class="col-8">
-                  {!! Form::select('district_id', array('' => 'Choose district') + $districts, null, ['class' => 'form-control']) !!}
+                  {!! Form::select('province_id', array('' => 'Choose province') + $provinces, null, ['class' => 'form-control', 'name' => 'province_id']) !!}
+                  <span class="text-danger">{{ $errors->first('province_id') }}</span>
+                  </div>
+                </div>              
+
+                <div class="form-group {{$errors->has('district_id') ? 'has-error' : '' }} row">
+                  {!! Form::label('district_id', 'District:', ['class' => 'col-4 col-form-label']) !!}
+                  <div class="col-6">
+                  {!! Form::select('district_id', array('' => 'Choose district') + $districts, null, ['class' => 'form-control', 'name' => 'district_id', 'id' => 'district_id']) !!}
                   <span class="text-danger">{{ $errors->first('district_id') }}</span>
+                  </div>
+                  <div class="col-2">
+                    <span id="loader_district"><i class="fa fa-refresh fa-1x fa-spin"></i></span>
                   </div>
                 </div>
                 
@@ -112,5 +123,11 @@ Sectors
     </div>
   </div>
 </section>
+
+@endsection
+
+@section('scripts')
+
+<script type="text/javascript" src="{{ asset('js/getparams.js') }}"></script>
 
 @endsection

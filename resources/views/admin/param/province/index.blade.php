@@ -59,8 +59,10 @@ Provinces
                   <th>ID</th>
                   <th>CODE</th>
                   <th>NAME</th>                  
+                  <!--
                   <th>CREATED</th>
                   <th>UPDATED</th>
+                  -->
                   <th></th>
                 </tr>
               </thead>

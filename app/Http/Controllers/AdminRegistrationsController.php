@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Member;
 use App\Registration;
 use App\Type;
 use App\Degree;
@@ -82,17 +83,51 @@ class AdminRegistrationsController extends Controller
     {
         // dd($request->all());
 
-        // Registration::create($request->all());
+        // Registration::create($request->all());        
+
+        $user = Auth::user();
+
+        /*
+        $input_reg = $request->except(['service_id', 'status_id', 'duty_id', 'category_id', 'commission_id', 'degree_id', 'type_id']);
+        $input_mem = $request->only(['service_id', 'status_id', 'duty_id', 'category_id', 'commission_id', 'degree_id', ' type_id']);
+
+        $input_reg['user_id'] = $user->id;
+        $input_mem['user_id'] = $user->id;
+        
+        $registration_id = $user->members()->create($input);
+
+        $input_mem['user_id'] = $user->id;
+
+        $registration = Registration::findOrFail($registration_id);
+
+        $registration->member()->create($input_mem);
+        */
 
         $input = $request->all();
 
-        $user = Auth::user();
-        
-        $user->registrations()->create($input);
+        $input['user_id'] = $user->id;
 
-        Session::flash('created_registration', 'Registration created');
+        Registration::create($input);
 
-        return redirect(route('admin.registrations.index'));
+        Session::flash('created_registration', 'Registration created');        
+
+        // return redirect(route('admin.members.index'));
+
+        $service_id = $request->service_id;
+
+        if ($service_id == 1) {
+
+            return redirect(route('admin.preachings.create'));            
+
+        } else if ($service_id == 2) {
+
+            return redirect(route('admin.receptions.create'));
+
+        } else {
+
+            return redirect(route('admin.members.index'));
+
+        }
     }
 
     /**
@@ -144,6 +179,6 @@ class AdminRegistrationsController extends Controller
 
         Session::flash('deleted_registration', 'Registration id ' . $id . ' deleted');
         
-        return redirect(route('admin.registrations.index'));
+        return redirect(route('admin.members.index'));
     }
 }

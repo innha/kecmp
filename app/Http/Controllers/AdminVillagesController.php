@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Village;
 use App\Cell;
+use App\Sector;
+use App\District;
+use App\Province;
 use Session;
 
 class AdminVillagesController extends Controller
@@ -17,10 +20,13 @@ class AdminVillagesController extends Controller
     public function index()
     {
         // return 'AdminVillagesController@index';
-        $villages = Village::paginate(5);
+        $villages = Village::orderByDesc('id')->paginate(15);
         $cells = Cell::pluck('name', 'id')->all();
+        $sectors = Sector::pluck('name', 'id')->all();
+        $districts = District::pluck('name', 'id')->all();
+        $provinces = Province::pluck('name', 'id')->all();        
 
-        return view('admin.param.village.index', compact('villages', 'cells'));
+        return view('admin.param.village.index', compact('villages', 'cells', 'sectors', 'districts', 'provinces'));
     }
 
     /**

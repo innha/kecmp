@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->integer('parish_id')->index()->unsigned()->nullable();
             $table->integer('chapelle_id')->index()->unsigned()->nullable();
             $table->integer('zone_id')->index()->unsigned()->nullable();
+            $table->integer('status_id')->index()->unsigned()->nullable();
             $table->rememberToken();
             $table->timestamps();
 
@@ -47,6 +48,7 @@ class CreateUsersTable extends Migration
             $table->foreign('parish_id')->references('id')->on('parishes')->onDelete('cascade');
             $table->foreign('chapelle_id')->references('id')->on('chapelles')->onDelete('cascade');
             $table->foreign('zone_id')->references('id')->on('zones')->onDelete('cascade');
+            $table->foreign('status_id')->references('id')->on('users')->onDelete('cascade');
 
         });
     }

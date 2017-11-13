@@ -8,8 +8,9 @@ class Commission extends Model
 {
     protected $fillable = ['name'];
 
-    public function registrations()
+    public function members()
     {
-    	return $this->hasMany('App\Registration');
+    	// return $this->hasMany('App\Member', 'member_commission')->withTimestamps()->using('App\MemberCommission');
+    	return $this->hasMany('App\Commission');
     }    
 }

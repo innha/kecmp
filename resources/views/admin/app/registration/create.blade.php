@@ -168,26 +168,35 @@ Registration
 
 				<div class="form-group {{$errors->has('district_id') ? 'has-error' : '' }} row">			
 					{!! Form::label('district_id', 'District:', ['class' => 'col-4 col-form-label']) !!}
-					<div class="col-8">
+					<div class="col-6">
 					{!! Form::select('district_id', array('' => 'Choose district') + $districts, null, ['class' => 'form-control']) !!}
 					<span class="text-danger">{{ $errors->first('district_id') }}</span>
 					</div>
+					<div class="col-2">
+                    <span id="loader_district"><i class="fa fa-refresh fa-1x fa-spin"></i></span>
+                  </div>
 				</div>
 
 				<div class="form-group {{$errors->has('sector_id') ? 'has-error' : '' }} row">			
 					{!! Form::label('sector_id', 'Sector:', ['class' => 'col-4 col-form-label']) !!}
-					<div class="col-8">
+					<div class="col-6">
 					{!! Form::select('sector_id', array('' => 'Choose sector') + $sectors, null, ['class' => 'form-control']) !!}
 					<span class="text-danger">{{ $errors->first('sector_id') }}</span>
 					</div>
+					<div class="col-2">
+                    <span id="loader_sector"><i class="fa fa-refresh fa-1x fa-spin"></i></span>
+                  </div>					
 				</div>
 
 				<div class="form-group {{$errors->has('cell_id') ? 'has-error' : '' }} row">			
 					{!! Form::label('cell_id', 'Cell:', ['class' => 'col-4 col-form-label']) !!}
-					<div class="col-8">
+					<div class="col-6">
 					{!! Form::select('cell_id', array('' => 'Choose cell') + $cells, null, ['class' => 'form-control']) !!}
 					<span class="text-danger">{{ $errors->first('cell_id') }}</span>
 					</div>
+					<div class="col-2">
+                    <span id="loader_cell"><i class="fa fa-refresh fa-1x fa-spin"></i></span>
+                  </div>					
 				</div>
 
 				<div class="form-group {{$errors->has('village_id') ? 'has-error' : '' }} row">			
@@ -370,4 +379,10 @@ Registration
 	</div>
 
 </div>
+@endsection
+
+@section('scripts')
+
+<script type="text/javascript" src="{{ asset('js/getparams.js') }}"></script>
+
 @endsection

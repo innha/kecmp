@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Sector;
 use App\District;
+use App\Province;
 use Session;
 
 class AdminSectorsController extends Controller
@@ -17,10 +18,11 @@ class AdminSectorsController extends Controller
     public function index()
     {
         // return 'AdminSectorsController@index';
-        $sectors = Sector::paginate(5);
+        $sectors = Sector::orderByDesc('id')->paginate(15);
         $districts = District::pluck('name', 'id')->all();
+        $provinces = Province::pluck('name', 'id')->all();
 
-        return view('admin.param.sector.index', compact('sectors', 'districts'));       
+        return view('admin.param.sector.index', compact('sectors', 'districts', 'provinces'));     
     }
 
     /**

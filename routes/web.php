@@ -19,6 +19,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/admin/districts/get/{province_id}', 'GetParamsController@getDistricts');
+Route::get('/admin/sectors/get/{district_id}', 'GetParamsController@getSectors');
+Route::get('/admin/cells/get/{sector_id}', 'GetParamsController@getCells');
+Route::get('/admin/villages/get/{cell_id}', 'GetParamsController@getVillages');
+
 Route::resource('/admin/baptisms', 'AdminBaptismsController', ['as' => 'admin'], 
 	['name' => [
 

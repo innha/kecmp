@@ -12,29 +12,6 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
-    static $password;
-
-    return [
-        'name' => $faker->unique()->randomElement(['Inn Ha']),
-        'role_id' => 1,
-        'privilege_id' => $faker->numberBetween(1, 1),
-        'photo_id' => 1,
-        'email' => $faker->unique()->randomElement(['innha@example.com']),
-        'phone' => $faker->phoneNumber, //$faker->unique()->randomElement(['250785447722', '250722776655']),
-        'password' => $password ?: $password = bcrypt('123456'),
-        'province_id' => 1,
-        'district_id' => 1,
-        'sector_id' => 1,
-        'cell_id' => 1,
-        'village_id' => 1,
-        'diocese_id' => 1,
-        'parish_id' => 1,
-        'chapelle_id' => 1,
-        'zone_id' => 1,
-        'remember_token' => str_random(10),
-    ];
-});
 
 $factory->define(App\Role::class, function (Faker\Generator $faker) {
 	return [
@@ -56,40 +33,40 @@ $factory->define(App\Photo::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Province::class, function (Faker\Generator $faker) {
 	return [
-		'name' => $faker->unique()->randomElement(['Kigali', 'South']),
-		'code' => $faker->numberBetween(1, 2),
+		'name' => $faker->unique()->randomElement(['Kigali']),
+		'code' => 1,
 	];
 });
 
 $factory->define(App\District::class, function (Faker\Generator $faker) {
 	return [
 		'province_id' => 1,
-		'name' => $faker->randomElement(['Gasabo']),
-		'code' => $faker->numberBetween(102, 102),
+		'name' => $faker->randomElement(['Nyarugenge']),
+		'code' => 101,
 	];
 });
 
 $factory->define(App\Sector::class, function (Faker\Generator $faker) {
 	return [
 		'district_id' => 1,
-		'name' => $faker->randomElement(['Gisozi']),
-		'code' => $faker->numberBetween(10201, 10201),
+		'name' => $faker->randomElement(['Gitega']),
+		'code' => 10101,
 	];
 });
 
 $factory->define(App\Cell::class, function (Faker\Generator $faker) {
 	return [
 		'sector_id' => 1,
-		'name' => $faker->randomElement(['Kinamba']),
-		'code' => $faker->numberBetween(1020101, 1020101),
+		'name' => $faker->randomElement(['Cyahafi']),
+		'code' => 1010101,
 	];
 });
 
 $factory->define(App\Village::class, function (Faker\Generator $faker) {
 	return [
 		'cell_id' => 1,
-		'name' => $faker->randomElement(['Gakinjiro']),
-		'code' => $faker->numberBetween(102010101, 102010101),
+		'name' => $faker->randomElement(['Bannyahe']),
+		'code' => 101010101,
 	];
 });
 
@@ -170,9 +147,41 @@ $factory->define(App\Status::class, function (Faker\Generator $faker) {
 	];
 });
 
+$factory->define(App\User::class, function (Faker\Generator $faker) {
+    static $password;
+
+    return [
+        'name' => $faker->unique()->randomElement(['Inn Ha']),
+        'role_id' => 1,
+        'privilege_id' => $faker->numberBetween(1, 1),
+        'photo_id' => 1,
+        'email' => $faker->unique()->randomElement(['innha@example.com']),
+        'phone' => $faker->phoneNumber, //$faker->unique()->randomElement(['250785447722', '250722776655']),
+        'password' => $password ?: $password = bcrypt('123456'),
+        'province_id' => 1,
+        'district_id' => 1,
+        'sector_id' => 1,
+        'cell_id' => 1,
+        'village_id' => 1,
+        'diocese_id' => 1,
+        'parish_id' => 1,
+        'chapelle_id' => 1,
+        'zone_id' => 1,
+        'status_id' => 1,
+        'remember_token' => str_random(10),
+    ];
+});
+
 $factory->define(App\Registration::class, function (Faker\Generator $faker) {
 	return [
     	'type_id' => $faker->numberBetween(1, 2),
+    	'degree_id' => 1,
+    	'duty_id' => 1,
+    	'category_id' => 1,
+    	'service_id' => 1,
+    	'commission_id' => 1,
+    	'user_id' => 1,
+    	'status_id' => 1,		
     	'regNumber' => $faker->unique()->numberBetween(102010101, 102010115),
     	'lastName' => $faker->randomElement(['RUGEMA', 'NSHUTI']),
     	'firstName' => $faker->randomElement(['Charles', 'Tresor']),
@@ -186,8 +195,6 @@ $factory->define(App\Registration::class, function (Faker\Generator $faker) {
     	'phoneTwo' => '250722334466',
     	'gender' => 'Male',
     	'idNumber' => '119818002233',
-    	'degree_id' => 1,
-    	'school' => 'NUR',
     	'maritalStatus' => 'Married',
     	'email' => 'crugema@sorasvie.rw',
     	'village_id' => 1,
@@ -205,18 +212,27 @@ $factory->define(App\Registration::class, function (Faker\Generator $faker) {
     	'jobLocation' => 'Kigali',
     	'baptismDate' => $faker->randomElement(['1981-12-25', '1982-01-26']),
     	'baptismParish' => $faker->randomElement(['Nyakinama', 'Nyagatare']),
-    	'duty_id' => 1,
-    	'category_id' => 1,
-    	'service_id' => 1,
-    	'commission_id' => 1,
     	'choir_id' => 1,
     	'user_id' => 1,
-    	'status_id' => 1,
     	'confirmed' => true,
     	'notes' => 'Using fake data',
 	];
 });
-
+/*
+$factory->define(App\Member::class, function (Faker\Generator $faker) {
+	return [
+		'registration_id' => 1,
+    	'type_id' => $faker->numberBetween(1, 2),
+    	'degree_id' => 1,
+    	'duty_id' => 1,
+    	'category_id' => 1,
+    	'service_id' => 1,
+    	'commission_id' => 1,
+    	'user_id' => 1,
+    	'status_id' => 1,
+	];
+});
+*/
 $factory->define(App\Baptism::class, function (Faker\Generator $faker) {
 	return [
 		'registration_id' => 1,
@@ -326,3 +342,4 @@ $factory->define(App\Teaching::class, function (Faker\Generator $faker) {
 		'user_id' => 1,
 	];
 });
+

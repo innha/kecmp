@@ -17,7 +17,7 @@ class AdminDistrictsController extends Controller
     public function index()
     {
         // return 'AdminDistrictsController@index';
-        $districts = District::paginate(5);
+        $districts = District::orderByDesc('id')->paginate(15);
         $provinces = Province::pluck('name', 'id')->all();
 
         return view('admin.param.district.index', compact('districts', 'provinces'));

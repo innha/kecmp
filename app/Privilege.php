@@ -10,6 +10,7 @@ class Privilege extends Model
 
     public function users()
     {
-    	return $this->hasMany('App\User');
+    	// return $this->hasMany('App\User');
+    	return $this->belongsToMany('App\User', 'user_privilege')->using('App\UserPrivilege');
     }
 }

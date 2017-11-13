@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Cell;
 use App\Sector;
+use App\District;
+use App\Province;
 use Session;
 
 class AdminCellsController extends Controller
@@ -16,17 +18,13 @@ class AdminCellsController extends Controller
      */
     public function index()
     {
-        $this->validate($request, [
-            'sector_id' => 'required|numeric',
-            'code' => 'required|numeric',
-            'name' => 'required|alpha_spaces'
-        ]);
-
         // return 'AdminCellsController@index';
-        $cells = Cell::paginate(5);
+        $cells = Cell::orderByDesc('id')->paginate(15);
         $sectors = Sector::pluck('name', 'id')->all();
+        $districts = District::pluck('name', 'id')->all();
+        $provinces = Province::pluck('name', 'id')->all();
 
-        return view('admin.param.cell.index', compact('cells', 'sectors'));
+        return view('admin.param.cell.index', compact('cells', 'sectors', 'districts', 'provinces'));
     }
 
     /**
@@ -48,6 +46,12 @@ class AdminCellsController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+
+        $this->validate($request, [
+            'sector_id' => 'required|numeric',
+            'code' => 'required|numeric',
+            'name' => 'required|alpha_spaces'
+        ]);        
 
         Cell::create($request->all());
 
