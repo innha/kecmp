@@ -13,5 +13,10 @@ class Category extends Model
     	// return $this->hasMany('App\Registration');
     	// return $this->belongsToMany('App\Member', 'member_category')->withTimestamps()->using('App\MemberCategory');
     	return $this->hasMany('App\Member');
-    }    
+    }
+
+    public function registrations()
+    {
+        return $this->hasMany('App\Registration');
+    }     
 }

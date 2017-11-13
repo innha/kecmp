@@ -14,4 +14,9 @@ class Degree extends Model
     	// return $this->belongsToMany('App\Member', 'member_degree')->withTimestamps()->using('MemberDegree');
     	return $this->hasMany('App\Member');
     }
+
+    public function registrations()
+    {
+        return $this->hasMany('App\Registration');
+    }    
 }

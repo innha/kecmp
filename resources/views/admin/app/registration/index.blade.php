@@ -54,7 +54,7 @@ Registration
                   <th>GENDER</th>
                   <th>ID #</th>
                   <th>EDUCATION</th>
-                  <th>SCHOOL</th>
+                  {{-- <th>SCHOOL</th> --}}
                   <th>MARITAL STATUS</th>
                   <th>EMAIL</th>
                   <th>VILLAGE</th>
@@ -96,7 +96,7 @@ Registration
                     {!! Form::close() !!}
                     </div>
                   </td>                  
-                  <td>{{ $registration->type_id }}</td>
+                  <td>{{ $registration->type->name }}</td>
                   <td>{{ $registration->regNumber }}</td>
                   <td>{{ $registration->lastName }}</td>
                   <td>{{ $registration->firstName }}</td>
@@ -110,8 +110,8 @@ Registration
                   <td>{{ $registration->phoneTwo }}</td>
                   <td>{{ $registration->gender }}</td>
                   <td>{{ $registration->idNumber }}</td>
-                  <td>{{ $registration->degree_id }}</td>
-                  <td>{{-- $registration->school --}}</td>
+                  <td>{{ $registration->degree->name }}</td>
+                  {{-- <td>$registration->school</td>--}}
                   <td>{{ $registration->maritalStatus }}</td>
                   <td>{{ $registration->email }}</td>
                   <td>{{ $registration->village->name }}</td>
@@ -129,14 +129,14 @@ Registration
                   <td>{{ $registration->jobLocation }}</td>
                   <td>{{ $registration->baptismDate }}</td>
                   <td>{{ $registration->baptismParish }}</td>
-                  <td>{{ $registration->duty_id }}</td>
-                  <td>{{ $registration->category_id }}</td>
-                  <td>{{ $registration->service_id}}</td>
-                  <td>{{ $registration->commission_id }}</td>
+                  <td>{{ $registration->duty->name }}</td>
+                  <td>{{ $registration->category->name }}</td>
+                  <td>{{ $registration->service->name}}</td>
+                  <td>{{ $registration->commission->name }}</td>
                   <td>{{ $registration->choir->name }}</td>
-                  <td>{{ $registration->user_id }}</td>
-                  <td>{{ $registration->status_id }}</td>
-                  <td>{{ $registration->confirmed }}</td>                  
+                  <td>{{ $registration->user->name }}</td>
+                  <td>{{ $registration->status->name }}</td>
+                  <td>{{ $registration->confirmed == 1 ? 'Confirmed' : 'Unconfirmed' }}</td>                  
                   <td>{{ $registration->created_at }}</td>
                   <td>{{ $registration->updated_at }}</td>
                   <td>{{ $registration->notes }}</td>

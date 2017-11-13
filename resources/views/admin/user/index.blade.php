@@ -74,7 +74,7 @@ Users
                   <td><img height="70" width="125" src="{{ $user->photo ? $user->photo->file : 'http://placehold.it/400X400'}}" alt="" /></td>
                   <td>{{ $user->role->name }}</td>
                   <td>{{ $user->privilege->name }}</td>
-                  <td>{{ $user->is_active }}</td>
+                  <td>{{ $user->is_active == 1 ? 'Active' : 'Inactive' }}</td>
                   <td>{{ $user->name }}</td>
                   <td>{{ $user->email }}</td>
                   <td>{{ $user->phone }}</td>

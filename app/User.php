@@ -27,19 +27,22 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function roles()
+    public function role()
     {
-        return $this->belongsToMany('App\Role', 'user_role')->withTimestamps()->using('App\UserRole');
+        // return $this->belongsToMany('App\Role', 'user_role')->withTimestamps()->using('App\UserRole');
+        return $this->belongsTo('App\Role');
     }
 
-    public function privileges()
+    public function privilege()
     {
-        return $this->belongsToMany('App\Privilege', 'user_privilege')->withTimestamps()->using('App\UserPrivilege');
+        // return $this->belongsToMany('App\Privilege', 'user_privilege')->withTimestamps()->using('App\UserPrivilege');
+        return $this->belongsTo('App\Privilege');
     }
 
-    public function statuses()
+    public function status()
     {
-        return $this->belongsToMany('App\Status', 'user_status')->withTimestamps()->using('App\UserStatus');
+        // return $this->belongsToMany('App\Status', 'user_status')->withTimestamps()->using('App\UserStatus');
+        return $this->belongsTo('App\Status');
     }
 
     public function photo()

@@ -15,8 +15,14 @@ class Status extends Model
         return $this->hasMany('App\Member');
     }
 
+    public function registrations()
+    {
+        return $this->hasMany('App\Registration');
+    }
+
     public function users()
     {
-    	return $this->belongsToMany('App\User', 'user_status')->withTimestamps()->using('App\UserStatus');
+        return $this->hasMany('App\User');
+    	// return $this->belongsToMany('App\User', 'user_status')->withTimestamps()->using('App\UserStatus');
     }
 }

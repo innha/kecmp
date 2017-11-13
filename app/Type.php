@@ -14,4 +14,9 @@ class Type extends Model
     	// return $this->belongsToMany('App\Member', 'member_type')->withTimestamps()->using('App\MemberType');
     	return $this->hasMany('App\Member');
     }
+
+    public function registrations()
+    {
+        return $this->hasMany('App\Registration');
+    }    
 }
