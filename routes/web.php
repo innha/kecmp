@@ -24,6 +24,9 @@ Route::get('/admin/sectors/get/{district_id}', 'GetParamsController@getSectors')
 Route::get('/admin/cells/get/{sector_id}', 'GetParamsController@getCells');
 Route::get('/admin/villages/get/{cell_id}', 'GetParamsController@getVillages');
 
+Route::post('/admin/registrations/search', 'AdminRegistrationsController@search');
+Route::get('/admin/registrations/search/ajax', array('as' => 'admin.registrations.search.ajax', 'uses' => 'AdminRegistrationsController@searchAjax'));
+
 Route::resource('/admin/baptisms', 'AdminBaptismsController', ['as' => 'admin'], 
 	['name' => [
 
@@ -306,7 +309,7 @@ Route::resource('/admin/registrations', 'AdminRegistrationsController', ['as' =>
 		'show' => 'admin.registrations.show',
 		'edit' => 'admin.registrations.edit',
 		'update' => 'admin.registrations.update',
-		'destroy' => 'admin.registrations.destroy'
+		'destroy' => 'admin.registrations.destroy'		
 	]]
 );
 

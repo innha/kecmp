@@ -51,8 +51,8 @@ class AdminVillagesController extends Controller
 
         $this->validate($request, [
             'cell_id' => 'required|numeric',
-            'code' => 'required|numeric',
-            'name' => 'required|alpha_spaces'
+            'code' => 'required|numeric|unique:villages',
+            'name' => 'required'
         ]);        
 
         Village::create($request->all());

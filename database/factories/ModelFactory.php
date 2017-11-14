@@ -31,6 +31,7 @@ $factory->define(App\Photo::class, function (Faker\Generator $faker) {
 	];
 });
 
+/*
 $factory->define(App\Province::class, function (Faker\Generator $faker) {
 	return [
 		'name' => $faker->unique()->randomElement(['Kigali']),
@@ -69,7 +70,7 @@ $factory->define(App\Village::class, function (Faker\Generator $faker) {
 		'code' => 101010101,
 	];
 });
-
+*/
 $factory->define(App\Diocese::class, function (Faker\Generator $faker) {
 	return [
 		'name' => $faker->randomElement(['Kigali']),

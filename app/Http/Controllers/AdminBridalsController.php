@@ -46,8 +46,8 @@ class AdminBridalsController extends Controller
         $this->validate($request, [
             
             'registration_id' => 'required|numeric',
-            'bridalName' => 'required|alpha_spaces',
-            'origin' => 'required|alpha_spaces'
+            'bridalName' => 'required',
+            'origin' => 'required'
         ]);
 
         $input = $request->all();

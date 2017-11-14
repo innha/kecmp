@@ -16,7 +16,7 @@ class CreateSectorsTable extends Migration
         Schema::create('sectors', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('district_id')->index()->unsigned()->nullable();
-            $table->string('code', 5);
+            $table->string('code', 5)->unique();
             $table->string('name'); //->unique();
             $table->timestamps();
 

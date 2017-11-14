@@ -45,8 +45,8 @@ class AdminDistrictsController extends Controller
 
         $this->validate($request, [
             'province_id' => 'required|numeric',
-            'code' => 'required|numeric',
-            'name' => 'required|alpha_spaces'
+            'code' => 'required|numeric|unique:districts',
+            'name' => 'required|alpha_spaces|unique:districts'
         ]);        
 
         District::create($request->all());

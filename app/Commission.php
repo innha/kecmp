@@ -11,7 +11,8 @@ class Commission extends Model
     public function members()
     {
     	// return $this->hasMany('App\Member', 'member_commission')->withTimestamps()->using('App\MemberCommission');
-    	return $this->hasMany('App\Commission');
+    	// return $this->hasMany('App\Commission');
+        return $this->belongsToMany('App\Member', 'member_commission')->withTimestamps()->using('App\MemberCommission');
     }
 
     public function registrations()

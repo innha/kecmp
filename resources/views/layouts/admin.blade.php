@@ -19,6 +19,9 @@
   <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+  
+  <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
+  <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet"> -->
 
 </head>
 <body id="app">
@@ -163,10 +166,21 @@
 <script src="{{ asset('js/app.js') }}"></script>
 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://drvic10k.github.io/bootstrap-sortable/Contents/bootstrap-sortable.css" />
 <!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script> //causes $.ajax is not a function -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<script type="text/javascript" src="{{ asset('js/jquery-ui.js') }}"></script>
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.js"></script>
+<script src="https://drvic10k.github.io/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script> -->
+<!-- <script type="text/javascript" src="{{ asset('js/bootstrap3-typeahead.min.js') }}"></script> -->
+<script type="text/javascript" src="{{ asset('js/ajaxsearch.js') }}"></script>
+
 @yield('scripts')
 
 </body>

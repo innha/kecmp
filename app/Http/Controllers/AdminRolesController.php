@@ -42,7 +42,7 @@ class AdminRolesController extends Controller
         // dd($request->all());
 
         $this->validate($request, [
-            'name' => 'required|alpha_spaces'
+            'name' => 'required|alpha_spaces|unique:roles'
         ]);        
 
         Role::create($request->all());

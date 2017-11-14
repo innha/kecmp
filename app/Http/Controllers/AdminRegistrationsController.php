@@ -181,4 +181,55 @@ class AdminRegistrationsController extends Controller
         
         return redirect(route('admin.members.index'));
     }
+
+    /**
+     * Search registration
+     *
+     * @return view
+     **/
+    public function search(Request $request)
+    {
+        // dd($request->q);
+        $q = $request->q;
+
+        // dd($q);
+
+        // $registrations = Registration::orderByDesc('id')->paginate(5);
+        $registrations = Registration::where('firstName', 'LIKE', '%' . $q . '%')->orWhere('lastname', 'LIKE', '%' . $q . '%')->orWhere('email', 'LIKE', '%' . $q . '%')->orWhere('phoneOne', 'LIKE', '%' . $q . '%')->orWhere('regNumber', 'LIKE', '%' . $q . '%')->orWhere('idNumber', 'LIKE', '%' . $q . '%')->paginate(5);
+
+        return view('admin.app.registration.index', compact('registrations'));
+
+    }
+
+    /**
+     * Autocomplete search registration
+     *
+     * @return void
+     **/
+    public function searchAjax(Request $request)
+    {
+        // dd($request);
+
+        // $q = $request->get('query', '');
+        $q = $request->get('term', '');
+
+        $registrations = Registration::where('lastName', 'LIKE', '%' . $q . '%')->orWhere('firstName', 'LIKE', '%' . $q . '%')->orWhere('email', 'LIKE', '%' . $q . '%')->orWhere('phoneOne', 'LIKE', '%' . $q . '%')->orWhere('regNumber', 'LIKE', '%' . $q . '%')->orWhere('idNumber', 'LIKE', '%' . $q . '%')->get();
+
+        // $registrations = Type::where('name', 'LIKE', '%' . $q . '%')->get();
+
+        $data = array();
+
+        foreach ($registrations as $registration) {
+            $data[] = array('label' => $registration->lastName . ' ' . $registration->firstName . ' ' . $registration->idNumber . ' ' . $registration->email . ' ' . $registration->phoneOne, 'value' => $registration->id, 'id' => $registration->id);
+        }
+
+        if(count($data)) {
+
+            return $data;
+
+        } else {
+
+            return ['value' => 'No results found', 'id' => ''];
+        }
+    }
 }

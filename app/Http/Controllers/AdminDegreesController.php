@@ -42,7 +42,7 @@ class AdminDegreesController extends Controller
         // dd($request->all());
 
         $this->validate($request, [
-            'name' => 'required|alpha_spaces'
+            'name' => 'required|alpha_spaces|unique:degrees'
         ]);        
 
         Degree::create($request->all());

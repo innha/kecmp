@@ -47,8 +47,8 @@ class AdminSectorsController extends Controller
 
         $this->validate($request, [
             'district_id' => 'required|numeric',
-            'code' => 'required|numeric',
-            'name' => 'required|alpha_spaces'
+            'code' => 'required|numeric|unique:sectors',
+            'name' => 'required'
         ]);        
 
         Sector::create($request->all());

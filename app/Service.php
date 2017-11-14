@@ -10,7 +10,8 @@ class Service extends Model
 
     public function members()
     {
-    	return $this->hasMany('App\Member', 'member_service')->withTimestamps()->using('App\MemberService');
+    	// return $this->hasMany('App\Member');
+    	return $this->belongsToMany('App\Member', 'member_service')->withTimestamps()->using('App\MemberService');
     }
 
     public function registrations()

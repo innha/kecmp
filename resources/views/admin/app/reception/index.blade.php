@@ -18,10 +18,23 @@ Reception
           <i class="fa fa-plus"></i> Add new
         </a>
       </div>
-      <div class="col-md-3 mr-3">
+      <div class="col-md-8 mr-1">
+        {{--
         <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#searchPeopleModal">
-          <i class="fa fa-search"></i> Search
+          <i class="fa fa-search"></i> Search registration
         </a>
+        --}}
+        <form action="/admin/registrations/search" method="POST" role="search">
+          {{ csrf_field() }}
+          <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search by last/first name, email, phone, reg/id number">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-warning">
+                <span class="fa fa-search"></span>
+              </button>
+            </span>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -35,10 +48,10 @@ Reception
     <div class="row">
       <div class="col">
           <div class="scrollx">
-            <table class="table table-striped table-hover table-sm table-bordered"  id="people-table">
+            <table class="table table-striped table-hover table-sm table-bordered sortable"  id="people-table">
               <thead class="thead-default">
                 <tr>
-                  <th>ID</th>
+                  <th data-defaultsort="desc">ID</th>
                   <th></th>                  
                   <th>REG #</th>
                   <th>CELL</th>

@@ -45,7 +45,7 @@ class AdminParishesController extends Controller
 
         $this->validate($request, [
             'diocese_id' => 'required|numeric',
-            'name' => 'required|alpha'
+            'name' => 'required|alpha_spaces|unique:parishes'
         ]);        
 
         Parish::create($request->all());

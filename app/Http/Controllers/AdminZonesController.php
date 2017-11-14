@@ -45,7 +45,7 @@ class AdminZonesController extends Controller
 
         $this->validate($request, [
             'chapelle_id' => 'required|numeric',
-            'name' => 'required|alpha_spaces'
+            'name' => 'required'
         ]);        
 
         Zone::create($request->all());

@@ -50,7 +50,7 @@ class AdminCellsController extends Controller
         $this->validate($request, [
             'sector_id' => 'required|numeric',
             'code' => 'required|numeric',
-            'name' => 'required|alpha_spaces'
+            'name' => 'required|alpha_spaces|unique:cells'
         ]);        
 
         Cell::create($request->all());

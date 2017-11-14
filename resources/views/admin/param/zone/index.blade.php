@@ -53,10 +53,10 @@ Zones
       </div>
       <div class="col-6">
           <div>
-            <table class="table table-striped table-hover table-sm table-bordered"  id="people-table">
+            <table class="table table-striped table-hover table-sm table-bordered sortable"  id="people-table">
               <thead class="thead-default">
                 <tr>
-                  <th>ID</th>
+                  <th data-defaultsort="desc">ID</th>
                   <th>NAME</th>
                   <!--
                   <th>CREATED</th>

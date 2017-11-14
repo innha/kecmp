@@ -3,9 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Registration extends Model
-{
+{    
     protected $fillable = [
         'type_id',
         'degree_id',
@@ -48,7 +49,19 @@ class Registration extends Model
     	'user_id',    	
     	'confirmed',
     	'notes',    	
-    ];  
+    ];
+
+    private $format = 'Y-m-d';
+
+    public function setDobAttribute($value)
+    {
+        $this->attributes['dob'] = Carbon::parse($value)->format($this->format);
+    }   
+
+    public function setBaptismDateAttribute($value)
+    {
+        $this->attributes['baptismDate'] = Carbon::parse($value)->format($this->format);
+    }
 
     public function type()
     {

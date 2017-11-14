@@ -16,7 +16,7 @@ class CreateCellsTable extends Migration
         Schema::create('cells', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sector_id')->index()->unsigned()->nullable();
-            $table->string('code', 7);
+            $table->string('code', 7)->unique();
             $table->string('name'); //->unique();
             $table->timestamps();
 

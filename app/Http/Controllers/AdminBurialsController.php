@@ -47,7 +47,7 @@ class AdminBurialsController extends Controller
             
             'registration_id' => 'required|numeric',
             'date_died' => 'required|date',
-            'burialPlace' => 'required|alpha_spaces'
+            'burialPlace' => 'required'
         ]);
 
         $input = $request->all();

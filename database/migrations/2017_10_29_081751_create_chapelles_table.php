@@ -16,7 +16,7 @@ class CreateChapellesTable extends Migration
         Schema::create('chapelles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parish_id')->index()->unsigned()->nullable();
-            $table->string('name'); //->unique();            
+            $table->string('name')->unique();            
             $table->timestamps();
 
             $table->foreign('parish_id')->references('id')->on('parishes')->onDelete('cascade');

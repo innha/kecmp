@@ -41,7 +41,7 @@ class AdminCommissionsController extends Controller
     {
         // dd($request->all());
         $this->validate($request, [
-            'name' => 'required|alpha_spaces'
+            'name' => 'required|alpha_spaces|unique:commissions'
         ]);        
 
         Commission::create($request->all());

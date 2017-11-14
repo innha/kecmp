@@ -16,7 +16,7 @@ class CreateVillagesTable extends Migration
         Schema::create('villages', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cell_id')->index()->unsigned()->nullable();
-            $table->string('code', 9);
+            $table->string('code', 9)->unique();
             $table->string('name'); //->unique();
             $table->timestamps();
 

@@ -173,8 +173,8 @@ Registration
 					<span class="text-danger">{{ $errors->first('district_id') }}</span>
 					</div>
 					<div class="col-2">
-                    <span id="loader_district"><i class="fa fa-refresh fa-1x fa-spin"></i></span>
-                  </div>
+                    <span id="loader_district"><i class="fa fa-repeat fa-1x fa-spin"></i></span>
+                  	</div>
 				</div>
 
 				<div class="form-group {{$errors->has('sector_id') ? 'has-error' : '' }} row">			
@@ -184,7 +184,7 @@ Registration
 					<span class="text-danger">{{ $errors->first('sector_id') }}</span>
 					</div>
 					<div class="col-2">
-                    <span id="loader_sector"><i class="fa fa-refresh fa-1x fa-spin"></i></span>
+                    <span id="loader_sector"><i class="fa fa-repeat fa-1x fa-spin"></i></span>
                   </div>					
 				</div>
 
@@ -195,7 +195,7 @@ Registration
 					<span class="text-danger">{{ $errors->first('cell_id') }}</span>
 					</div>
 					<div class="col-2">
-                    <span id="loader_cell"><i class="fa fa-refresh fa-1x fa-spin"></i></span>
+                    <span id="loader_cell"><i class="fa fa-repeat fa-1x fa-spin"></i></span>
                   </div>					
 				</div>
 

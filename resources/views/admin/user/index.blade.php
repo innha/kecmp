@@ -34,10 +34,10 @@ Users
     <div class="row">
       <div class="col">
           <div class="scrollx">
-            <table class="table table-striped table-hover table-sm table-bordered"  id="people-table">
+            <table class="table table-striped table-hover table-sm table-bordered sortable"  id="people-table">
               <thead class="thead-default">
                 <tr>
-                  <th>ID</th>
+                  <th data-defaultsort="desc">ID</th>
                   <th></th>                  
                   <th>PHOTO</th>
                   <th>ROLE</th>

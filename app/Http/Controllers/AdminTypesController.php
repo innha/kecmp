@@ -43,7 +43,7 @@ class AdminTypesController extends Controller
 
         $this->validate($request, [
 
-            'name' => 'required|alpha_spaces'
+            'name' => 'required|alpha_spaces|unique:types'
         ]);        
 
         Type::create($request->all());

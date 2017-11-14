@@ -47,7 +47,7 @@ class AdminMarriagesController extends Controller
             
             'registration_id' => 'required|numeric',
             'date_married' => 'required|date',
-            'marriagePlace' => 'required|alpha_spaces'
+            'marriagePlace' => 'required'
         ]);
 
         $input = $request->all();

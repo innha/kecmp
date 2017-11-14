@@ -42,7 +42,7 @@ class AdminProvincesController extends Controller
         // dd($request->all());
 
         $this->validate($request, [
-            'name' => 'required|alpha_spaces'
+            'name' => 'required|alpha_spaces|unique:provinces'
         ]);        
 
         Province::create($request->all());

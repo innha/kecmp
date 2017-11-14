@@ -42,7 +42,7 @@ class AdminPrivilegesController extends Controller
         // dd($request->all());
 
         $this->validate($request, [
-            'name' => 'required|alpha_spaces'
+            'name' => 'required|alpha_spaces|unique:privileges'
         ]);
 
         Privilege::create($request->all());
