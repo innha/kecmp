@@ -26,6 +26,7 @@ Route::get('/admin/villages/get/{cell_id}', 'GetParamsController@getVillages');
 
 Route::post('/admin/registrations/search', 'AdminRegistrationsController@search');
 Route::get('/admin/registrations/search/ajax', array('as' => 'admin.registrations.search.ajax', 'uses' => 'AdminRegistrationsController@searchAjax'));
+Route::post('/admin/users/search', 'AdminUsersController@search');
 
 Route::resource('/admin/baptisms', 'AdminBaptismsController', ['as' => 'admin'], 
 	['name' => [

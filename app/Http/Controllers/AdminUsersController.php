@@ -164,4 +164,24 @@ class AdminUsersController extends Controller
         
         return redirect(route('admin.users.index'));
     }
+
+    /**
+     * Search user
+     *
+     * @return view
+     **/
+    public function search(Request $request)
+    {
+        // dd($request->q);
+        $q = $request->q;
+
+        // dd($q);
+
+        // $registrations = Registration::orderByDesc('id')->paginate(5);
+        $users = User::where('name', 'LIKE', '%' . $q . '%')->orWhere('email', 'LIKE', '%' . $q . '%')->orWhere('phone', 'LIKE', '%' . $q . '%')->paginate(5);
+
+        return view('admin.user.index', compact('users'));
+
+    }    
 }
+

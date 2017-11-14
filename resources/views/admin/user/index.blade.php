@@ -17,10 +17,23 @@ Users
           <i class="fa fa-plus"></i> Add new
         </a>
       </div>
-      <div class="col-md-3 mr-3">
+      <div class="col-md-8 mr-1">
+        {{--
         <a href="#" class="btn btn-warning btn-block" data-toggle="modal" data-target="#searchPeopleModal">
-          <i class="fa fa-search"></i> Search
+          <i class="fa fa-search"></i> Search user
         </a>
+        --}}
+        <form action="/admin/users/search" method="POST" role="search">
+          {{ csrf_field() }}
+          <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search by name, email, phone">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-warning">
+                <span class="fa fa-search"></span>
+              </button>
+            </span>
+          </div>
+        </form>
       </div>
     </div>
   </div>
