@@ -41,6 +41,15 @@ Parishes
                   <span class="text-danger">{{ $errors->first('name') }}</span>
                   </div>
                 </div>
+
+                <div class="form-group {{$errors->has('code') ? 'has-error' : '' }} row">      
+                  {!! Form::label('code', 'Code:', ['class' => 'col-4 col-form-label']) !!}
+                  <div class="col-8">
+                  {!! Form::text('code', null, ['class' => 'form-control']) !!}
+                  <span class="text-danger">{{ $errors->first('code') }}</span>
+                  </div>
+                </div>
+
                 <div class="form-group">
                   <div class="text-center">
                   {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
@@ -56,9 +65,10 @@ Parishes
             <table class="table table-striped table-hover table-sm table-bordered sortable"  id="people-table">
               <thead class="thead-default">
                 <tr>
-                  <th data-defaultsort="desc">ID</th>
+                  <th data-defaultsort="desc">ID</th>                                    
+                  <th>CODE</th>
+                  <th>NAME</th>
                   <th>DIOCESE</th>
-                  <th>NAME</th>                  
                   <!--
                   <th>CREATED</th>
                   <th>UPDATED</th>
@@ -69,9 +79,10 @@ Parishes
               <tbody>
               @foreach($parishes as $parish)
                 <tr>
-                  <td scope="row">{{ $parish->id }}</td>
+                  <td scope="row">{{ $parish->id }}</td>                                    
+                  <td>{{ $parish->code }}</td>
+                  <td>{{ $parish->name }}</td>
                   <td>{{ $parish->diocese->name }}</td>
-                  <td>{{ $parish->name }}</td>                  
                   <!--
                   <td>{{ $parish->created_at }}</td>
                   <td>{{ $parish->updated_at }}</td>

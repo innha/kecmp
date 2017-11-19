@@ -55,7 +55,7 @@ Suspensions
                   <th></th>                  
                   <th>REG #</th>
                   <th>REASON</th>
-                  <th>AUTHORIZER</th>
+                  <th>DECIDED BY</th>
                   <th>USER</th>
                   <th>CREATED</th>
                   <th>UPDATED</th>
@@ -74,7 +74,7 @@ Suspensions
                   </td>                  
                   <td>{{ $suspension->registration_id }}</td>
                   <td>{{ $suspension->reason }}</td>
-                  <td>{{ $suspension->authRegNum }}</td>
+                  <td>{{ $suspension->authorizer }}</td>
                   <td>{{ $suspension->user_id }}</td>
                   <td>{{ $suspension->created_at }}</td>
                   <td>{{ $suspension->updated_at }}</td>

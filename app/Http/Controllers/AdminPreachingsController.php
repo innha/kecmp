@@ -30,7 +30,7 @@ class AdminPreachingsController extends Controller
      */
     public function create()
     {
-        $registrations = Registration::pluck('regnumber', 'id')->all();
+        $registrations = Registration::pluck('regNumber', 'id')->all();
 
         return view('admin.app.preaching.create', compact('registrations'));
     }

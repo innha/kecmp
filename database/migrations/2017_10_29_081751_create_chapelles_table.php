@@ -16,6 +16,7 @@ class CreateChapellesTable extends Migration
         Schema::create('chapelles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parish_id')->index()->unsigned()->nullable();
+            $table->string('code', 5)->unique();
             $table->string('name')->unique();            
             $table->timestamps();
 

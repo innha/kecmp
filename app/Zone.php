@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Zone extends Model
 {
-    protected $fillable = ['chapelle_id', 'name'];
+    protected $fillable = ['chapelle_id', 'code', 'name'];
 
     public function chapelle()
     {

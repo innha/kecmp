@@ -59,26 +59,26 @@
         </li>
         <li class="nav-item dropdown px-2">
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-gears"></i>Parameters</a>
-          <div class="dropdown-menu">
-            <a href="{{ route('admin.types.index') }}" class="dropdown-item">Types</a>
-            <a href="{{ route('admin.categories.index') }}" class="dropdown-item">Categories</a>
-            <a href="{{ route('admin.roles.index') }}" class="dropdown-item">Roles</a>
-            <a href="{{ route('admin.privileges.index') }}" class="dropdown-item">Privileges</a>
+          <div class="dropdown-menu">                        
+            <a href="{{ route('admin.dioceses.index') }}" class="dropdown-item">Dioceses</a>
+            <a href="{{ route('admin.parishes.index') }}" class="dropdown-item">Parishes</a>
+            <a href="{{ route('admin.chapelles.index') }}" class="dropdown-item">Chapelles</a>
+            <a href="{{ route('admin.zones.index') }}" class="dropdown-item">Zones</a>        
+            <a href="{{ route('admin.provinces.index') }}" class="dropdown-item">Provinces</a>    
+            <a href="{{ route('admin.districts.index') }}" class="dropdown-item">Districts</a>
+            <a href="{{ route('admin.sectors.index') }}" class="dropdown-item">Sectors</a>
+            <a href="{{ route('admin.cells.index') }}" class="dropdown-item">Cells</a>
+            <a href="{{ route('admin.villages.index') }}" class="dropdown-item">Villages</a>
             <a href="{{ route('admin.duties.index') }}" class="dropdown-item">Duties</a>
             <a href="{{ route('admin.services.index') }}" class="dropdown-item">Services</a>
             <a href="{{ route('admin.commissions.index') }}" class="dropdown-item">Commissions</a>            
             <a href="{{ route('admin.choirs.index') }}" class="dropdown-item">Choirs</a>            
-            <a href="{{ route('admin.degrees.index') }}" class="dropdown-item">Education</a>
-            <a href="{{ route('admin.zones.index') }}" class="dropdown-item">Zones</a>
-            <a href="{{ route('admin.chapelles.index') }}" class="dropdown-item">Chapelles</a>
-            <a href="{{ route('admin.villages.index') }}" class="dropdown-item">Villages</a>
-            <a href="{{ route('admin.cells.index') }}" class="dropdown-item">Cells</a>
-            <a href="{{ route('admin.sectors.index') }}" class="dropdown-item">Sectors</a>
-            <a href="{{ route('admin.districts.index') }}" class="dropdown-item">Districts</a>
-            <a href="{{ route('admin.provinces.index') }}" class="dropdown-item">Provinces</a>
-            <a href="{{ route('admin.parishes.index') }}" class="dropdown-item">Parishes</a>
-            <a href="{{ route('admin.dioceses.index') }}" class="dropdown-item">Dioceses</a>
+            <a href="{{ route('admin.degrees.index') }}" class="dropdown-item">Education</a>            
+            <a href="{{ route('admin.types.index') }}" class="dropdown-item">Types</a>
+            <a href="{{ route('admin.categories.index') }}" class="dropdown-item">Categories</a>
             <a href="{{ route('admin.statuses.index') }}" class="dropdown-item">Statuses</a>
+            <a href="{{ route('admin.roles.index') }}" class="dropdown-item">Roles</a>
+            <a href="{{ route('admin.privileges.index') }}" class="dropdown-item">Privileges</a>            
           </div>
         </li>
         <li class="nav-item px-2">

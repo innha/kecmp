@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Chapelle extends Model
 {
-    protected $fillable = ['parish_id', 'name'];
+    protected $fillable = ['parish_id', 'code', 'name'];
 
     public function zones()
     {

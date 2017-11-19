@@ -33,6 +33,15 @@ Dioceses
                   <span class="text-danger">{{ $errors->first('name') }}</span>
                   </div>
                 </div>
+
+                <div class="form-group {{$errors->has('code') ? 'has-error' : '' }} row">      
+                  {!! Form::label('code', 'Code:', ['class' => 'col-4 col-form-label']) !!}
+                  <div class="col-8">
+                  {!! Form::text('code', null, ['class' => 'form-control']) !!}
+                  <span class="text-danger">{{ $errors->first('code') }}</span>
+                  </div>
+                </div>
+
                 <div class="form-group">
                   <div class="text-center">
                   {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
@@ -49,6 +58,7 @@ Dioceses
               <thead class="thead-default">
                 <tr>
                   <th data-defaultsort="desc">ID</th>
+                  <th>CODE</th>
                   <th>NAME</th>
                   <!--
                   <th>CREATED</th>
@@ -61,6 +71,7 @@ Dioceses
               @foreach($dioceses as $diocese)
                 <tr>
                   <td scope="row">{{ $diocese->id }}</td>
+                  <td>{{ $diocese->code }}</td>
                   <td>{{ $diocese->name }}</td>
                   <!--
                   <td>{{ $diocese->created_at }}</td>

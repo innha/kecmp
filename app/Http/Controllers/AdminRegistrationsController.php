@@ -24,7 +24,8 @@ use App\Choir;
 use App\Status;
 use Auth;
 use Session;
-use App\Http\Requests\StoreRegistrationRequest;
+use App\Http\Requests\UpdateRegistrationRequest;
+use DB;
 
 class AdminRegistrationsController extends Controller
 {
@@ -80,8 +81,13 @@ class AdminRegistrationsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRegistrationRequest $request)
+    // public function store(Request $request)
     {
-        // dd($request->all());
+        // dd($this->getNextRegistrationId());
+
+        // $Village_code = Village::findOrFail($request->village_id);
+
+        // dd(Village::findOrFail($request->village_id)->first()->code);
 
         // Registration::create($request->all());        
 
@@ -105,7 +111,19 @@ class AdminRegistrationsController extends Controller
 
         $input = $request->all();
 
+
+        $Village_code = Village::findOrFail($request->village_id)->first()->code;
+        $zone_code = Zone::findOrFail($request->zone_id)->first()->code;
+        $next_reg_id = $this->getNextRegistrationId();
+
+        // dd($Village_code);
+
+        $regNumber = $Village_code . $zone_code . sprintf('%07d', $next_reg_id);
+
+        // dd($regNumber);
+
         $input['user_id'] = $user->id;
+        $input['regNumber'] = $regNumber;
 
         Registration::create($input);
 
@@ -149,7 +167,31 @@ class AdminRegistrationsController extends Controller
      */
     public function edit($id)
     {
-        //
+        // return $id;
+
+        $registration = Registration::findOrFail($id);
+
+        // dd($registration);
+
+        $types = Type::pluck('name', 'id')->all();
+        $degrees = Degree::pluck('name', 'id')->all();
+        $provinces = Province::pluck('name', 'id')->all();
+        $districts = District::pluck('name', 'id')->all();
+        $sectors = Sector::pluck('name', 'id')->all();
+        $cells = Cell::pluck('name', 'id')->all();
+        $villages = Village::pluck('name', 'id')->all();
+        $dioceses = Diocese::pluck('name', 'id')->all();
+        $parishes = Parish::pluck('name', 'id')->all();
+        $chapelles = Chapelle::pluck('name', 'id')->all();
+        $zones = Zone::pluck('name', 'id')->all();
+        $duties = Duty::pluck('name', 'id')->all();
+        $categories = Category::pluck('name', 'id')->all();
+        $services = Service::pluck('name', 'id')->all();
+        $commissions = Commission::pluck('name', 'id')->all();
+        $choirs = Choir::pluck('name', 'id')->all();
+        $statuses = Status::pluck('name', 'id')->all();
+
+        return view('admin.app.registration.edit', compact('registration', 'types', 'degrees', 'provinces', 'districts', 'sectors', 'cells', 'villages', 'dioceses', 'parishes', 'chapelles', 'zones', 'duties', 'categories', 'services', 'commissions', 'choirs', 'statuses'));        
     }
 
     /**
@@ -159,9 +201,21 @@ class AdminRegistrationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRegistrationRequest $request, $id)
     {
-        //
+        // dd($request);
+
+        $user = Auth::user();
+
+        $input = $request->all();
+
+        $input['user_id'] = $user->id;
+
+        $updated = Registration::findOrFail($id)->update($input);
+
+        Session::flash('updated_registration', 'Registration [id:' . $id . '] updated [' . $updated . ']');        
+
+        return redirect(route('admin.registrations.index'));        
     }
 
     /**
@@ -231,5 +285,15 @@ class AdminRegistrationsController extends Controller
 
             return ['value' => 'No results found', 'id' => ''];
         }
+    }
+
+    /**
+     * Get next registration id
+     *
+     * @return int
+     **/
+    public function getNextRegistrationId ()
+    {
+        return DB::table('registrations')->max('id') + 1;
     }
 }

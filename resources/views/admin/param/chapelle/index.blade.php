@@ -41,6 +41,15 @@ Chapelles
                   <span class="text-danger">{{ $errors->first('name') }}</span>
                   </div>
                 </div>
+
+                <div class="form-group {{$errors->has('code') ? 'has-error' : '' }} row">      
+                  {!! Form::label('code', 'Code:', ['class' => 'col-4 col-form-label']) !!}
+                  <div class="col-8">
+                  {!! Form::text('code', null, ['class' => 'form-control']) !!}
+                  <span class="text-danger">{{ $errors->first('code') }}</span>
+                  </div>
+                </div>
+
                 <div class="form-group">
                   <div class="text-center">
                   {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
@@ -57,6 +66,7 @@ Chapelles
               <thead class="thead-default">
                 <tr>
                   <th data-defaultsort="desc">ID</th>
+                  <th>CODE</th>
                   <th>NAME</th>
                   <th>PARISH</th>
                   <!--
@@ -70,6 +80,7 @@ Chapelles
               @foreach($chapelles as $chapelle)
                 <tr>
                   <td scope="row">{{ $chapelle->id }}</td>
+                  <td>{{ $chapelle->code }}</td>
                   <td>{{ $chapelle->name }}</td>
                   <td>{{ $chapelle->parish->name }}</td>
                   <!--

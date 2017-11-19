@@ -16,6 +16,7 @@ class CreateZonesTable extends Migration
         Schema::create('zones', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('chapelle_id')->index()->unsigned()->nullable();
+            $table->string('code', 7)->unique();
             $table->string('name')->unique();            
             $table->timestamps();
 

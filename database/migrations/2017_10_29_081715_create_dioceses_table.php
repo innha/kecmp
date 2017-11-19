@@ -15,6 +15,7 @@ class CreateDiocesesTable extends Migration
     {
         Schema::create('dioceses', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('code', 1)->unique();
             $table->string('name')->unique();
             $table->timestamps();
         });

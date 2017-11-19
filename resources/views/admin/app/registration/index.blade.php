@@ -50,10 +50,10 @@ Registration
             <table class="table table-striped table-hover table-sm table-bordered sortable"  id="people-table">
               <thead class="thead-default">
                 <tr>
-                  <th data-defaultsort="desc">ID</th>
+                  <!-- <th data-defaultsort="desc">ID</th> -->
                   <th></th>
-                  <th>TYPE</th>
-                  <th>REG #</th>
+                  <th data-defaultsort="desc">REG NUMBER</th>
+                  <th>TYPE</th>                  
                   <th>LASTNAME</th>
                   <th>FIRSTNAME</th>
                   <th>FATHER LAST</th>
@@ -101,21 +101,21 @@ Registration
               <tbody>
               @foreach($registrations as $registration)
                 <tr>              
-                  <td scope="row">{{ $registration->id }}</td>
+                  <!-- <td scope="row">{{ $registration->id }}</td> -->
                   <td>
                     <div class="text-center">
                     {!! Form::open(['method' => 'DELETE', 'action' => ['AdminRegistrationsController@destroy', $registration->id]]) !!}        
                         {!! Form::submit('x', ['class' => 'btn btn-sm btn-danger']) !!}
                     {!! Form::close() !!}
                     </div>
-                  </td>                  
-                  <td>{{ $registration->type->name }}</td>
-                  <td>{{ $registration->regNumber }}</td>
+                  </td>
+                  <td scope="row"><a href="{{ route('admin.registrations.edit', ['id' => $registration->id]) }}">{{ $registration->regNumber }}</a></td>
+                  <td>{{ $registration->type->name }}</td>                  
                   <td>{{ $registration->lastName }}</td>
                   <td>{{ $registration->firstName }}</td>
                   <td>{{ $registration->fLastName }}</td>
                   <td>{{ $registration->fFirstName }}</td>
-                  <td>{{ $registration->mLastname }}</td>
+                  <td>{{ $registration->mLastName }}</td>
                   <td>{{ $registration->mFirstName }}</td>
                   <td>{{ $registration->dob }}</td>
                   <td>{{ $registration->birthPlace }}</td>
@@ -136,7 +136,7 @@ Registration
                   <td>{{ $registration->chapelle->name }}</td>
                   <td>{{ $registration->parish->name }}</td>
                   <td>{{ $registration->diocese->name }}</td>
-                  <td>{{ $registration->ownsHouse }}</td>
+                  <td>{{ $registration->ownsHouse ? 'Yes' : 'No' }}</td>
                   <td>{{ $registration->job }}</td>
                   <td>{{ $registration->employer }}</td>
                   <td>{{ $registration->jobLocation }}</td>

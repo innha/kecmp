@@ -55,7 +55,7 @@ Repenting
                   <th></th>                  
                   <th>REG #</th>
                   <th>DATE RETURNED</th>
-                  <th>AUTHORISER</th>
+                  <th>APPROVED BY</th>
                   <th>USER</th>
                   <th>CREATED</th>
                   <th>UPDATED</th>
@@ -74,7 +74,7 @@ Repenting
                   </td>                  
                   <td>{{ $repenting->registration_id }}</td>
                   <td>{{ $repenting->date_returned }}</td>
-                  <td>{{ $repenting->authRegNum }}</td>
+                  <td>{{ $repenting->authorizer }}</td>
                   <td>{{ $repenting->user_id }}</td>
                   <td>{{ $repenting->created_at->diffForHumans() }}</td>
                   <td>{{ $repenting->updated_at->diffForHumans() }}</td>

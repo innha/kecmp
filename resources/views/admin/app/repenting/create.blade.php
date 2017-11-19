@@ -33,13 +33,13 @@ Repenting
                   	</div>					
 				</div>
 
-				<div class="form-group {{$errors->has('authRegNum') ? 'has-error' : '' }} row">			
-					{!! Form::label('authRegNum', 'Approved By:', ['class' => 'col-4 col-form-label']) !!}
+				<div class="form-group {{$errors->has('authorizer') ? 'has-error' : '' }} row">			
+					{!! Form::label('authorizer', 'Approved By:', ['class' => 'col-4 col-form-label']) !!}
 					<div class="col-8">
-					{!! Form::select('authRegNum', array('' => 'Choose reg #') + $regNums, null, ['class' => 'form-control']) !!}
-					<span class="text-danger">{{ $errors->first('authRegNum') }}</span>
+					{!! Form::text('authorizer', null, ['class' => 'form-control']) !!}
+					<span class="text-danger">{{ $errors->first('authorizer') }}</span>
 					</div>
-				</div>				
+				</div>
 
 				<div class="form-group {{$errors->has('date_returned') ? 'has-error' : '' }} row">			
 					{!! Form::label('date_returned', 'Date Returned:', ['class' => 'col-4 col-form-label']) !!}

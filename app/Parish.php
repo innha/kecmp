@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Parish extends Model
 {
-    protected $fillable = ['diocese_id', 'name'];
+    protected $fillable = ['diocese_id', 'code', 'name'];
 
     public function chapelles()
     {

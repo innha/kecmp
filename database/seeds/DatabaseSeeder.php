@@ -86,7 +86,7 @@ class DatabaseSeeder extends Seeder
         factory(App\Choir::class, 1)->create();
         factory(App\Status::class, 1)->create();
         factory(App\Degree::class, 2)->create();
-        factory(App\Registration::class, 2)->create();
+        factory(App\Registration::class, 1)->create();
         // factory(App\Member::class, 1)->create();
         factory(App\Baptism::class, 1)->create();
         factory(App\Bridal::class, 1)->create();
@@ -103,43 +103,43 @@ class DatabaseSeeder extends Seeder
 
         $time = Carbon::now()->format('Y-m-d H:i:s');
 
-        DB::table('provinces')->insert(['code' => 1, 'name' => 'Kigali', 'created_at' => $time, 'updated_at' => $time]);
-        DB::table('provinces')->insert(['code' => 2, 'name' => 'South', 'created_at' => $time, 'updated_at' => $time]);
-        DB::table('provinces')->insert(['code' => 3, 'name' => 'West', 'created_at' => $time, 'updated_at' => $time]);
-        DB::table('provinces')->insert(['code' => 4, 'name' => 'North', 'created_at' => $time, 'updated_at' => $time]);
-        DB::table('provinces')->insert(['code' => 5, 'name' => 'East', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('provinces')->insert(['code' => '1', 'name' => 'Kigali', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('provinces')->insert(['code' => '2', 'name' => 'South', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('provinces')->insert(['code' => '3', 'name' => 'West', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('provinces')->insert(['code' => '4', 'name' => 'North', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('provinces')->insert(['code' => '5', 'name' => 'East', 'created_at' => $time, 'updated_at' => $time]);
 
-        DB::table('districts')->insert(['province_id' => '1', 'code' => 101, 'name' => 'Nyarugenge', 'created_at' => $time, 'updated_at' => $time]);
-        DB::table('districts')->insert(['province_id' => '1', 'code' => 102, 'name' => 'Gasabo', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('districts')->insert(['province_id' => '1', 'code' => '101', 'name' => 'Nyarugenge', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('districts')->insert(['province_id' => '1', 'code' => '102', 'name' => 'Gasabo', 'created_at' => $time, 'updated_at' => $time]);
 
-        DB::table('districts')->insert(['province_id' => '2', 'code' => 201, 'name' => 'Nyanza', 'created_at' => $time, 'updated_at' => $time]);
-        DB::table('districts')->insert(['province_id' => '2', 'code' => 202, 'name' => 'Gisagara', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('districts')->insert(['province_id' => '2', 'code' => '201', 'name' => 'Nyanza', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('districts')->insert(['province_id' => '2', 'code' => '202', 'name' => 'Gisagara', 'created_at' => $time, 'updated_at' => $time]);
 
-        DB::table('districts')->insert(['province_id' => '3', 'code' => 301, 'name' => 'Karongi', 'created_at' => $time, 'updated_at' => $time]);
-        DB::table('districts')->insert(['province_id' => '3', 'code' => 302, 'name' => 'Rutsiro', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('districts')->insert(['province_id' => '3', 'code' => '301', 'name' => 'Karongi', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('districts')->insert(['province_id' => '3', 'code' => '302', 'name' => 'Rutsiro', 'created_at' => $time, 'updated_at' => $time]);
 
-        DB::table('districts')->insert(['province_id' => '4', 'code' => 401, 'name' => 'Rulindo', 'created_at' => $time, 'updated_at' => $time]);
-        DB::table('districts')->insert(['province_id' => '4', 'code' => 402, 'name' => 'Gakenke', 'created_at' => $time, 'updated_at' => $time]);        
-        DB::table('districts')->insert(['province_id' => '5', 'code' => 501, 'name' => 'Rwamagana', 'created_at' => $time, 'updated_at' => $time]);
-        DB::table('districts')->insert(['province_id' => '5', 'code' => 502, 'name' => 'Nyagatare', 'created_at' => $time, 'updated_at' => $time]);        
+        DB::table('districts')->insert(['province_id' => '4', 'code' => '401', 'name' => 'Rulindo', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('districts')->insert(['province_id' => '4', 'code' => '402', 'name' => 'Gakenke', 'created_at' => $time, 'updated_at' => $time]);        
+        DB::table('districts')->insert(['province_id' => '5', 'code' => '501', 'name' => 'Rwamagana', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('districts')->insert(['province_id' => '5', 'code' => '502', 'name' => 'Nyagatare', 'created_at' => $time, 'updated_at' => $time]);        
 
-        DB::table('sectors')->insert(['district_id' => '1', 'code' => 10101, 'name' => 'Gitega', 'created_at' => $time, 'updated_at' => $time]);
-        DB::table('sectors')->insert(['district_id' => '2', 'code' => 10201, 'name' => 'Bumbogo', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('sectors')->insert(['district_id' => '1', 'code' => '10101', 'name' => 'Gitega', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('sectors')->insert(['district_id' => '2', 'code' => '10201', 'name' => 'Bumbogo', 'created_at' => $time, 'updated_at' => $time]);
 
-        DB::table('sectors')->insert(['district_id' => '3', 'code' => 20101, 'name' => 'Busasamana', 'created_at' => $time, 'updated_at' => $time]);
-        DB::table('sectors')->insert(['district_id' => '4', 'code' => 20201, 'name' => 'Gikonko', 'created_at' => $time, 'updated_at' => $time]);        
-        DB::table('sectors')->insert(['district_id' => '5', 'code' => 30101, 'name' => 'Bwishyura', 'created_at' => $time, 'updated_at' => $time]);
-        DB::table('sectors')->insert(['district_id' => '6', 'code' => 30201, 'name' => 'Boneza', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('sectors')->insert(['district_id' => '3', 'code' => '20101', 'name' => 'Busasamana', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('sectors')->insert(['district_id' => '4', 'code' => '20201', 'name' => 'Gikonko', 'created_at' => $time, 'updated_at' => $time]);        
+        DB::table('sectors')->insert(['district_id' => '5', 'code' => '30101', 'name' => 'Bwishyura', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('sectors')->insert(['district_id' => '6', 'code' => '30201', 'name' => 'Boneza', 'created_at' => $time, 'updated_at' => $time]);
 
-        DB::table('sectors')->insert(['district_id' => '7', 'code' => 40101, 'name' => 'Base', 'created_at' => $time, 'updated_at' => $time]);
-        DB::table('sectors')->insert(['district_id' => '8', 'code' => 40201, 'name' => 'Busengo', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('sectors')->insert(['district_id' => '7', 'code' => '40101', 'name' => 'Base', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('sectors')->insert(['district_id' => '8', 'code' => '40201', 'name' => 'Busengo', 'created_at' => $time, 'updated_at' => $time]);
 
-        DB::table('sectors')->insert(['district_id' => '9', 'code' => 50101, 'name' => 'Fumbwe', 'created_at' => $time, 'updated_at' => $time]);
-        DB::table('sectors')->insert(['district_id' => '10', 'code' => 50201, 'name' => 'Gatunda', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('sectors')->insert(['district_id' => '9', 'code' => '50101', 'name' => 'Fumbwe', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('sectors')->insert(['district_id' => '10', 'code' => '50201', 'name' => 'Gatunda', 'created_at' => $time, 'updated_at' => $time]);
 
 
-        DB::table('cells')->insert(['sector_id' => '1', 'code' => 1010101, 'name' => 'Cyahafi', 'created_at' => $time, 'updated_at' => $time]);
-        DB::table('villages')->insert(['cell_id' => '1', 'code' => 1010101, 'name' => 'Akarwa', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('cells')->insert(['sector_id' => '1', 'code' => '1010101', 'name' => 'Cyahafi', 'created_at' => $time, 'updated_at' => $time]);
+        DB::table('villages')->insert(['cell_id' => '1', 'code' => '101010101', 'name' => 'Akarwa', 'created_at' => $time, 'updated_at' => $time]);
         
         /*
         DB::table('member_category')->insert(

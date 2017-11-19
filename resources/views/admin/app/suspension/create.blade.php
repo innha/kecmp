@@ -33,11 +33,11 @@ Suspension
                   	</div>					
 				</div>
 
-				<div class="form-group {{$errors->has('authRegNum') ? 'has-error' : '' }} row">			
-					{!! Form::label('authRegNum', 'Decided By:', ['class' => 'col-4 col-form-label']) !!}
+				<div class="form-group {{$errors->has('authorizer') ? 'has-error' : '' }} row">			
+					{!! Form::label('authorizer', 'Decided By:', ['class' => 'col-4 col-form-label']) !!}
 					<div class="col-8">
-					{!! Form::select('authRegNum', array('' => 'Choose reg #') + $regNums, null, ['class' => 'form-control']) !!}
-					<span class="text-danger">{{ $errors->first('authRegNum') }}</span>
+					{!! Form::text('authorizer', null, ['class' => 'form-control']) !!}
+					<span class="text-danger">{{ $errors->first('authorizer') }}</span>
 					</div>
 				</div>
 

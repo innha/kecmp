@@ -22,12 +22,12 @@ class CreateRegistrationsTable extends Migration
             $table->integer('service_id')->index()->unsigned()->nullable();
             $table->integer('commission_id')->index()->unsigned()->nullable();            
             $table->integer('status_id')->index()->unsigned()->nullable();            
-            $table->bigInteger('regNumber')->nullable()->unsigned()->unique()->index();            
+            $table->string('regNumber', 23)->nullable()->unique();            
             $table->string('lastName');
             $table->string('firstName')->nullable();
             $table->string('fLastName');
             $table->string('fFirstName')->nullable();
-            $table->string('mLastname');
+            $table->string('mLastName');
             $table->string('mFirstName')->nullable();
             $table->date('dob')->nullable();
             $table->string('birthPlace');

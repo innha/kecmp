@@ -15,12 +15,12 @@ Registration
 	<div class="panel mx-auto">
 
 		<div class="panel-heading text-center my-5">
-			<h3>New Registration</h3>
+			<h3>Edit Registration</h3>
 		</div>
 
 		<div class="panel-body">
 					
-			{!! Form::open(['method' => 'POST', 'action' => 'AdminRegistrationsController@store']) !!}
+			{!! Form::model($registration, ['method' => 'PATCH', 'action' => ['AdminRegistrationsController@update', $registration->id]]) !!}
 
 				<div class="form-group {{$errors->has('type_id') ? 'has-error' : '' }} row">			
 					{!! Form::label('type_id', 'Type:', ['class' => 'col-4 col-form-label']) !!}
@@ -30,7 +30,7 @@ Registration
 					</div>
 				</div>
 				{{--
-				<div class="form-group {{$errors->has('regNumber') ? 'has-error' : '' }} row">			
+				<div class="form-group {{$errors->has('regNumber') ? 'has-error' : '' }} row">
 					{!! Form::label('regNumber', 'Reg #:', ['class' => 'col-4 col-form-label']) !!}
 					<div class="col-8">
 					{!! Form::text('regNumber', null, ['class' => 'form-control']) !!}
@@ -378,7 +378,7 @@ Registration
 				</div>
 				<div class="form-group">
 					<div class="text-center">
-					{!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+					{!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
 					</div>
 				</div>
 				{!! Form::close() !!}

@@ -73,6 +73,7 @@ $factory->define(App\Village::class, function (Faker\Generator $faker) {
 */
 $factory->define(App\Diocese::class, function (Faker\Generator $faker) {
 	return [
+		'code' => '1',
 		'name' => $faker->randomElement(['Kigali']),
 	];
 });
@@ -80,6 +81,7 @@ $factory->define(App\Diocese::class, function (Faker\Generator $faker) {
 $factory->define(App\Parish::class, function (Faker\Generator $faker) {
 	return [
 		'diocese_id' => 1,
+		'code' => '101',
 		'name' => $faker->randomElement(['Gasabo']),
 	];
 });
@@ -87,6 +89,7 @@ $factory->define(App\Parish::class, function (Faker\Generator $faker) {
 $factory->define(App\Chapelle::class, function (Faker\Generator $faker) {
 	return [
 		'parish_id' => 1,
+		'code' => '10101',
 		'name' => $faker->randomElement(['Gisozi']),
 	];
 });
@@ -94,6 +97,7 @@ $factory->define(App\Chapelle::class, function (Faker\Generator $faker) {
 $factory->define(App\Zone::class, function (Faker\Generator $faker) {
 	return [
 		'chapelle_id' => 1,
+		'code' => '1010101',
 		'name' => $faker->randomElement(['Gakinjiro']),
 	];
 });
@@ -175,7 +179,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Registration::class, function (Faker\Generator $faker) {
 	return [
-    	'type_id' => $faker->numberBetween(1, 2),
+    	'type_id' => 1,
     	'degree_id' => 1,
     	'duty_id' => 1,
     	'category_id' => 1,
@@ -183,15 +187,15 @@ $factory->define(App\Registration::class, function (Faker\Generator $faker) {
     	'commission_id' => 1,
     	'user_id' => 1,
     	'status_id' => 1,		
-    	'regNumber' => $faker->unique()->numberBetween(102010101, 102010115),
-    	'lastName' => $faker->randomElement(['RUGEMA', 'NSHUTI']),
-    	'firstName' => $faker->randomElement(['Charles', 'Tresor']),
-    	'fLastName' => $faker->randomElement(['BAGARAGAZA', 'HABIMANA']),
-    	'fFirstName' => $faker->randomElement(['Thomas', 'Bosco']),
-    	'mLastname' => $faker->randomElement(['MUKAMANA', 'NYIRAMANA']),
-    	'mFirstName' => $faker->randomElement(['Dorothy', 'Betty']),
-    	'dob' => $faker->randomElement(['1981-01-10', '1982-02-11']), 
-    	'birthPlace' => $faker->randomElement(['Nyakinama', 'Nyagatare']),
+    	'regNumber' => '10101010110101010000001',
+    	'lastName' => $faker->randomElement(['RUGEMA']),
+    	'firstName' => $faker->randomElement(['Charles']),
+    	'fLastName' => $faker->randomElement(['BAGARAGAZA']),
+    	'fFirstName' => $faker->randomElement(['Thomas']),
+    	'mLastname' => $faker->randomElement(['MUKAMANA']),
+    	'mFirstName' => $faker->randomElement(['Dorothy']),
+    	'dob' => $faker->randomElement(['1981-01-10']), 
+    	'birthPlace' => $faker->randomElement(['Nyakinama']),
     	'phoneOne' => '250788556633',
     	'phoneTwo' => '250722334466',
     	'gender' => 'Male',
@@ -318,18 +322,18 @@ $factory->define(App\Recommendation::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Repenting::class, function (Faker\Generator $faker) {
 	return [
-		'registration_id' => 2,		
+		'registration_id' => 1,		
 		'date_returned' => '2017-10-26',
-		'authRegNum' => 102010102,
+		'authorizer' => 'Pastor Y',
 		'user_id' => 1,
 	];
 });
 
 $factory->define(App\Suspension::class, function (Faker\Generator $faker) {
 	return [
-		'registration_id' => 2,		
+		'registration_id' => 1,		
 		'reason' => 'Resistence to Repenting',
-		'authRegNum' => 102010102,
+		'authorizer' => 'Bishop X',
 		'user_id' => 1,
 	];
 });
