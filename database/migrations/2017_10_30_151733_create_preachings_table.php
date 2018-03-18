@@ -15,14 +15,15 @@ class CreatePreachingsTable extends Migration
     {
         Schema::create('preachings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('registration_id')->index()->unsigned()->nullable();            
+            $table->string('visitor_names');            
             $table->string('topic');
             $table->date('date_preached');
-            $table->boolean('hasRepented');
+            // $table->boolean('hasRepented');
+            $table->integer('num_repented');
             $table->integer('user_id')->index()->unsigned()->nullable();
             $table->timestamps();
 
-            $table->foreign('registration_id')->references('id')->on('registrations')->onDelete('cascade');
+            // $table->foreign('registration_id')->references('id')->on('registrations')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

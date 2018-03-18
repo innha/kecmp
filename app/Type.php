@@ -18,5 +18,5 @@ class Type extends Model
     public function registrations()
     {
         return $this->hasMany('App\Registration');
-    }    
+    }   
 }

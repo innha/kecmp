@@ -53,7 +53,7 @@ Registration
                   <!-- <th data-defaultsort="desc">ID</th> -->
                   <th></th>
                   <th data-defaultsort="desc">REG NUMBER</th>
-                  <th>TYPE</th>                  
+                  <!-- <th>TYPE</th> -->
                   <th>LASTNAME</th>
                   <th>FIRSTNAME</th>
                   <th>FATHER LAST</th>
@@ -65,41 +65,50 @@ Registration
                   <th>PHONE 1</th>
                   <th>PHONE 2</th>
                   <th>GENDER</th>
-                  <th>ID #</th>
+                  <!-- <th>ID #</th> -->
                   <th>EDUCATION</th>
-                  {{-- <th>SCHOOL</th> --}}
+                  <!-- <th>SCHOOL</th> -->
                   <th>MARITAL STATUS</th>
+                  <th>LEGALLY MARRIED</th>
                   <th>EMAIL</th>
+                  <!--
                   <th>VILLAGE</th>
                   <th>CELL</th>
-                  <th>SECTOR</th>
+                  <th>SECTOR</th> -->
                   <th>DISTRICT</th>
                   <th>PROVINCE</th>
+                  <!--
                   <th>ZONE</th>
-                  <th>CHAPELLE</th>
+                  <th>CHAPELLE</th> -->
                   <th>PARISH</th>
                   <th>DIOCESE</th>
                   <th>HOUSE OWNER</th>
                   <th>JOB</th>
+                  <!--
                   <th>EMPLOYER</th>
-                  <th>JOB LOCATION</th>
+                  <th>JOB LOCATION</th> -->
+                  <th>ORIGIN CELL</th>
+                  <th>ORIGIN PARISH</th>
                   <th>BAPTISM DATE</th>
-                  <th>BAPT. PARISH</th>
-                  <th>DUTY</th>
+                  <th>BAPT. PARISH</th>                                    
                   <th>CATEGORY</th>
-                  <th>SERVICE</th>
-                  <th>COMMISSION</th>
-                  <th>CHOIR</th>
-                  <th>USER</th>
+                  <!-- <th>SERVICE</th> -->
+                  <th>COMMISSION</th>                  
+                  <!-- <th>DUTY</th> -->
+                  <th>TASK</th>
+                  <th>CHOIR</th>                  
                   <th>STATUS</th>
-                  <th>CONFIRMED</th>
+                  <th>USER</th>
+                  <!--
+                  <th>CONFIRMED</th>                  
                   <th>CREATED</th>
-                  <th>UPDATED</th>
+                  <th>UPDATED</th> -->
                   <th>NOTES</th>                  
                 </tr>
               </thead>
               <tbody>
               @foreach($registrations as $registration)
+                {{-- dd($registration->notes) --}}
                 <tr>              
                   <!-- <td scope="row">{{ $registration->id }}</td> -->
                   <td>
@@ -110,7 +119,6 @@ Registration
                     </div>
                   </td>
                   <td scope="row"><a href="{{ route('admin.registrations.edit', ['id' => $registration->id]) }}">{{ $registration->regNumber }}</a></td>
-                  <td>{{ $registration->type->name }}</td>                  
                   <td>{{ $registration->lastName }}</td>
                   <td>{{ $registration->firstName }}</td>
                   <td>{{ $registration->fLastName }}</td>
@@ -122,42 +130,43 @@ Registration
                   <td>{{ $registration->phoneOne }}</td>
                   <td>{{ $registration->phoneTwo }}</td>
                   <td>{{ $registration->gender }}</td>
-                  <td>{{ $registration->idNumber }}</td>
-                  <td>{{ $registration->degree->name }}</td>
-                  {{-- <td>$registration->school</td>--}}
+                  <!-- <td>{{ $registration->idNumber }}</td> -->
+                  <td>{{ $registration->degree_id? $registration->degree->name : '' }}</td>
                   <td>{{ $registration->maritalStatus }}</td>
+                  <td>{{ $registration->legallyMarried ? 'Yes' : 'No' }}</td>
                   <td>{{ $registration->email }}</td>
+                  <!--
                   <td>{{ $registration->village->name }}</td>
                   <td>{{ $registration->cell->name }}</td>
-                  <td>{{ $registration->sector->name }}</td>
-                  <td>{{ $registration->district->name }}</td>
-                  <td>{{ $registration->province->name }}</td>
+                  <td>{{ $registration->sector->name }}</td> -->
+                  <td>{{ $registration->district_id ? $registration->district->name : '' }}</td>
+                  <td>{{ $registration->province_id ? $registration->province->name : '' }}</td>
+                  <!--
                   <td>{{ $registration->zone->name }}</td>
-                  <td>{{ $registration->chapelle->name }}</td>
-                  <td>{{ $registration->parish->name }}</td>
-                  <td>{{ $registration->diocese->name }}</td>
+                  <td>{{ $registration->chapelle->name }}</td> -->
+                  <td>{{ $registration->parish_id ? $registration->parish->name : '' }}</td>
+                  <td>{{ $registration->diocese_id ? $registration->diocese->name : '' }}</td>
                   <td>{{ $registration->ownsHouse ? 'Yes' : 'No' }}</td>
-                  <td>{{ $registration->job }}</td>
+                  <td>{{ $registration->job_id ? $registration->job->name : '' }}</td>
+                  <!--
                   <td>{{ $registration->employer }}</td>
-                  <td>{{ $registration->jobLocation }}</td>
+                  <td>{{ $registration->jobLocation }}</td> -->
+                  <td>{{ $registration->origin_cell }}</td>
+                  <td>{{ $registration->origin_parish }}</td>
                   <td>{{ $registration->baptismDate }}</td>
-                  <td>{{ $registration->baptismParish }}</td>
-                  <td>{{ $registration->duty->name }}</td>
-                  <td>{{ $registration->category->name }}</td>
-                  <td>{{ $registration->service->name}}</td>
-                  <td>{{ $registration->commission->name }}</td>
-                  <td>{{ $registration->choir->name }}</td>
-                  <td>{{ $registration->user->name }}</td>
-                  <td>{{ $registration->status->name }}</td>
-                  <td>{{ $registration->confirmed == 1 ? 'Confirmed' : 'Unconfirmed' }}</td>                  
-                  <td>{{ $registration->created_at }}</td>
-                  <td>{{ $registration->updated_at }}</td>
+                  <td>{{ $registration->baptismParish }}</td>                  
+                  <td>{{ $registration->category_id ? $registration->category->name : '' }}</td>
+                  <td>{{ $registration->commission_id ? $registration->commission->name : '' }}</td>                  
+                  <td>{{ $registration->task_id ? $registration->task->name : '' }}</td>
+                  <td>{{ $registration->choir_id ? $registration->choir->name : ''}}</td>
+                  <td>{{ $registration->status_id ? $registration->status->name : '' }}</td>
+                  <td>{{ $registration->user_id ? $registration->user->name : '' }}</td>
                   <td>{{ $registration->notes }}</td>
                   <!--
-                  <td><a href="details.html" class="btn btn-scondary">
+                  <td><a href="details.html" class="btn btn-secondary">
                     <i class="fa fa-angle-double-right"></i> Details
                   </a></td>
-                -->
+                  -->
                 </tr>
               @endforeach
               </tbody>

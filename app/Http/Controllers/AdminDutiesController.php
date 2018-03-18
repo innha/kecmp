@@ -16,7 +16,8 @@ class AdminDutiesController extends Controller
     public function index()
     {
         // return 'AdminDutiesController@index';
-        $duties = Duty::paginate(5);
+        // $duties = Duty::paginate(5);
+        $duties = Duty::all();
 
         return view('admin.param.duty.index', compact('duties'));
     }
@@ -45,11 +46,11 @@ class AdminDutiesController extends Controller
             'name' => 'required|alpha_spaces|unique:duties'
         ]);        
 
-        Duty::create($request->all());
+        return Duty::create($request->all());
 
-        Session::flash('created_duty', 'Duty created');
+        // Session::flash('created_duty', 'Duty created');
 
-        return redirect(route('admin.duties.index'));
+        // return redirect(route('admin.duties.index'));
     }
 
     /**
@@ -83,7 +84,14 @@ class AdminDutiesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+
+            'name' => 'required|alpha_spaces'            
+        ]);
+
+        Duty::whereId($id)->update($request->all());
+
+        return Duty::whereId($id)->first();
     }
 
     /**
@@ -98,8 +106,10 @@ class AdminDutiesController extends Controller
 
         $deleted = Duty::findOrFail($id)->delete();
 
-        Session::flash('deleted_duty', 'Duty id ' . $id . ' deleted');
+        // Session::flash('deleted_duty', 'Duty id ' . $id . ' deleted');
         
-        return redirect(route('admin.duties.index'));
+        // return redirect(route('admin.duties.index'));
+
+        return response()->json(['status' => 'Delete OK', 'Num deleted' => $deleted, 'ID' => $id], 200);
     }
 }

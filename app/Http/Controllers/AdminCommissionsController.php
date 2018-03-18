@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Commission;
 use Session;
+use DB;
 
 class AdminCommissionsController extends Controller
 {
@@ -16,7 +17,12 @@ class AdminCommissionsController extends Controller
     public function index()
     {
         // return 'AdminCommissionsController@index';
-        $commissions = Commission::paginate(5);
+        // $commissions = Commission::paginate(5);
+        // $commissions = Commission::all();
+        $commissions = DB::table('commissions')
+                        ->join('chapelles', 'commissions.chapelle_id', '=', 'chapelles.id')
+                        ->select('commissions.*', 'chapelles.name as chapelle')
+                        ->get();        
 
         return view('admin.param.commission.index', compact('commissions'));
     }
@@ -41,14 +47,29 @@ class AdminCommissionsController extends Controller
     {
         // dd($request->all());
         $this->validate($request, [
+            'chapelle_id' => 'required|numeric',
             'name' => 'required|alpha_spaces|unique:commissions'
-        ]);        
+        ]);
 
-        Commission::create($request->all());
+        // return Commission::create($request->all());
 
-        Session::flash('created_commission', 'Commission created');
+        $id = DB::table('commissions')->insertGetId(
 
-        return redirect(route('admin.commissions.index'));        
+            ['chapelle_id' => $request->chapelle_id, 'name' => $request->name]
+
+        );
+
+        $commission = DB::table('commissions')
+                        ->where('commissions.id', $id)
+                        ->join('chapelles', 'commissions.chapelle_id', '=', 'chapelles.id')
+                        ->select('commissions.*', 'chapelles.name as chapelle')
+                        ->get();
+
+        return json_decode($commission);
+
+        // Session::flash('created_commission', 'Commission created');
+
+        // return redirect(route('admin.commissions.index'));
     }
 
     /**
@@ -82,7 +103,22 @@ class AdminCommissionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'chapelle_id' => 'required|numeric',
+            'name' => 'required|alpha_spaces'            
+        ]);
+
+        Commission::whereId($id)->update($request->all());
+
+        $commission = DB::table('commissions')
+                        ->where('commissions.id', $id)
+                        ->join('chapelles', 'commissions.province_id', '=', 'chapelles.id')
+                        ->select('commissions.*', 'chapelles.name as chapelle')
+                        ->get();        
+
+        return json_decode($commission);
+
+        // return Commission::whereId($id)->first();
     }
 
     /**
@@ -97,8 +133,10 @@ class AdminCommissionsController extends Controller
 
         $deleted = Commission::findOrFail($id)->delete();
 
-        Session::flash('deleted_commission', 'Commission id ' . $id . ' deleted');
+        // Session::flash('deleted_commission', 'Commission id ' . $id . ' deleted');
         
-        return redirect(route('admin.commissions.index'));
+        // return redirect(route('admin.commissions.index'));
+
+        return response()->json(['status' => 'Delete OK', 'Num deleted' => $deleted, 'ID' => $id], 200);
     }
 }

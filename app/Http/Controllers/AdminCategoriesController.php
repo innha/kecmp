@@ -16,7 +16,9 @@ class AdminCategoriesController extends Controller
     public function index()
     {
         // return 'AdminCategoriesController@index';
-        $categories = Category::paginate(5);
+        // $categories = Category::paginate(5);
+
+        $categories = Category::all();
 
         return view('admin.param.category.index', compact('categories'));
     }
@@ -44,11 +46,11 @@ class AdminCategoriesController extends Controller
         ]);
 
         // dd($request->all());
-        Category::create($request->all());
+        return Category::create($request->all());
 
-        Session::flash('created_category', 'Category created');
+        // Session::flash('created_category', 'Category created');
 
-        return redirect(route('admin.categories.index'));
+        // return redirect(route('admin.categories.index'));
     }
 
     /**
@@ -82,7 +84,14 @@ class AdminCategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+
+            'name' => 'required|alpha_spaces'            
+        ]);
+
+        Category::whereId($id)->update($request->all());
+
+        return Category::whereId($id)->first();
     }
 
     /**
@@ -97,8 +106,10 @@ class AdminCategoriesController extends Controller
 
         $deleted = Category::findOrFail($id)->delete();
 
-        Session::flash('deleted_category', 'Category id ' . $id . ' deleted');
+        // Session::flash('deleted_category', 'Category id ' . $id . ' deleted');
         
-        return redirect(route('admin.categories.index'));
+        // return redirect(route('admin.categories.index'));
+
+        return response()->json(['status' => 'Delete OK', 'Num deleted' => $deleted, 'ID' => $id], 200);
     }
 }

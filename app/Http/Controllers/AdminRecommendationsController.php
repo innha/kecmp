@@ -45,12 +45,10 @@ class AdminRecommendationsController extends Controller
     {
         $this->validate($request, [
             
-            'registration_id' => 'required|numeric',
+            'registration_id' => 'required|numeric',            
+            'origin_parish' => 'required|alpha_spaces',
             'date_issued' => 'required|date',
-            'ownerName' => 'required|alpha_spaces',
-            'destination' => 'required|alpha_spaces',
-            'holderName' => 'required|alpha_spaces',
-            'date_arrived' => 'required|date'
+            'destination_parish' => 'required|alpha_spaces'
         ]);
 
         $input = $request->all();

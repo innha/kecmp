@@ -16,7 +16,8 @@ class AdminPrivilegesController extends Controller
     public function index()
     {
         // return 'AdminPrivilegesController@index';
-        $privileges = Privilege::paginate(5);
+        // $privileges = Privilege::paginate(5);
+        $privileges = Privilege::all();
 
         return view('admin.param.privilege.index', compact('privileges'));
     }
@@ -45,11 +46,11 @@ class AdminPrivilegesController extends Controller
             'name' => 'required|alpha_spaces|unique:privileges'
         ]);
 
-        Privilege::create($request->all());
+        return Privilege::create($request->all());
 
-        Session::flash('created_privilege', 'Privilege created');
+        // Session::flash('created_privilege', 'Privilege created');
 
-        return redirect(route('admin.privileges.index'));
+        // return redirect(route('admin.privileges.index'));
 
     }
 
@@ -84,7 +85,14 @@ class AdminPrivilegesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+
+            'name' => 'required|alpha_spaces'            
+        ]);
+
+        Privilege::whereId($id)->update($request->all());
+
+        return Privilege::whereId($id)->first();
     }
 
     /**
@@ -99,8 +107,10 @@ class AdminPrivilegesController extends Controller
 
         $deleted = Privilege::findOrFail($id)->delete();
 
-        Session::flash('deleted_privilege', 'Privilege id ' . $id . ' deleted');
+        // Session::flash('deleted_privilege', 'Privilege id ' . $id . ' deleted');
         
-        return redirect(route('admin.privileges.index'));
+        // return redirect(route('admin.privileges.index'));
+
+        return response()->json(['status' => 'Delete OK', 'Num deleted' => $deleted, 'ID' => $id], 200);
     }
 }

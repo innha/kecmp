@@ -21,7 +21,7 @@ Preaching
 		<div class="panel-body">
 					
 			{!! Form::open(['method' => 'POST', 'action' => 'AdminPreachingsController@store', 'files' => true]) !!}
-
+				<!--
 				<div class="form-group row">			
 					{!! Form::label('registration_id', 'Registration:', ['class' => 'col-4 col-form-label']) !!}
 					<div class="col-6 ui-widget">
@@ -31,6 +31,14 @@ Preaching
 					<div class="col-2">
                     <span id="loader_registration_id"><i class="fa fa-repeat fa-1x fa-spin"></i></span>
                   	</div>					
+				</div>
+				-->
+				<div class="form-group {{$errors->has('visitor_names') ? 'has-error' : '' }} row">			
+					{!! Form::label('visitor_names', 'Visitor\'s names:', ['class' => 'col-4 col-form-label']) !!}
+					<div class="col-8">
+					{!! Form::text('visitor_names', null, ['class' => 'form-control']) !!}
+					<span class="text-danger">{{ $errors->first('visitor_names') }}</span>
+					</div>
 				</div>
 
 				<div class="form-group {{$errors->has('topic') ? 'has-error' : '' }} row">			
@@ -48,7 +56,7 @@ Preaching
 					<span class="text-danger">{{ $errors->first('date_preached') }}</span>
 					</div>
 				</div>
-
+				<!--
 				<div class="form-group {{$errors->has('hasRepented') ? 'has-error' : '' }} row">
 					<div class="col-4">
 						Has Repented:
@@ -64,7 +72,15 @@ Preaching
 						</div>
 						<span class="text-danger">{{ $errors->first('hasRepented') }}</span>
 					</div>
-				</div>	
+				</div>
+				-->
+				<div class="form-group {{$errors->has('num_repented') ? 'has-error' : '' }} row">			
+					{!! Form::label('num_repented', 'Number repented:', ['class' => 'col-4 col-form-label']) !!}
+					<div class="col-8">
+					{!! Form::text('num_repented', null, ['class' => 'form-control']) !!}
+					<span class="text-danger">{{ $errors->first('num_repented') }}</span>
+					</div>
+				</div>
 
 				<div class="form-group">
 					<div class="text-center">

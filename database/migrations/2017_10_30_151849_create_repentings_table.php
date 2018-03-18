@@ -17,7 +17,7 @@ class CreateRepentingsTable extends Migration
             $table->increments('id');
             $table->integer('registration_id')->index()->unsigned()->nullable();
             $table->date('date_returned');
-            $table->string('authorizer');
+            $table->string('reinstator');
             $table->integer('user_id')->index()->unsigned()->nullable();
             $table->timestamps();
 

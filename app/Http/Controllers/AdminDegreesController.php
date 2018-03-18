@@ -16,7 +16,8 @@ class AdminDegreesController extends Controller
     public function index()
     {
         // return 'AdminDegreesController@index';
-        $degrees = Degree::paginate(5);
+        // $degrees = Degree::paginate(5);
+        $degrees = Degree::all();
 
         return view('admin.param.degree.index', compact('degrees'));
     }
@@ -45,11 +46,11 @@ class AdminDegreesController extends Controller
             'name' => 'required|alpha_spaces|unique:degrees'
         ]);        
 
-        Degree::create($request->all());
+        return Degree::create($request->all());
 
-        Session::flash('created_degree', 'Education created');
+        // Session::flash('created_degree', 'Education created');
 
-        return redirect(route('admin.degrees.index'));        
+        // return redirect(route('admin.degrees.index'));        
     }
 
     /**
@@ -83,7 +84,14 @@ class AdminDegreesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+
+            'name' => 'required|alpha_spaces'            
+        ]);
+
+        Degree::whereId($id)->update($request->all());
+
+        return Degree::whereId($id)->first();
     }
 
     /**
@@ -98,8 +106,10 @@ class AdminDegreesController extends Controller
 
         $deleted = Degree::findOrFail($id)->delete();
 
-        Session::flash('deleted_degree', 'Education id ' . $id . ' deleted');
+        // Session::flash('deleted_degree', 'Education id ' . $id . ' deleted');
         
-        return redirect(route('admin.degrees.index'));
+        // return redirect(route('admin.degrees.index'));
+
+        return response()->json(['status' => 'Delete OK', 'Num deleted' => $deleted, 'ID' => $id], 200);
     }
 }

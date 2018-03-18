@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Suspension extends Model
 {
-    protected $fillable = ['registration_id', 'reason', 'authRegNum', 'user_id'];
+    protected $fillable = ['registration_id', 'reason', 'suspendor', 'date_suspended', 'user_id'];
 
     public function registration()
     {

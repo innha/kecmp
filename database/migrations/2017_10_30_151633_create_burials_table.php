@@ -17,6 +17,7 @@ class CreateBurialsTable extends Migration
             $table->increments('id');
             $table->integer('registration_id')->index()->unsigned()->nullable();
             $table->date('date_died');
+            $table->date('date_buried');
             $table->string('burialPlace');
             $table->integer('user_id')->index()->unsigned()->nullable();
             $table->timestamps();

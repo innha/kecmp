@@ -53,8 +53,9 @@ Marriages
                 <tr>
                   <th data-defaultsort="desc">ID</th>
                   <th></th>                  
-                  <th>REG #</th>
-                  <th>DATE</th>
+                  <th>HUSBAND</th>
+                  <th>WIFE</th>
+                  <th>DATE MARRIED</th>
                   <th>PLACE</th>
                   <th>USER</th>
                   <th>CREATED</th>
@@ -73,6 +74,7 @@ Marriages
                     </div>
                   </td>                  
                   <td>{{ $marriage->registration_id }}</td>
+                  <td>{{ $marriage->bridal_id }}</td>
                   <td>{{ $marriage->date_married }}</td>
                   <td>{{ $marriage->marriagePlace }}</td>
                   <td>{{ $marriage->user_id }}</td>

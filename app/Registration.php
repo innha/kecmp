@@ -7,28 +7,37 @@ use Carbon\Carbon;
 
 class Registration extends Model
 {    
+
+    /*
+        'fLastName',
+        'fFirstName',
+        'mLastName',
+        'mFirstName',
+    */
     protected $fillable = [
-        'type_id',
+        // 'type_id',
         'degree_id',
-        'duty_id',
         'category_id',
-        'service_id',
+        'task_id',
+        // 'service_id',
         'commission_id',
+        // 'duty_id',
         'status_id',        
     	'regNumber',
     	'lastName',
     	'firstName',
-    	'fLastName',
-    	'fFirstName',
-    	'mLastName',
-    	'mFirstName',
+        'fLastName',
+        'fFirstName',
+        'mLastName',
+        'mFirstName',
     	'dob',
     	'birthPlace',
     	'phoneOne',
     	'phoneTwo',
     	'gender',
-    	'idNumber',    	
+    	// 'idNumber', 	
     	'maritalStatus',
+        'legallyMarried',
     	'email',
     	'village_id',
     	'cell_id',
@@ -40,12 +49,14 @@ class Registration extends Model
     	'parish_id',
     	'diocese_id',
     	'ownsHouse',
-    	'job',
-    	'employer',
-    	'jobLocation',
+    	'job_id',
+    	// 'employer',
+    	// 'jobLocation',
     	'baptismDate',
     	'baptismParish',    	    	    	    	
     	'choir_id',
+        'origin_cell',
+        'origin_parish',
     	'user_id',    	
     	'confirmed',
     	'notes',    	
@@ -62,10 +73,15 @@ class Registration extends Model
     {
         $this->attributes['baptismDate'] = Carbon::parse($value)->format($this->format);
     }
-
+    /*
     public function type()
     {
         return $this->belongsTo('App\Type');
+    }
+    */
+    public function task()
+    {
+        return $this->belongsTo('App\Task');
     }
 
     public function category()
@@ -92,6 +108,11 @@ class Registration extends Model
     {
         return $this->belongsTo('App\Service');
     }
+
+    public function job()
+    {
+        return $this->belongsTo('App\Job');
+    }    
 
     public function status()
     {
@@ -182,12 +203,12 @@ class Registration extends Model
     {
         return $this->hasMany('App\Marriage');
     }    
-
+    /*
     public function preachings()
     {
         return $this->hasMany('App\Preaching');
     }
-
+    */
     public function receptions()
     {
         return $this->hasMany('App\Reception');

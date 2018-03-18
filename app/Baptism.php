@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Baptism extends Model
 {
-    protected $fillable = ['registration_id', 'date_baptized', 'user_id'];
+    protected $fillable = ['teaching_id', 'date_baptized', 'user_id'];
 
-    public function registration()
+    public function teaching()
     {
-    	return $this->belongsTo('App\Registration');
-    }    
+    	return $this->belongsTo('App\Teaching');
+    }   
 }

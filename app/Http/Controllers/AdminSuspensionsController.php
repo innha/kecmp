@@ -48,7 +48,7 @@ class AdminSuspensionsController extends Controller
             
             'registration_id' => 'required|numeric',
             'reason' => 'required|alpha_spaces',
-            'authRegNum' => 'required|numeric'
+            'suspendor' => 'required'
         ]);
 
         $input = $request->all();

@@ -24,6 +24,7 @@ Preaching
           <i class="fa fa-search"></i> Search registration
         </a>
         --}}
+        {{--
         <form action="/admin/registrations/search" method="POST" role="search">
           {{ csrf_field() }}
           <div class="input-group">
@@ -35,6 +36,7 @@ Preaching
             </span>
           </div>
         </form>
+        --}}
       </div>
     </div>
   </div>
@@ -52,8 +54,8 @@ Preaching
               <thead class="thead-default">
                 <tr>
                   <th data-defaultsort="desc">ID</th>
-                  <th></th>                  
-                  <th>REG #</th>
+                  <th></th>   
+                  <th>VISITOR NAMES</th>               
                   <th>TOPIC</th>
                   <th>DATE PREACHED</th>
                   <th>REPENTED</th>
@@ -72,11 +74,11 @@ Preaching
                         {!! Form::submit('x', ['class' => 'btn btn-sm btn-danger']) !!}
                     {!! Form::close() !!}
                     </div>
-                  </td>                  
-                  <td>{{ $preaching->registration_id }}</td>
+                  </td>
+                  <td>{{ $preaching->visitor_names }}</td>
                   <td>{{ $preaching->topic }}</td>
                   <td>{{ $preaching->date_preached }}</td>
-                  <td>{{ $preaching->hasRepented }}</td>
+                  <td>{{ $preaching->num_repented }}</td>
                   <td>{{ $preaching->user_id }}</td>
                   <td>{{ $preaching->created_at }}</td>
                   <td>{{ $preaching->updated_at }}</td>

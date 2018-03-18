@@ -39,7 +39,7 @@ Literacy
 					{!! Form::text('period', null, ['class' => 'form-control']) !!}
 					<span class="text-danger">{{ $errors->first('period') }}</span>
 					</div>
-				</div>				
+				</div>
 
 				<div class="form-group">
 					<div class="text-center">

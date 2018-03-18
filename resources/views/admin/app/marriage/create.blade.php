@@ -23,7 +23,7 @@ Marriage
 			{!! Form::open(['method' => 'POST', 'action' => 'AdminMarriagesController@store', 'files' => true]) !!}
 
 				<div class="form-group row">			
-					{!! Form::label('registration_id', 'Registration:', ['class' => 'col-4 col-form-label']) !!}
+					{!! Form::label('registration_id', 'Husband:', ['class' => 'col-4 col-form-label']) !!}
 					<div class="col-6 ui-widget">
 					{!! Form::text('registration_id', Request::get('registration_id'), array('placeholder' => 'Search registration', 'class' => 'form-control typeahead', 'id' => 'registration_id', 'name' => 'registration_id', 'autocomplete' => 'off')) !!}
 					<span class="text-danger">{{ $errors->first('registration_id') }}</span>
@@ -32,6 +32,17 @@ Marriage
                     <span id="loader_registration_id"><i class="fa fa-repeat fa-1x fa-spin"></i></span>
                   	</div>					
 				</div>
+
+				<div class="form-group row">			
+					{!! Form::label('bridal_id', 'Wife:', ['class' => 'col-4 col-form-label']) !!}
+					<div class="col-6 ui-widget">
+					{!! Form::text('bridal_id', Request::get('bridal_id'), array('placeholder' => 'Search registration', 'class' => 'form-control typeahead', 'id' => 'bridal_id', 'name' => 'bridal_id', 'autocomplete' => 'off')) !!}
+					<span class="text-danger">{{ $errors->first('bridal_id') }}</span>
+					</div>
+					<div class="col-2">
+                    <span id="loader_bridal_id"><i class="fa fa-repeat fa-1x fa-spin"></i></span>
+                  	</div>					
+				</div>			
 
 				<div class="form-group row">			
 					{!! Form::label('date_married', 'Date Married:', ['class' => 'col-4 col-form-label']) !!}

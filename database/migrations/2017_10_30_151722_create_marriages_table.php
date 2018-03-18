@@ -16,13 +16,15 @@ class CreateMarriagesTable extends Migration
         Schema::create('marriages', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('registration_id')->index()->unsigned()->nullable();
+            $table->integer('bridal_id')->index()->unsigned()->nullable();
             $table->date('date_married');
             $table->string('marriagePlace');
             $table->integer('user_id')->index()->unsigned()->nullable();
             $table->timestamps();
 
-            $table->foreign('registration_id')->references('id')->on('registrations')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('registration_id')->references('id')->on('registrations')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('bridal_id')->references('id')->on('registrations')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

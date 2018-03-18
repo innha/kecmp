@@ -47,6 +47,7 @@ class AdminBurialsController extends Controller
             
             'registration_id' => 'required|numeric',
             'date_died' => 'required|date',
+            'date_buried' => 'required|date',
             'burialPlace' => 'required'
         ]);
 

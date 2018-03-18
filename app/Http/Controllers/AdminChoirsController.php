@@ -16,7 +16,12 @@ class AdminChoirsController extends Controller
     public function index()
     {
         // return 'AdminChoirsController@index';
-        $choirs = Choir::paginate(5);
+        // $choirs = Choir::paginate(5);
+        // $choirs = Choir::all();
+        $choirs = DB::table('choirs')
+                        ->join('chapelles', 'choirs.chapelle_id', '=', 'chapelles.id')
+                        ->select('choirs.*', 'chapelles.name as chapelle')
+                        ->get();
 
         return view('admin.param.choir.index', compact('choirs'));
     }
@@ -42,15 +47,30 @@ class AdminChoirsController extends Controller
         // dd($request->all());
 
         $this->validate($request, [
+            'chapelle_id' => 'required|numeric',
             'name' => 'required|alpha_spaces|unique:choirs',
             'equipment' => 'required'
         ]);
 
-        Choir::create($request->all());
+        $id = DB::table('choirs')->insertGetId(
 
-        Session::flash('created_choir', 'Choir created');
+            ['chapelle_id' => $request->chapelle_id, 'name' => $request->name]
 
-        return redirect(route('admin.choirs.index'));
+        );
+
+        $choir = DB::table('choirs')
+                        ->where('choirs.id', $id)
+                        ->join('chapelles', 'choirs.chapelle_id', '=', 'chapelles.id')
+                        ->select('choirs.*', 'chapelles.name as chapelle')
+                        ->get();
+
+        return json_decode($commission);        
+
+        // return Choir::create($request->all());
+
+        // Session::flash('created_choir', 'Choir created');
+
+        // return redirect(route('admin.choirs.index'));
     }
 
     /**
@@ -84,7 +104,22 @@ class AdminChoirsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'chapelle_id' => 'required|numeric',
+            'name' => 'required|alpha_spaces'            
+        ]);
+
+        Choir::whereId($id)->update($request->all());
+
+        $choir = DB::table('choirs')
+                        ->where('choirs.id', $id)
+                        ->join('chapelles', 'choirs.province_id', '=', 'chapelles.id')
+                        ->select('choirs.*', 'chapelles.name as chapelle')
+                        ->get();        
+
+        return json_decode($choir);
+
+        // return Choir::whereId($id)->first();
     }
 
     /**
@@ -99,9 +134,11 @@ class AdminChoirsController extends Controller
 
         $deleted = Choir::findOrFail($id)->delete();
 
-        Session::flash('deleted_choir', 'Choir id ' . $id . ' deleted');
+        // Session::flash('deleted_choir', 'Choir id ' . $id . ' deleted');
 
-        return redirect(route('admin.choirs.index'));
+        // return redirect(route('admin.choirs.index'));
+
+        return response()->json(['status' => 'Delete OK', 'Num deleted' => $deleted, 'ID' => $id], 200);
 
     }
 }

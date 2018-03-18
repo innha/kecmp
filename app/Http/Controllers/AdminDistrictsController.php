@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\District;
 use App\Province;
 use Session;
+use DB;
 
 class AdminDistrictsController extends Controller
 {
@@ -17,10 +18,15 @@ class AdminDistrictsController extends Controller
     public function index()
     {
         // return 'AdminDistrictsController@index';
-        $districts = District::orderByDesc('id')->paginate(15);
-        $provinces = Province::pluck('name', 'id')->all();
+        // $districts = District::orderByDesc('id')->paginate(15);
+        // $provinces = Province::pluck('name', 'id')->all();
 
-        return view('admin.param.district.index', compact('districts', 'provinces'));
+        $districts = DB::table('districts')
+                        ->join('provinces', 'districts.province_id', '=', 'provinces.id')
+                        ->select('districts.*', 'provinces.name as province')
+                        ->get();
+
+        return view('admin.param.district.index', compact('districts'));
     }
 
     /**
@@ -47,13 +53,27 @@ class AdminDistrictsController extends Controller
             'province_id' => 'required|numeric',
             'code' => 'required|numeric|unique:districts',
             'name' => 'required|alpha_spaces|unique:districts'
-        ]);        
+        ]);
 
-        District::create($request->all());
+        // $id = District::create($request->all());
 
-        Session::flash('created_district', 'District created');
+        $id = DB::table('districts')->insertGetId(
 
-        return redirect(route('admin.districts.index'));        
+            ['province_id' => $request->province_id, 'code' => $request->code, 'name' => $request->name]
+
+        );
+
+        $district = DB::table('districts')
+                        ->where('districts.id', $id)
+                        ->join('provinces', 'districts.province_id', '=', 'provinces.id')
+                        ->select('districts.id', 'districts.code', 'districts.name', 'provinces.name as province')
+                        ->get();
+
+        return json_decode($district);
+
+        // Session::flash('created_district', 'District created');
+
+        // return redirect(route('admin.districts.index'));        
     }
 
     /**
@@ -87,7 +107,21 @@ class AdminDistrictsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'province_id' => 'required|numeric',
+            'code' => 'required|numeric',
+            'name' => 'required|alpha_spaces'
+        ]);
+
+        District::whereId($id)->update($request->all());
+
+        $district = DB::table('districts')
+                        ->where('districts.id', $id)
+                        ->join('provinces', 'districts.province_id', '=', 'provinces.id')
+                        ->select('districts.id', 'districts.code', 'districts.name', 'provinces.name as province')
+                        ->get();        
+
+        return json_decode($district);
     }
 
     /**
@@ -102,8 +136,17 @@ class AdminDistrictsController extends Controller
 
         $deleted = District::findOrFail($id)->delete();
 
-        Session::flash('deleted_district', 'District id ' . $id . ' deleted');
+        // Session::flash('deleted_district', 'District id ' . $id . ' deleted');
         
-        return redirect(route('admin.districts.index'));
+        // return redirect(route('admin.districts.index'));
+
+        return response()->json(['status' => 'Delete OK', 'Num deleted' => $deleted, 'ID' => $id], 200);
+    }
+
+    public function list()
+    {
+        $districts = District::pluck('name', 'id')->all();
+
+        return $districts;        
     }
 }

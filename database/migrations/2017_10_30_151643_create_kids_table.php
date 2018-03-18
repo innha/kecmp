@@ -15,7 +15,8 @@ class CreateKidsTable extends Migration
     {
         Schema::create('kids', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('registration_id')->index()->unsigned()->nullable();
+            $table->string('child_names');
+            $table->integer('registration_id')->index()->unsigned()->nullable(); //parent id
             $table->date('date_prayed');
             $table->integer('user_id')->index()->unsigned()->nullable();
             $table->timestamps();

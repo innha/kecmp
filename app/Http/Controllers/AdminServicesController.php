@@ -16,7 +16,8 @@ class AdminServicesController extends Controller
     public function index()
     {
         // return 'AdminServicesController@index';
-        $services = Service::paginate(5);
+        // $services = Service::paginate(5);
+        $services = Service::all();
 
         return view('admin.param.service.index', compact('services'));        
     }
@@ -46,11 +47,11 @@ class AdminServicesController extends Controller
             'name' => 'required|alpha_spaces|unique:services'
         ]);        
 
-        Service::create($request->all());
+        return Service::create($request->all());
 
-        Session::flash('created_service', 'Service created');
+        // Session::flash('created_service', 'Service created');
 
-        return redirect(route('admin.services.index'));
+        // return redirect(route('admin.services.index'));
     }
 
     /**
@@ -84,7 +85,14 @@ class AdminServicesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+
+            'name' => 'required|alpha_spaces'            
+        ]);
+
+        Service::whereId($id)->update($request->all());
+
+        return Service::whereId($id)->first();
     }
 
     /**
@@ -99,8 +107,10 @@ class AdminServicesController extends Controller
 
         $deleted = Service::findOrFail($id)->delete();
 
-        Session::flash('deleted_service', 'Service id ' . $id . ' deleted');
+        // Session::flash('deleted_service', 'Service id ' . $id . ' deleted');
         
-        return redirect(route('admin.services.index'));
+        // return redirect(route('admin.services.index'));
+
+        return response()->json(['status' => 'Delete OK', 'Num deleted' => $deleted, 'ID' => $id], 200);
     }
 }

@@ -16,7 +16,9 @@
     "vue": "^2.2.2"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "font-awesome": "^4.7.0",
-    "popper.js": "^1.11.0"
+    "popper.js": "^1.12.9",
+    "tether": "^1.4.3"
   }
 }

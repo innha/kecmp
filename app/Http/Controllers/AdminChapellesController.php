@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Chapelle;
 use App\Parish;
 use Session;
+use DB;
 
 class AdminChapellesController extends Controller
 {
@@ -17,10 +18,17 @@ class AdminChapellesController extends Controller
     public function index()
     {
         // return 'AdminChapellesController@index';
-        $chapelles = Chapelle::paginate(5);
-        $parishes = Parish::pluck('name', 'id')->all();
+        // $chapelles = Chapelle::paginate(5);
+        // $parishes = Parish::pluck('name', 'id')->all();
 
-        return view('admin.param.chapelle.index', compact('chapelles', 'parishes'));
+        $chapelles = DB::table('chapelles')
+                        ->join('parishes', 'chapelles.parish_id', '=', 'parishes.id')
+                        ->join('dioceses', 'parishes.diocese_id', '=', 'dioceses.id')
+                        ->select('chapelles.*', 'parishes.name as parish', 'dioceses.name as diocese')
+                        ->get();
+
+        // return view('admin.param.chapelle.index', compact('chapelles', 'parishes'));
+        return view('admin.param.chapelle.index', compact('chapelles'));
     }
 
     /**
@@ -48,11 +56,26 @@ class AdminChapellesController extends Controller
             'name' => 'required|alpha_spaces|unique:chapelles'
         ]);        
 
-        Chapelle::create($request->all());
+        // Chapelle::create($request->all());
 
-        Session::flash('created_chapelle', 'Chapelle created');
+        $id = DB::table('chapelles')->insertGetId(
 
-        return redirect(route('admin.chapelles.index'));        
+            ['parish_id' => $request->parish_id, 'code' => $request->code, 'name' => $request->name]
+
+        );
+
+        $chapelle = DB::table('chapelles')
+                        ->where('chapelles.id', $id)
+                        ->join('parishes', 'chapelles.parish_id', '=', 'parishes.id')
+                        ->join('dioceses', 'parishes.diocese_id', '=', 'dioceses.id')
+                        ->select('chapelles.*', 'parishes.name as parish', 'dioceses.name as diocese')
+                        ->get();
+
+        return json_decode($chapelle);        
+
+        // Session::flash('created_chapelle', 'Chapelle created');
+
+        // return redirect(route('admin.chapelles.index'));        
     }
 
     /**
@@ -86,7 +109,21 @@ class AdminChapellesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'parish_id' => 'required|numeric',
+            'name' => 'required|alpha_spaces'
+        ]);
+
+        Chapelle::whereId($id)->update($request->all());
+
+        $chapelle = DB::table('chapelles')
+                        ->where('chapelles.id', $id)
+                        ->join('parishes', 'chapelles.parish_id', '=', 'parishes.id')
+                        ->join('dioceses', 'parishes.diocese_id', '=', 'dioceses.id')
+                        ->select('chapelles.*', 'parishes.name as parish', 'dioceses.name as diocese')
+                        ->get();
+
+        return json_decode($chapelle);
     }
 
     /**
@@ -101,8 +138,17 @@ class AdminChapellesController extends Controller
 
         $deleted = Chapelle::findOrFail($id)->delete();
 
-        Session::flash('deleted_chapelle', 'Chapelle id ' . $id . ' deleted');
+        // Session::flash('deleted_chapelle', 'Chapelle id ' . $id . ' deleted');
         
-        return redirect(route('admin.chapelles.index'));
+        // return redirect(route('admin.chapelles.index'));
+
+        return response()->json(['status' => 'Delete OK', 'Num deleted' => $deleted, 'ID' => $id], 200);
     }
+
+    public function list()
+    {
+        $chapelles = Chapelle::pluck('name', 'id')->all();
+
+        return $chapelles;        
+    }    
 }

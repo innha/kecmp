@@ -14,17 +14,10 @@
 
   <title>{{ config('app.name', 'KECMP') }}</title>
 
-  <!-- Styles -->
-  <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-  
-  <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
-  <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet"> -->
-
 </head>
-<body id="app">
+<body>
+
+<div id="app">
 
 <nav class="navbar-expand-sm navbar-dark bg-primary p-0 sticky-top">
   <div class="container">
@@ -43,42 +36,45 @@
           <a href="{{ route('home') }}" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-navicon"></i> Manage</a>
           <div class="dropdown-menu">
             <a href="{{ route('admin.registrations.index') }}" class="dropdown-item">Registrations</a>
-            <a href="{{ route('admin.teachings.index') }}" class="dropdown-item">New Believers</a>
-            <a href="{{ route('admin.receptions.index') }}" class="dropdown-item">From Elsewhere</a>
-            <a href="{{ route('admin.baptisms.index') }}" class="dropdown-item">Baptism</a>
             <a href="{{ route('admin.literacies.index') }}" class="dropdown-item">Literacy</a>
-            <a href="{{ route('admin.suspensions.index') }}" class="dropdown-item">Suspension</a>
             <a href="{{ route('admin.bridals.index') }}" class="dropdown-item">Bridal</a>
-            <a href="{{ route('admin.kids.index') }}" class="dropdown-item">Prayers</a>
+            <a href="{{ route('admin.marriages.index') }}" class="dropdown-item">Marriage</a>
+            <a href="{{ route('admin.kids.index') }}" class="dropdown-item">Kids</a>
             <a href="{{ route('admin.preachings.index') }}" class="dropdown-item">Preaching</a>
             <a href="{{ route('admin.recommendations.index') }}" class="dropdown-item">Recommendations</a>            
             <a href="{{ route('admin.singers.index') }}" class="dropdown-item">Singers</a>
-            <a href="{{ route('admin.repentings.index') }}" class="dropdown-item">Repenting</a>
-            <a href="{{ route('admin.burials.index') }}" class="dropdown-item">Burials</a>
+            <a href="{{ route('admin.commission_reports.index') }}" class="dropdown-item">Commissions</a>           
+            <!-- <a href="{{ route('admin.teachings.index') }}" class="dropdown-item">New Believers</a> (= registration with new = status) -->
+            <!-- <a href="{{ route('admin.receptions.index') }}" class="dropdown-item">From Elsewhere</a> (= registration with active = status and origin parish != kinamba) -->
+            <!-- <a href="{{ route('admin.baptisms.index') }}" class="dropdown-item">Baptism</a> (from new status to active) -->            
+            <!-- <a href="{{ route('admin.suspensions.index') }}" class="dropdown-item">Suspension</a> (= registration with status = suspended) -->
+            <!-- <a href="{{ route('admin.repentings.index') }}" class="dropdown-item">Repenting</a> (= registration with status = reinstated) -->
+            <!-- <a href="{{ route('admin.burials.index') }}" class="dropdown-item">Burials</a> (= registration with status = dead) -->            
           </div>
         </li>
         <li class="nav-item dropdown px-2">
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-gears"></i>Parameters</a>
           <div class="dropdown-menu">                        
-            <a href="{{ route('admin.dioceses.index') }}" class="dropdown-item">Dioceses</a>
-            <a href="{{ route('admin.parishes.index') }}" class="dropdown-item">Parishes</a>
-            <a href="{{ route('admin.chapelles.index') }}" class="dropdown-item">Chapelles</a>
-            <a href="{{ route('admin.zones.index') }}" class="dropdown-item">Zones</a>        
-            <a href="{{ route('admin.provinces.index') }}" class="dropdown-item">Provinces</a>    
-            <a href="{{ route('admin.districts.index') }}" class="dropdown-item">Districts</a>
-            <a href="{{ route('admin.sectors.index') }}" class="dropdown-item">Sectors</a>
-            <a href="{{ route('admin.cells.index') }}" class="dropdown-item">Cells</a>
-            <a href="{{ route('admin.villages.index') }}" class="dropdown-item">Villages</a>
-            <a href="{{ route('admin.duties.index') }}" class="dropdown-item">Duties</a>
-            <a href="{{ route('admin.services.index') }}" class="dropdown-item">Services</a>
-            <a href="{{ route('admin.commissions.index') }}" class="dropdown-item">Commissions</a>            
-            <a href="{{ route('admin.choirs.index') }}" class="dropdown-item">Choirs</a>            
-            <a href="{{ route('admin.degrees.index') }}" class="dropdown-item">Education</a>            
-            <a href="{{ route('admin.types.index') }}" class="dropdown-item">Types</a>
             <a href="{{ route('admin.categories.index') }}" class="dropdown-item">Categories</a>
-            <a href="{{ route('admin.statuses.index') }}" class="dropdown-item">Statuses</a>
+            <a href="{{ route('admin.cells.index') }}" class="dropdown-item">Cells</a>
+            <a href="{{ route('admin.chapelles.index') }}" class="dropdown-item">Chapelles</a>
+            <a href="{{ route('admin.choirs.index') }}" class="dropdown-item">Choirs</a>
+            <a href="{{ route('admin.commissions.index') }}" class="dropdown-item">Commissions</a>
+            <a href="{{ route('admin.dioceses.index') }}" class="dropdown-item">Dioceses</a>
+            <a href="{{ route('admin.districts.index') }}" class="dropdown-item">Districts</a>
+            <a href="{{ route('admin.duties.index') }}" class="dropdown-item">Duties</a>
+            <a href="{{ route('admin.degrees.index') }}" class="dropdown-item">Education</a>            
+            <a href="{{ route('admin.parishes.index') }}" class="dropdown-item">Parishes</a>
+            <a href="{{ route('admin.privileges.index') }}" class="dropdown-item">Privileges</a>
+            <a href="{{ route('admin.provinces.index') }}" class="dropdown-item">Provinces</a>
             <a href="{{ route('admin.roles.index') }}" class="dropdown-item">Roles</a>
-            <a href="{{ route('admin.privileges.index') }}" class="dropdown-item">Privileges</a>            
+            <a href="{{ route('admin.sectors.index') }}" class="dropdown-item">Sectors</a>
+            <a href="{{ route('admin.services.index') }}" class="dropdown-item">Services</a>
+            <a href="{{ route('admin.statuses.index') }}" class="dropdown-item">Statuses</a>
+            <a href="{{ route('admin.tasks.index') }}" class="dropdown-item">Tasks</a>
+            <a href="{{ route('admin.types.index') }}" class="dropdown-item">Types</a>
+            <a href="{{ route('admin.villages.index') }}" class="dropdown-item">Villages</a>
+            <a href="{{ route('admin.zones.index') }}" class="dropdown-item">Zones</a>
           </div>
         </li>
         <li class="nav-item px-2">
@@ -111,6 +107,13 @@
                 {{ csrf_field() }}
             </form>
         </li>
+        <!--
+        <li class="nav-item dropdown px-2">
+          <a href="javascript:;" class="btn btn-primary" data-toggle="modal" data-target="#villageModal">
+            <i class="fa fa-plus"></i> Add Village
+          </a>          
+        </li>
+        -->
       </ul>
     </div>
   </div>
@@ -136,6 +139,8 @@
 
 @yield('content')
 
+<vue-noty></vue-noty>
+
 <!-- MAIN FOOTER -->
 <footer id="main-footer" class="bg-dark">
   <div class="container">
@@ -150,36 +155,56 @@
   </div>
 </footer>
 
+</div>
+
 <!-- Scripts -->
-<script>
-  window.Tether = {};
-</script>
-<!-- 
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
--->
 <!--
-<script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="{{ asset('js/popper.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/app.js') }}"></script>
--->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://drvic10k.github.io/bootstrap-sortable/Contents/bootstrap-sortable.css" />
-<!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script> //causes $.ajax is not a function -->
+-->
+
+<!-- 
+<script src="{{ asset('js/jquery-ui.js') }}"></script>
+<script src="{{ asset('js/tether.min.js') }}"></script>
+-->
+
+
+<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+<!--
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
+-->
 <script type="text/javascript" src="{{ asset('js/jquery-ui.js') }}"></script>
-<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
-
+<!--
+<script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.js"></script>
-<script src="https://drvic10k.github.io/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script> -->
-<!-- <script type="text/javascript" src="{{ asset('js/bootstrap3-typeahead.min.js') }}"></script> -->
-<script type="text/javascript" src="{{ asset('js/ajaxsearch.js') }}"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.js"></script>
+  <script src="https://drvic10k.github.io/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
+-->
+  <script src="{{ asset('js/moment.js') }}"></script>
+  <script src="{{ asset('js/bootstrap-sortable.js') }}"></script>
+  
+  <script src="{{ asset('js/ajaxsearch.js') }}"></script>
+
+  <!-- Styles -->
+  <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">  
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet"> -->
+  <link href="{{ asset('css/jquery-ui.css') }}" rel="stylesheet">
+
+  <!-- including the 3 js files below causes dropdown issues
+    
+  <script src="{{ asset('js/popper.js') }}"></script>
+  <script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}"></script>  
+  <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+  including the 3 js files below causes dropdown issues -->
+  <script src="{{ asset('js/app.js') }}"></script>
+
+  <script src="{{ asset('js/getparams.js') }}"></script>
 
 @yield('scripts')
 

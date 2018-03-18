@@ -231,4 +231,10 @@ return [
 
     ],
 
+    'allowed_file_types' => 'doc,docx,xls,xlsx,pdf,txt,csv',
+
+    'max_file_size' => '1024',
+
+    'files_destination_path' => '',
+
 ];

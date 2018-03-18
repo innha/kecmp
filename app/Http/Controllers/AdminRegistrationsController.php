@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Member;
 use App\Registration;
 use App\Type;
+use App\Task;
 use App\Degree;
 use App\Province;
 use App\District;
@@ -17,6 +18,7 @@ use App\Parish;
 use App\Chapelle;
 use App\Zone;
 use App\Duty;
+use App\Job;
 use App\Category;
 use App\Service;
 use App\Commission;
@@ -24,8 +26,10 @@ use App\Choir;
 use App\Status;
 use Auth;
 use Session;
+use App\Http\Requests\StoreRegistrationRequest;
 use App\Http\Requests\UpdateRegistrationRequest;
 use DB;
+use Carbon\Carbon;
 
 class AdminRegistrationsController extends Controller
 {
@@ -41,6 +45,8 @@ class AdminRegistrationsController extends Controller
         // $registrations = Registration::all();
         $registrations = Registration::orderByDesc('id')->paginate(5);
 
+        // dd($registrations);
+
         return view('admin.app.registration.index', compact('registrations'));
     }
 
@@ -53,7 +59,8 @@ class AdminRegistrationsController extends Controller
     {
         // return 'AdminRegistrationsController@create';
 
-        $types = Type::pluck('name', 'id')->all();
+        // $types = Type::pluck('name', 'id')->all();
+        $tasks = Task::pluck('name', 'id')->all();
         $degrees = Degree::pluck('name', 'id')->all();
         $provinces = Province::pluck('name', 'id')->all();
         $districts = District::pluck('name', 'id')->all();
@@ -65,13 +72,14 @@ class AdminRegistrationsController extends Controller
         $chapelles = Chapelle::pluck('name', 'id')->all();
         $zones = Zone::pluck('name', 'id')->all();
         $duties = Duty::pluck('name', 'id')->all();
+        $jobs = Job::pluck('name', 'id')->all();
         $categories = Category::pluck('name', 'id')->all();
-        $services = Service::pluck('name', 'id')->all();
+        // $services = Service::pluck('name', 'id')->all();
         $commissions = Commission::pluck('name', 'id')->all();
         $choirs = Choir::pluck('name', 'id')->all();
         $statuses = Status::pluck('name', 'id')->all();
 
-        return view('admin.app.registration.create', compact('types', 'degrees', 'provinces', 'districts', 'sectors', 'cells', 'villages', 'dioceses', 'parishes', 'chapelles', 'zones', 'duties', 'categories', 'services', 'commissions', 'choirs', 'statuses'));
+        return view('admin.app.registration.create', compact('tasks', 'degrees', 'provinces', 'districts', 'sectors', 'cells', 'villages', 'dioceses', 'parishes', 'chapelles', 'zones', 'duties', 'jobs', 'categories', 'services', 'commissions', 'choirs', 'statuses'));
     }
 
     /**
@@ -83,69 +91,219 @@ class AdminRegistrationsController extends Controller
     public function store(StoreRegistrationRequest $request)
     // public function store(Request $request)
     {
-        // dd($this->getNextRegistrationId());
+        DB::beginTransaction();
 
-        // $Village_code = Village::findOrFail($request->village_id);
+        try {
 
-        // dd(Village::findOrFail($request->village_id)->first()->code);
+            // dd($request->all());
+            
+            // dd($this->getNextRegistrationId());
 
-        // Registration::create($request->all());        
+            // $Village_code = Village::findOrFail($request->village_id);
 
-        $user = Auth::user();
+            // dd(Village::findOrFail($request->village_id)->first()->code);
 
-        /*
-        $input_reg = $request->except(['service_id', 'status_id', 'duty_id', 'category_id', 'commission_id', 'degree_id', 'type_id']);
-        $input_mem = $request->only(['service_id', 'status_id', 'duty_id', 'category_id', 'commission_id', 'degree_id', ' type_id']);
+            // Registration::create($request->all());        
 
-        $input_reg['user_id'] = $user->id;
-        $input_mem['user_id'] = $user->id;
-        
-        $registration_id = $user->members()->create($input);
+            $user = Auth::user();
 
-        $input_mem['user_id'] = $user->id;
+            $user_id = $user->id;
 
-        $registration = Registration::findOrFail($registration_id);
+            /*
+            $input_reg = $request->except(['service_id', 'status_id', 'duty_id', 'category_id', 'commission_id', 'degree_id', 'type_id']);
+            $input_mem = $request->only(['service_id', 'status_id', 'duty_id', 'category_id', 'commission_id', 'degree_id', ' type_id']);
 
-        $registration->member()->create($input_mem);
-        */
+            $input_reg['user_id'] = $user->id;
+            $input_mem['user_id'] = $user->id;
+            
+            $registration_id = $user->members()->create($input);
 
-        $input = $request->all();
+            $input_mem['user_id'] = $user->id;
 
+            $registration = Registration::findOrFail($registration_id);
 
-        $Village_code = Village::findOrFail($request->village_id)->first()->code;
-        $zone_code = Zone::findOrFail($request->zone_id)->first()->code;
-        $next_reg_id = $this->getNextRegistrationId();
+            $registration->member()->create($input_mem);
+            */
 
-        // dd($Village_code);
+            $input = $request->all();
 
-        $regNumber = $Village_code . $zone_code . sprintf('%07d', $next_reg_id);
+            $chapelle_id = $request->chapelle_id;
 
-        // dd($regNumber);
+            $status_id = $request->status_id;
 
-        $input['user_id'] = $user->id;
-        $input['regNumber'] = $regNumber;
+            // dd(count($request->category_id));
 
-        Registration::create($input);
+            if(count($request->category_id)) {
+                $categories = $request->category_id;
+                $category_id = reset($categories);
+            } else {
+                $category_id = null;
+            }
 
-        Session::flash('created_registration', 'Registration created');        
+            $input['category_id'] = $category_id;
 
-        // return redirect(route('admin.members.index'));
+            if(count($request->commission_id)) {
+                $commissions = $request->commission_id;
+                $commission_id = reset($commissions);
+            } else {
+                $commission_id = null;
+            }
 
-        $service_id = $request->service_id;
+            $input['commission_id'] = $commission_id;
 
-        if ($service_id == 1) {
+            if(count($request->task_id)) {
+                $tasks = $request->task_id;
+                $task_id = reset($tasks);       
+            } else {
+                $task_id = null;
+            }
 
-            return redirect(route('admin.preachings.create'));            
+            $input['task_id'] = $task_id;
 
-        } else if ($service_id == 2) {
+            // dd($input);
 
-            return redirect(route('admin.receptions.create'));
+            // $chapelle_code = Chapelle::findOrFail($request->chapelle_id)->first()->code;
+            $chapelle_code = DB::table('chapelles')->where('id', $chapelle_id)->first()->code;
 
-        } else {
+            // dd($chapelle_code);
+            
+            $reg_num = $this->getNextRegistrationId($chapelle_id);
 
-            return redirect(route('admin.members.index'));
+            // dd($reg_num);
 
+            // $regNumber = $village_code . $zone_code . sprintf('%07d', $next_reg_id);
+            $regNumber = $chapelle_code . sprintf('%04d', $reg_num + 1);
+
+            // dd($regNumber);
+
+            $input['user_id'] = $user_id;
+            $input['regNumber'] = $regNumber;
+
+            $registration = Registration::create($input);
+
+            $registration_id = $registration->id;
+
+            $this->storeRegistrationId($chapelle_id, $regNumber);
+
+            // dd($registration);
+
+            $time = Carbon::now()->format('Y-m-d H:i:s');
+
+            if ($status_id == 3) { // suspension
+
+                // return redirect(route('admin.preachings.create'));
+                $insert_id = DB::table('suspensions')->insertGetId(
+                    ['registration_id' => $registration_id,
+                     'reason' => $request->reason,
+                     'suspendor' => $request->suspendor,
+                     'date_suspended' => $request->date_suspended,
+                     'user_id' => $user_id,
+                     'created_at' => $time
+                    ]
+                );
+
+            } else if ($status_id == 4) { // reinstated
+
+                // return redirect(route('admin.receptions.create'));
+                $insert_id = DB::table('repentings')->insertGetId(
+                    ['registration_id' => $registration_id,
+                     'date_returned' => $request->date_returned,
+                     'reinstator' => $request->reinstator,
+                     'user_id' => $user_id,
+                     'created_at' => $time
+                    ]
+                );
+
+            } else if ($status_id == 5) { // dead
+
+                // return redirect(route('admin.registrations.index'));
+                $insert_id = DB::table('burials')->insertGetId(
+                    ['registration_id' => $registration_id,
+                     'date_died' => $request->date_died,
+                     'date_buried' => $request->date_buried,
+                     'burialPlace' => $request->burialPlace,
+                     'user_id' => $user_id,
+                     'created_at' => $time
+                    ]
+                );
+
+            } else {
+                $insert_id = 1;                
+            }
+
+            $insert_status_id = DB::table('reg_statuses')->insertGetId(
+                ['registration_id' => $registration_id,
+                 'status_id' => $registration->task_id,
+                 'date_started' => $time,
+                 'user_id' => $user_id,
+                 'created_at' => $time
+                ]
+            );            
+
+            foreach ($categories as $key => $value) {
+                $insert_category_id = DB::table('reg_categories')->insertGetId(
+                    ['registration_id' => $registration_id,
+                     'category_id' => $value,
+                     'date_started' => $time,
+                     'user_id' => $user_id,
+                     'created_at' => $time
+                    ]
+                );                
+            }
+
+            foreach ($commissions as $key => $value) {
+                if($request->commission_id) {
+                    $insert_commission_id = DB::table('reg_commissions')->insertGetId(
+                        ['registration_id' => $registration_id,
+                         'commission_id' => $value,
+                         'date_started' => $time,
+                         'user_id' => $user_id,
+                         'created_at' => $time
+                        ]
+                    );                
+                } else {
+                    $insert_commission_id = 1;
+                }
+            }
+
+            foreach ($tasks as $key => $value) {
+                if($request->task_id) {
+                    $insert_task_id = DB::table('reg_tasks')->insertGetId(
+                        ['registration_id' => $registration_id,
+                         'task_id' => $value,
+                         'date_started' => $time,
+                         'user_id' => $user_id,
+                         'created_at' => $time
+                        ]
+                    );
+                } else {
+                    $insert_task_id = 1;
+                }
+            }            
+
+            if($insert_id && $registration_id && $insert_status_id && $insert_category_id && $insert_commission_id && $insert_task_id) {
+
+                DB::commit();
+
+                Session::flash('created_registration', 'Registration created');
+
+                return redirect(route('admin.registrations.index'));
+
+            } else {
+                throw new \Exception('Registration failed');
+            }
+        } catch(ValidationException $e) {
+
+            DB::rollback();
+
+            return Redirect::back()->withInput();
+
+        } catch(\Excepttion $e) {
+            DB::rollback();
         }
+
+        DB::commit();
+
     }
 
     /**
@@ -173,7 +331,8 @@ class AdminRegistrationsController extends Controller
 
         // dd($registration);
 
-        $types = Type::pluck('name', 'id')->all();
+        // $types = Type::pluck('name', 'id')->all();
+        $tasks = Task::pluck('name', 'id')->all();
         $degrees = Degree::pluck('name', 'id')->all();
         $provinces = Province::pluck('name', 'id')->all();
         $districts = District::pluck('name', 'id')->all();
@@ -185,13 +344,14 @@ class AdminRegistrationsController extends Controller
         $chapelles = Chapelle::pluck('name', 'id')->all();
         $zones = Zone::pluck('name', 'id')->all();
         $duties = Duty::pluck('name', 'id')->all();
+        $jobs = Job::pluck('name', 'id')->all();
         $categories = Category::pluck('name', 'id')->all();
-        $services = Service::pluck('name', 'id')->all();
+        // $services = Service::pluck('name', 'id')->all();
         $commissions = Commission::pluck('name', 'id')->all();
         $choirs = Choir::pluck('name', 'id')->all();
         $statuses = Status::pluck('name', 'id')->all();
 
-        return view('admin.app.registration.edit', compact('registration', 'types', 'degrees', 'provinces', 'districts', 'sectors', 'cells', 'villages', 'dioceses', 'parishes', 'chapelles', 'zones', 'duties', 'categories', 'services', 'commissions', 'choirs', 'statuses'));        
+        return view('admin.app.registration.edit', compact('registration', 'tasks', 'degrees', 'provinces', 'districts', 'sectors', 'cells', 'villages', 'dioceses', 'parishes', 'chapelles', 'zones', 'duties', 'jobs', 'categories', 'services', 'commissions', 'choirs', 'statuses'));        
     }
 
     /**
@@ -203,19 +363,35 @@ class AdminRegistrationsController extends Controller
      */
     public function update(UpdateRegistrationRequest $request, $id)
     {
-        // dd($request);
+        // dd($request->all());
+        // dd($request->status_id);
 
         $user = Auth::user();
 
+        $status_id_old = $request->status_id_old;
+        $status_id = $request->status_id;        
+
         $input = $request->all();
 
-        $input['user_id'] = $user->id;
+        $input['user_id'] = $user->id;        
 
         $updated = Registration::findOrFail($id)->update($input);
 
-        Session::flash('updated_registration', 'Registration [id:' . $id . '] updated [' . $updated . ']');        
+        Session::flash('updated_registration', 'Registration [id:' . $id . '] updated [' . $updated . ']');
 
-        return redirect(route('admin.registrations.index'));        
+        if($status_id_old != $status_id) {
+
+            // dd('new status');
+            if($status_id == 3) {
+                return redirect(route('admin.suspensions.create'));
+            }
+
+            if($status_id == 4) {
+                return redirect(route('admin.repentings.create'));
+            }            
+        }
+
+        return redirect(route('admin.registrations.index'));
     }
 
     /**
@@ -233,7 +409,7 @@ class AdminRegistrationsController extends Controller
 
         Session::flash('deleted_registration', 'Registration id ' . $id . ' deleted');
         
-        return redirect(route('admin.members.index'));
+        return redirect(route('admin.registrations.index'));
     }
 
     /**
@@ -292,8 +468,19 @@ class AdminRegistrationsController extends Controller
      *
      * @return int
      **/
-    public function getNextRegistrationId ()
+    public function getNextRegistrationId ($chapelle_id)
     {
-        return DB::table('registrations')->max('id') + 1;
+        // return DB::table('registrations')->max('id') + 1;
+        if(DB::table('regnums')->where('chapelle_id', $chapelle_id)->exists()) {
+            return DB::table('regnums')->where('chapelle_id', $chapelle_id)->max('id');
+        } else {
+            return 0;
+        }
+    }
+
+    public function storeRegistrationId ($chapelle_id, $regNumber) {
+        $id = DB::table('regnums')->insertGetId(
+            ['chapelle_id' => $chapelle_id, 'regnum' => $regNumber]
+        );
     }
 }

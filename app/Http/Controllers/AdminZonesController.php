@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Zone;
 use App\Chapelle;
 use Session;
+use DB;
 
 class AdminZonesController extends Controller
 {
@@ -17,10 +18,18 @@ class AdminZonesController extends Controller
     public function index()
     {
         // return 'AdminZonesController@index';
-        $zones = Zone::paginate(5);
-        $chapelles = Chapelle::pluck('name', 'id')->all();
+        // $zones = Zone::paginate(5);
+        // $chapelles = Chapelle::pluck('name', 'id')->all();
 
-        return view('admin.param.zone.index', compact('zones', 'chapelles'));        
+        $zones = DB::table('zones')
+                        ->join('chapelles as s', 'zones.chapelle_id', '=', 's.id')
+                        ->join('parishes as d', 's.parish_id', '=', 'd.id')
+                        ->join('dioceses as p', 'd.diocese_id', '=', 'p.id')
+                        ->select('zones.*', 's.name as chapelle', 'd.name as parish', 'p.name as diocese')
+                        ->get();        
+
+        // return view('admin.param.zone.index', compact('zones', 'chapelles'));
+        return view('admin.param.zone.index', compact('zones'));
     }
 
     /**
@@ -45,14 +54,31 @@ class AdminZonesController extends Controller
 
         $this->validate($request, [
             'chapelle_id' => 'required|numeric',
+            'code' => 'required|numeric',
             'name' => 'required'
         ]);        
 
-        Zone::create($request->all());
+        // Zone::create($request->all());
 
-        Session::flash('created_zone', 'Zone created');
+        $id = DB::table('zones')->insertGetId(
 
-        return redirect(route('admin.zones.index'));
+            ['chapelle_id' => $request->chapelle_id, 'code' => $request->code, 'name' => $request->name]
+
+        );
+
+        $zone = DB::table('zones')
+                        ->where('zones.id', $id)
+                        ->join('chapelles as s', 'zones.chapelle_id', '=', 's.id')
+                        ->join('parishes as d', 's.parish_id', '=', 'd.id')
+                        ->join('dioceses as p', 'd.diocese_id', '=', 'p.id')
+                        ->select('zones.*', 's.name as chapelle', 'd.name as parish', 'p.name as diocese')
+                        ->get();
+
+        return json_decode($zone);
+
+        // Session::flash('created_zone', 'Zone created');
+
+        // return redirect(route('admin.zones.index'));
     }
 
     /**
@@ -86,7 +112,23 @@ class AdminZonesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'chapelle_id' => 'required|numeric',
+            'code' => 'required|numeric',
+            'name' => 'required'
+        ]);
+
+        Zone::whereId($id)->update($request->all());
+
+        $zone = DB::table('zones')
+                        ->where('zones.id', $id)
+                        ->join('chapelles as s', 'zones.chapelle_id', '=', 's.id')
+                        ->join('parishes as d', 's.parish_id', '=', 'd.id')
+                        ->join('dioceses as p', 'd.diocese_id', '=', 'p.id')
+                        ->select('zones.*', 's.name as chapelle', 'd.name as parish', 'p.name as diocese')
+                        ->get();
+
+        return json_decode($zone);
     }
 
     /**
@@ -101,8 +143,17 @@ class AdminZonesController extends Controller
 
         $deleted = Zone::findOrFail($id)->delete();
 
-        Session::flash('deleted_zone', 'Zone id ' . $id . ' deleted');
+        // Session::flash('deleted_zone', 'Zone id ' . $id . ' deleted');
         
-        return redirect(route('admin.zones.index'));
+        // return redirect(route('admin.zones.index'));
+
+        return response()->json(['status' => 'Delete OK', 'Num deleted' => $deleted, 'ID' => $id], 200);
     }
+
+    public function list()
+    {
+        $zones = Zone::pluck('name', 'id')->all();
+
+        return $zones;        
+    }    
 }

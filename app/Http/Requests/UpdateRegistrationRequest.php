@@ -24,7 +24,7 @@ class UpdateRegistrationRequest extends FormRequest
     public function rules()
     {
         return [
-            'type_id' => 'required|numeric',
+            // 'type_id' => 'required|numeric',
             // 'regNumber' => 'required|numeric|unique:registrations',
             'lastName' => 'required',
             'firstName' => 'required',

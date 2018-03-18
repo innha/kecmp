@@ -1,7 +1,9 @@
 
 window._ = require('lodash');
 
-import Popper from 'popper.js/dist/umd/popper.js';
+//import Popper from 'popper.js/dist/umd/popper.js';
+// import Popper from '../../../../node_modules/popper.js/dist/umd/popper.js';
+//import Popper from '../../../public/js/popper.js';
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -19,9 +21,13 @@ require('bootstrap');
 */
 
 try {
-    window.$ = window.jQuery = require('jquery');   
-    window.Popper = require('popper.js').default;
+    window.$ = window.jQuery = require('jquery');
+    
+    window.Popper = require('popper.js/dist/umd/popper.js').default;
+    //window.Popper = Popper;
+
     require('bootstrap');
+
 } catch (e) {
 	console.log(e);
 }

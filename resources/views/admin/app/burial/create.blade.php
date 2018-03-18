@@ -41,6 +41,14 @@ Burial
 					</div>
 				</div>
 
+				<div class="form-group row">			
+					{!! Form::label('date_buried', 'Date Buried:', ['class' => 'col-4 col-form-label']) !!}
+					<div class="col-8">
+					{!! Form::date('date_buried', null, ['class' => 'form-control']) !!}
+					<span class="text-danger">{{ $errors->first('date_buried') }}</span>
+					</div>
+				</div>
+
 				<div class="form-group {{$errors->has('burialPlace') ? 'has-error' : '' }} row">			
 					{!! Form::label('burialPlace', 'Place Buried:', ['class' => 'col-4 col-form-label']) !!}
 					<div class="col-8">

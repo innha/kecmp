@@ -33,13 +33,21 @@ Suspension
                   	</div>					
 				</div>
 
-				<div class="form-group {{$errors->has('authorizer') ? 'has-error' : '' }} row">			
-					{!! Form::label('authorizer', 'Decided By:', ['class' => 'col-4 col-form-label']) !!}
+				<div class="form-group row">			
+					{!! Form::label('date_suspended', 'Date Suspended:', ['class' => 'col-4 col-form-label']) !!}
 					<div class="col-8">
-					{!! Form::text('authorizer', null, ['class' => 'form-control']) !!}
-					<span class="text-danger">{{ $errors->first('authorizer') }}</span>
+					{!! Form::date('date_suspended', null, ['class' => 'form-control']) !!}
+					<span class="text-danger">{{ $errors->first('date_suspended') }}</span>
 					</div>
-				</div>
+				</div>				
+
+				<div class="form-group {{$errors->has('suspendor') ? 'has-error' : '' }} row">			
+					{!! Form::label('suspendor', 'Decided By:', ['class' => 'col-4 col-form-label']) !!}
+					<div class="col-8">
+					{!! Form::text('suspendor', null, ['class' => 'form-control']) !!}
+					<span class="text-danger">{{ $errors->first('suspendor') }}</span>
+					</div>
+				</div>				
 
 				<div class="form-group {{$errors->has('reason') ? 'has-error' : '' }} row">			
 					{!! Form::label('reason', 'Reason:', ['class' => 'col-4 col-form-label']) !!}
@@ -47,7 +55,7 @@ Suspension
 					{!! Form::text('reason', null, ['class' => 'form-control']) !!}
 					<span class="text-danger">{{ $errors->first('reason') }}</span>
 					</div>
-				</div>				
+				</div>
 
 				<div class="form-group">
 					<div class="text-center">

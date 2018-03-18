@@ -21,7 +21,9 @@
   <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
 </head>
-<body id="app">
+<body>
+
+<div id="app">
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
   <div class="container">
@@ -37,7 +39,7 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown mr-3">
         @if (Auth::guest())
-          <a href="{{ route('login') }}" class="nav-link">
+          <a href="javascript:;" data-toggle="modal" data-target="#loginModal" class="nav-link">
             <i class="fa fa-user"></i> Login
           </a>
         </li>
@@ -113,6 +115,8 @@
   </div>
 </header>
 
+<vue-login></vue-login>
+
 <!-- MAIN FOOTER -->
 <footer id="main-footer" class="bg-dark">
   <div class="container">
@@ -127,6 +131,8 @@
   </div>
 </footer>
 
+</div>
+
 <!-- Scripts -->
 <!-- 
 <script src="js/jquery.min.js"></script>
@@ -135,6 +141,7 @@
 -->
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/tether.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 </body>

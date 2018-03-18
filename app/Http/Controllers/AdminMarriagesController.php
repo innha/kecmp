@@ -45,7 +45,7 @@ class AdminMarriagesController extends Controller
     {
         $this->validate($request, [
             
-            'registration_id' => 'required|numeric',
+            'bridal_id' => 'required|numeric',
             'date_married' => 'required|date',
             'marriagePlace' => 'required'
         ]);

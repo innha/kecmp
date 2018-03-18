@@ -15,13 +15,14 @@ class CreateBridalsTable extends Migration
     {
         Schema::create('bridals', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('registration_id')->index()->unsigned()->nullable();
-            $table->string('bridalName');
+            $table->integer('m_bridal_id')->index()->unsigned()->nullable();
+            $table->integer('f_bridal_id')->index()->unsigned()->nullable();
             $table->string('origin');
             $table->integer('user_id')->index()->unsigned()->nullable();
             $table->timestamps();
 
-            $table->foreign('registration_id')->references('id')->on('registrations')->onDelete('cascade');
+            $table->foreign('m_bridal_id')->references('id')->on('registrations')->onDelete('cascade');
+            $table->foreign('f_bridal_id')->references('id')->on('registrations')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

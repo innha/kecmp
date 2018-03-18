@@ -33,11 +33,11 @@ Repenting
                   	</div>					
 				</div>
 
-				<div class="form-group {{$errors->has('authorizer') ? 'has-error' : '' }} row">			
-					{!! Form::label('authorizer', 'Approved By:', ['class' => 'col-4 col-form-label']) !!}
+				<div class="form-group {{$errors->has('reinstator') ? 'has-error' : '' }} row">			
+					{!! Form::label('reinstator', 'Approved By:', ['class' => 'col-4 col-form-label']) !!}
 					<div class="col-8">
-					{!! Form::text('authorizer', null, ['class' => 'form-control']) !!}
-					<span class="text-danger">{{ $errors->first('authorizer') }}</span>
+					{!! Form::text('reinstator', null, ['class' => 'form-control']) !!}
+					<span class="text-danger">{{ $errors->first('reinstator') }}</span>
 					</div>
 				</div>
 

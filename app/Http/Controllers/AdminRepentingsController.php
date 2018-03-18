@@ -48,7 +48,7 @@ class AdminRepentingsController extends Controller
             
             'registration_id' => 'required|numeric',
             'date_returned' => 'required|date',
-            'authRegNum' => 'required|numeric'
+            'reinstator' => 'required'
         ]);
 
         $input = $request->all();

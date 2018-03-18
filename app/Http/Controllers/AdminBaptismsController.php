@@ -46,7 +46,7 @@ class AdminBaptismsController extends Controller
     {
         $this->validate($request, [
             
-            'registration_id' => 'required|numeric',
+            'teaching_id' => 'required|numeric',
             'date_baptized' => 'required|date'
         ]);
 

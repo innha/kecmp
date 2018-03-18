@@ -51,9 +51,9 @@ Bridals
               <thead class="thead-default">
                 <tr>
                   <th data-defaultsort="desc">ID</th>
-                  <th></th>                  
-                  <th>REG #</th>
-                  <th>BRIDAL NAME</th>
+                  <th></th>
+                  <th>GROOM</th>
+                  <th>BRIDE</th>
                   <th>ORIGIN</th>
                   <th>USER</th>
                   <th>CREATED</th>
@@ -71,8 +71,8 @@ Bridals
                     {!! Form::close() !!}
                     </div>
                   </td>                  
-                  <td>{{ $bridal->registration_id }}</td>
-                  <td>{{ $bridal->bridalName }}</td>
+                  <td>{{ $bridal->m_bridal_id }}</td>
+                  <td>{{ $bridal->f_bridal_id }}</td>                  
                   <td>{{ $bridal->origin }}</td>
                   <td>{{ $bridal->user_id }}</td>
                   <td>{{ $bridal->created_at }}</td>

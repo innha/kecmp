@@ -16,7 +16,8 @@ class AdminProvincesController extends Controller
     public function index()
     {
         // return 'AdminProvincesController@index';
-        $provinces = Province::paginate(5);
+        // $provinces = Province::paginate(5);
+        $provinces = Province::all();
 
         return view('admin.param.province.index', compact('provinces'));
     }
@@ -45,11 +46,11 @@ class AdminProvincesController extends Controller
             'name' => 'required|alpha_spaces|unique:provinces'
         ]);        
 
-        Province::create($request->all());
+        return Province::create($request->all());
 
-        Session::flash('created_province', 'Province created');
+        // Session::flash('created_province', 'Province created');
 
-        return redirect(route('admin.provinces.index'));
+        // return redirect(route('admin.provinces.index'));
     }
 
     /**
@@ -83,7 +84,14 @@ class AdminProvincesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+
+            'name' => 'required|alpha_spaces'            
+        ]);
+
+        Province::whereId($id)->update($request->all());
+
+        return Province::whereId($id)->first();
     }
 
     /**
@@ -98,8 +106,17 @@ class AdminProvincesController extends Controller
 
         $deleted = Province::findOrFail($id)->delete();
 
-        Session::flash('deleted_province', 'Province id ' . $id . ' deleted');
+        // Session::flash('deleted_province', 'Province id ' . $id . ' deleted');
         
-        return redirect(route('admin.provinces.index'));
+        // return redirect(route('admin.provinces.index'));
+
+        return response()->json(['status' => 'Delete OK', 'Num deleted' => $deleted, 'ID' => $id], 200);
+    }
+
+    public function list()
+    {
+        $provinces = Province::pluck('name', 'id')->all();
+
+        return $provinces;
     }
 }

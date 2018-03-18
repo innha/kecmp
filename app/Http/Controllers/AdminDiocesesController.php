@@ -16,7 +16,8 @@ class AdminDiocesesController extends Controller
     public function index()
     {
         // return 'AdminDiocesesController@index';
-        $dioceses = Diocese::paginate(5);
+        // $dioceses = Diocese::paginate(5);
+        $dioceses = Diocese::all();
 
         return view('admin.param.diocese.index', compact('dioceses'));
     }
@@ -45,11 +46,11 @@ class AdminDiocesesController extends Controller
             'name' => 'required|alpha_spaces|unique:dioceses'
         ]);        
 
-        Diocese::create($request->all());
+        return Diocese::create($request->all());
 
-        Session::flash('created_diocese', 'Diocese created');
+        // Session::flash('created_diocese', 'Diocese created');
 
-        return redirect(route('admin.dioceses.index'));        
+        // return redirect(route('admin.dioceses.index'));        
     }
 
     /**
@@ -83,7 +84,14 @@ class AdminDiocesesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+
+            'name' => 'required|alpha_spaces'            
+        ]);
+
+        Diocese::whereId($id)->update($request->all());
+
+        return Diocese::whereId($id)->first();
     }
 
     /**
@@ -98,8 +106,17 @@ class AdminDiocesesController extends Controller
 
         $deleted = Diocese::findOrFail($id)->delete();
 
-        Session::flash('deleted_diocese', 'Diocese id ' . $id . ' deleted');
+        // Session::flash('deleted_diocese', 'Diocese id ' . $id . ' deleted');
         
-        return redirect(route('admin.dioceses.index'));
+        // return redirect(route('admin.dioceses.index'));
+
+        return response()->json(['status' => 'Delete OK', 'Num deleted' => $deleted, 'ID' => $id], 200);
     }
+
+    public function list()
+    {
+        $dioceses = Diocese::pluck('name', 'id')->all();
+
+        return $dioceses;        
+    }    
 }

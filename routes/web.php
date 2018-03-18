@@ -24,9 +24,52 @@ Route::get('/admin/sectors/get/{district_id}', 'GetParamsController@getSectors')
 Route::get('/admin/cells/get/{sector_id}', 'GetParamsController@getCells');
 Route::get('/admin/villages/get/{cell_id}', 'GetParamsController@getVillages');
 
+Route::get('/admin/parishes/get/{diocese_id}', 'GetParamsController@getParishes');
+Route::get('/admin/chapelles/get/{parish_id}', 'GetParamsController@getChapelles');
+Route::get('/admin/zones/get/{chapelle_id}', 'GetParamsController@getZones');
+
 Route::post('/admin/registrations/search', 'AdminRegistrationsController@search');
 Route::get('/admin/registrations/search/ajax', array('as' => 'admin.registrations.search.ajax', 'uses' => 'AdminRegistrationsController@searchAjax'));
+Route::get('/admin/cells/search/ajax', array('as' => 'admin.cells.search.ajax', 'uses' => 'AdminCellsController@searchAjax'));
+Route::get('/admin/parishes/search/ajax', array('as' => 'admin.parishes.search.ajax', 'uses' => 'AdminParishesController@searchAjax'));
 Route::post('/admin/users/search', 'AdminUsersController@search');
+
+//post params
+Route::post('/admin/villages/store', 'AdminVillagesController@store');
+Route::post('/admin/cells/store', 'AdminCellsController@store');
+Route::post('/admin/sectors/store', 'AdminSectorsController@store');
+Route::post('/admin/districts/store', 'AdminDistrictsController@store');
+Route::post('/admin/provinces/store', 'AdminProvincesController@store');
+
+Route::post('/admin/zones/store', 'AdminZonesController@store');
+Route::post('/admin/chapelles/store', 'AdminChapellesController@store');
+Route::post('/admin/parishes/store', 'AdminParishesController@store');
+Route::post('/admin/dioceses/store', 'AdminDiocesesController@store');
+
+Route::post('/admin/categories/store', 'AdminCategoriesController@store');
+Route::post('/admin/choirs/store', 'AdminChoirsController@store');
+Route::post('/admin/commissions/store', 'AdminCommissionsController@store');
+Route::post('/admin/degrees/store', 'AdminDegreesController@store');
+Route::post('/admin/duties/store', 'AdminDutiesController@store');
+Route::post('/admin/privileges/store', 'AdminPrivilegesController@store');
+Route::post('/admin/roles/store', 'AdminRolesController@store');
+Route::post('/admin/services/store', 'AdminServicesController@store');
+Route::post('/admin/statuses/store', 'AdminStatusesController@store');
+Route::post('/admin/types/store', 'AdminTypesController@store');
+Route::post('/admin/tasks/store', 'AdminTasksController@store');
+
+//return cells, sectors, districts, provinces as array to populate dropdown lists
+Route::get('/admin/param/villages', 'AdminVillagesController@list');
+Route::get('/admin/param/cells', 'AdminCellsController@list');
+Route::get('/admin/param/sectors', 'AdminSectorsController@list');
+Route::get('/admin/param/districts', 'AdminDistrictsController@list');
+Route::get('/admin/param/provinces', 'AdminProvincesController@list');
+
+Route::get('/admin/param/zones', 'AdminZonesController@list');
+Route::get('/admin/param/chapelles', 'AdminChapellesController@list');
+Route::get('/admin/param/parishes', 'AdminParishesController@list');
+Route::get('/admin/param/dioceses', 'AdminDiocesesController@list');
+
 
 Route::resource('/admin/baptisms', 'AdminBaptismsController', ['as' => 'admin'], 
 	['name' => [
@@ -129,6 +172,19 @@ Route::resource('/admin/commissions', 'AdminCommissionsController', ['as' => 'ad
 		'edit' => 'admin.commissions.edit',
 		'update' => 'admin.commissions.update',
 		'destroy' => 'admin.commissions.destroy'
+	]]
+);
+
+Route::resource('/admin/commission_reports', 'AdminCommissionReportsController', ['as' => 'admin'], 
+	['name' => [
+
+		'admin/commission_reports' => 'admin.commission_reports.index',
+		'create' => 'admin.commission_reports.create',
+		'store' => 'admin.commission_reports.store',
+		'show' => 'admin.commission_reports.show',
+		'edit' => 'admin.commission_reports.edit',
+		'update' => 'admin.commission_reports.update',
+		'destroy' => 'admin.commission_reports.destroy'
 	]]
 );
 
@@ -415,6 +471,19 @@ Route::resource('/admin/types', 'AdminTypesController', ['as' => 'admin'],
 		'edit' => 'admin.types.edit',
 		'update' => 'admin.types.update',
 		'destroy' => 'admin.types.destroy'
+	]]
+);
+
+Route::resource('/admin/tasks', 'AdminTasksController', ['as' => 'admin'], 
+	['name' => [
+
+		'admin/tasks' => 'admin.tasks.index',
+		'create' => 'admin.tasks.create',
+		'store' => 'admin.tasks.store',
+		'show' => 'admin.tasks.show',
+		'edit' => 'admin.tasks.edit',
+		'update' => 'admin.tasks.update',
+		'destroy' => 'admin.tasks.destroy'
 	]]
 );
 

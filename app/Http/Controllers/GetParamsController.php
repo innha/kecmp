@@ -58,4 +58,43 @@ class GetParamsController extends Controller
 
         return json_encode($villages);
     }
+
+    /**
+     * Get list of parishes given cell.
+     *
+     * @param int $diocese_id
+     * @return \Illuminate\Http\Response
+     **/
+    public function getParishes($diocese_id)
+    {
+        $parishes = DB::table("parishes")->where("diocese_id", $diocese_id)->pluck('name', 'id')->all();
+
+        return json_encode($parishes);
+    }
+
+    /**
+     * Get list of chapelles given cell.
+     *
+     * @param int $parish_id
+     * @return \Illuminate\Http\Response
+     **/
+    public function getChapelles($parish_id)
+    {
+        $chapelles = DB::table("chapelles")->where("parish_id", $parish_id)->pluck('name', 'id')->all();
+
+        return json_encode($chapelles);
+    }
+
+    /**
+     * Get list of zones given cell.
+     *
+     * @param int $chapelle_id
+     * @return \Illuminate\Http\Response
+     **/
+    public function getZones($chapelle_id)
+    {
+        $zones = DB::table("zones")->where("chapelle_id", $chapelle_id)->pluck('name', 'id')->all();
+
+        return json_encode($zones);
+    }        
 }

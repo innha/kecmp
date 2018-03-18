@@ -16,7 +16,8 @@ class AdminStatusesController extends Controller
     public function index()
     {
         // return 'AdminStatusesController@index';
-        $statuses = Status::paginate(5);
+        // $statuses = Status::paginate(5);
+        $statuses = Status::all();
 
         return view('admin.param.status.index', compact('statuses'));        
     }
@@ -46,11 +47,11 @@ class AdminStatusesController extends Controller
             'name' => 'required|alpha_spaces|unique:statuses'
         ]);        
 
-        Status::create($request->all());
+        return Status::create($request->all());
 
-        Session::flash('created_status', 'Status created');
+        // Session::flash('created_status', 'Status created');
 
-        return redirect(route('admin.statuses.index'));
+        // return redirect(route('admin.statuses.index'));
     }
 
     /**
@@ -84,7 +85,14 @@ class AdminStatusesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+
+            'name' => 'required|alpha_spaces'            
+        ]);
+
+        Status::whereId($id)->update($request->all());
+
+        return Status::whereId($id)->first();
     }
 
     /**
@@ -99,8 +107,10 @@ class AdminStatusesController extends Controller
 
         $deleted = Status::findOrFail($id)->delete();
 
-        Session::flash('deleted_status', 'Status id ' . $id . ' deleted');
+        // Session::flash('deleted_status', 'Status id ' . $id . ' deleted');
         
-        return redirect(route('admin.statuses.index'));
+        // return redirect(route('admin.statuses.index'));
+
+        return response()->json(['status' => 'Delete OK', 'Num deleted' => $deleted, 'ID' => $id], 200);
     }
 }

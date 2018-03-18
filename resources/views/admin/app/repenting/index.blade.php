@@ -24,6 +24,7 @@ Repenting
           <i class="fa fa-search"></i> Search registration
         </a>
         --}}
+        {{--
         <form action="/admin/registrations/search" method="POST" role="search">
           {{ csrf_field() }}
           <div class="input-group">
@@ -35,6 +36,7 @@ Repenting
             </span>
           </div>
         </form>
+        --}}
       </div>
     </div>
   </div>
@@ -53,7 +55,7 @@ Repenting
                 <tr>
                   <th data-defaultsort="desc">ID</th>
                   <th></th>                  
-                  <th>REG #</th>
+                  <th>REG ID</th>
                   <th>DATE RETURNED</th>
                   <th>APPROVED BY</th>
                   <th>USER</th>
@@ -74,7 +76,7 @@ Repenting
                   </td>                  
                   <td>{{ $repenting->registration_id }}</td>
                   <td>{{ $repenting->date_returned }}</td>
-                  <td>{{ $repenting->authorizer }}</td>
+                  <td>{{ $repenting->reinstator }}</td>
                   <td>{{ $repenting->user_id }}</td>
                   <td>{{ $repenting->created_at->diffForHumans() }}</td>
                   <td>{{ $repenting->updated_at->diffForHumans() }}</td>

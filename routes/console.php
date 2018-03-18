@@ -28,3 +28,15 @@ Artisan::command('remove:controller {name : Name of the controller}', function (
         $this->error('Cannot delete ' . $name . ', file not found.');
     }
 })->describe('Remove specific controller');
+
+Artisan::command('remove:model {name : Name of the model}', function ($name) {
+    // File location
+    $file_location = base_path() . '/app/' . $name . '.php';
+    // Check if exist
+    if (file_exists($file_location)) {
+        exec('rm ' . $file_location);
+        $this->info($name.' has been deleted!');
+    } else {
+        $this->error('Cannot delete ' . $name . ', file not found.');
+    }
+})->describe('Remove specific model');

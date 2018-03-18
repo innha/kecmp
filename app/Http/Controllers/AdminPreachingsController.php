@@ -45,10 +45,10 @@ class AdminPreachingsController extends Controller
     {
         $this->validate($request, [
             
-            'registration_id' => 'required|numeric',
+            'visitor_names' => 'required|alpha_spaces',
             'topic' => 'required|alpha_spaces',
             'date_preached' => 'required|date',
-            'hasRepented' => 'required|boolean'
+            'num_repented' => 'required|numeric'
         ]);
 
         $input = $request->all();

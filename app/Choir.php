@@ -12,9 +12,4 @@ class Choir extends Model
     {
     	return $this->hasMany('App\Registration');
     }
-
-    public function singer()
-    {
-    	return $this->belongsTo('App\Choir');
-    }  
 }

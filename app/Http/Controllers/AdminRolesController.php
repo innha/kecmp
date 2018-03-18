@@ -16,7 +16,8 @@ class AdminRolesController extends Controller
     public function index()
     {
         // return 'AdminRolesController@index';
-        $roles = Role::paginate(5);
+        // $roles = Role::paginate(5);
+        $roles = Role::all();
 
         return view('admin.param.role.index', compact('roles'));       
     }
@@ -45,11 +46,11 @@ class AdminRolesController extends Controller
             'name' => 'required|alpha_spaces|unique:roles'
         ]);        
 
-        Role::create($request->all());
+        return Role::create($request->all());
 
-        Session::flash('created_role', 'Role created');
+        // Session::flash('created_role', 'Role created');
 
-        return redirect(route('admin.roles.index'));
+        // return redirect(route('admin.roles.index'));
     }
 
     /**
@@ -83,7 +84,14 @@ class AdminRolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+
+            'name' => 'required|alpha_spaces'            
+        ]);
+
+        Role::whereId($id)->update($request->all());
+
+        return Role::whereId($id)->first();
     }
 
     /**
@@ -98,8 +106,10 @@ class AdminRolesController extends Controller
 
         $deleted = Role::findOrFail($id)->delete();
 
-        Session::flash('deleted_role', 'Role id ' . $id . ' deleted');
+        // Session::flash('deleted_role', 'Role id ' . $id . ' deleted');
         
-        return redirect(route('admin.roles.index'));
+        // return redirect(route('admin.roles.index'));
+
+        return response()->json(['status' => 'Delete OK', 'Num deleted' => $deleted, 'ID' => $id], 200);
     }
 }

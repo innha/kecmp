@@ -47,7 +47,23 @@ Teaching
 					{!! Form::select('parish_id', array('' => 'Choose parish') + $parishes, null, ['class' => 'form-control']) !!}
 					<span class="text-danger">{{ $errors->first('parish_id') }}</span>
 					</div>
-				</div>							
+				</div>	
+
+				<div class="form-group row">			
+					{!! Form::label('date_started', 'Date Started:', ['class' => 'col-4 col-form-label']) !!}
+					<div class="col-8">
+					{!! Form::date('date_started', null, ['class' => 'form-control']) !!}
+					<span class="text-danger">{{ $errors->first('date_started') }}</span>
+					</div>
+				</div>
+
+				<div class="form-group row">			
+					{!! Form::label('date_ended', 'Date Ended:', ['class' => 'col-4 col-form-label']) !!}
+					<div class="col-8">
+					{!! Form::date('date_ended', null, ['class' => 'form-control']) !!}
+					<span class="text-danger">{{ $errors->first('date_ended') }}</span>
+					</div>
+				</div>
 
 				<div class="form-group">
 					<div class="text-center">

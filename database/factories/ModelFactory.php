@@ -81,6 +81,7 @@ $factory->define(App\Diocese::class, function (Faker\Generator $faker) {
 $factory->define(App\Parish::class, function (Faker\Generator $faker) {
 	return [
 		'diocese_id' => 1,
+		'district_id' => 1,
 		'code' => '101',
 		'name' => $faker->randomElement(['Gasabo']),
 	];
@@ -101,39 +102,96 @@ $factory->define(App\Zone::class, function (Faker\Generator $faker) {
 		'name' => $faker->randomElement(['Gakinjiro']),
 	];
 });
-
+/*
 $factory->define(App\Category::class, function (Faker\Generator $faker) {
 	return [
 		'name' => $faker->unique()->randomElement(['Men', 'Women']),
 	];
 });
-
+*/
 $factory->define(App\Duty::class, function (Faker\Generator $faker) {
 	return [
 		'name' => $faker->unique()->randomElement(['Pastor', 'Teacher']),
 	];
 });
+/*
+$factory->define(App\Task::class, function (Faker\Generator $faker) {
+	return [
+		'name' => $faker->unique()->randomElement(['Christian', 'Representative']),
+	];
+});
+*/
+/*
+$factory->define(App\Service::class, function (Faker\Generator $faker) {
+	return [
+		'name' => $faker->unique()->randomElement(['Baptism']),
+	];
+});
 
 $factory->define(App\Service::class, function (Faker\Generator $faker) {
 	return [
-		'name' => $faker->unique()->randomElement(['Preaching', 'Baptism']),
+		'name' => $faker->unique()->randomElement(['Bridal']),
 	];
 });
+
+$factory->define(App\Service::class, function (Faker\Generator $faker) {
+	return [
+		'name' => $faker->unique()->randomElement(['Burial']),
+	];
+});
+
+$factory->define(App\Service::class, function (Faker\Generator $faker) {
+	return [
+		'name' => $faker->unique()->randomElement(['Kid']),
+	];
+});
+
+$factory->define(App\Service::class, function (Faker\Generator $faker) {
+	return [
+		'name' => $faker->unique()->randomElement(['Literacy']),
+	];
+});
+
+$factory->define(App\Service::class, function (Faker\Generator $faker) {
+	return [
+		'name' => $faker->unique()->randomElement(['Marriage']),
+	];
+});
+
+$factory->define(App\Service::class, function (Faker\Generator $faker) {
+	return [
+		'name' => $faker->unique()->randomElement(['Repenting']),
+	];
+});
+
+$factory->define(App\Service::class, function (Faker\Generator $faker) {
+	return [
+		'name' => $faker->unique()->randomElement(['Suspension']),
+	];
+});
+
+$factory->define(App\Service::class, function (Faker\Generator $faker) {
+	return [
+		'name' => $faker->unique()->randomElement(['Teaching']),
+	];
+});
+*/
 
 $factory->define(App\Type::class, function (Faker\Generator $faker) {
 	return [
 		'name' => $faker->unique()->randomElement(['Christian', 'Visitor', 'Other']),
 	];
 });
-
+/*
 $factory->define(App\Commission::class, function (Faker\Generator $faker) {
 	return [
 		'name' => $faker->unique()->randomElement(['Development', 'Construction']),
 	];
 });
-
+*/
 $factory->define(App\Choir::class, function (Faker\Generator $faker) {
 	return [
+		'chapelle_id' => 1,
 		'name' => $faker->randomElement(['Rehoboth']),
 		'equipment' => $faker->randomElement(['2 Piono, 3 Guitars, Drums']),
 	];
@@ -145,13 +203,13 @@ $factory->define(App\Degree::class, function (Faker\Generator $faker) {
 		'name' => $faker->unique()->randomElement(['Masters', 'Graduate']),
 	];
 });
-
+/*
 $factory->define(App\Status::class, function (Faker\Generator $faker) {
 	return [
 		'name' => $faker->randomElement(['Active']),
 	];
 });
-
+*/
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
@@ -179,15 +237,16 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Registration::class, function (Faker\Generator $faker) {
 	return [
-    	'type_id' => 1,
-    	'degree_id' => 1,
-    	'duty_id' => 1,
+    	// 'type_id' => 1,
+    	'degree_id' => 1,    	
     	'category_id' => 1,
-    	'service_id' => 1,
+    	// 'service_id' => 1,
     	'commission_id' => 1,
+    	//'duty_id' => 1,
+    	'task_id' => 1,
     	'user_id' => 1,
     	'status_id' => 1,		
-    	'regNumber' => '10101010110101010000001',
+    	'regNumber' => '10101010100001',
     	'lastName' => $faker->randomElement(['RUGEMA']),
     	'firstName' => $faker->randomElement(['Charles']),
     	'fLastName' => $faker->randomElement(['BAGARAGAZA']),
@@ -201,6 +260,7 @@ $factory->define(App\Registration::class, function (Faker\Generator $faker) {
     	'gender' => 'Male',
     	'idNumber' => '119818002233',
     	'maritalStatus' => 'Married',
+    	'legallyMarried' => 1,
     	'email' => 'crugema@sorasvie.rw',
     	'village_id' => 1,
     	'cell_id' => 1,
@@ -212,11 +272,14 @@ $factory->define(App\Registration::class, function (Faker\Generator $faker) {
     	'parish_id' => 1,
     	'diocese_id' => 1,
     	'ownsHouse' => true,
-    	'job' => $faker->randomElement(['IT Manager', 'Network Administrator']),
-    	'employer' => $faker->randomElement(['SORAS VIE Ltd', 'SORAS AG Ltd']),
-    	'jobLocation' => 'Kigali',
+    	// 'job' => $faker->randomElement(['IT Manager', 'Network Administrator']),
+    	'job_id' => 1,
+    	// 'employer' => $faker->randomElement(['SORAS VIE Ltd', 'SORAS AG Ltd']),
+    	// 'jobLocation' => 'Kigali',
     	'baptismDate' => $faker->randomElement(['1981-12-25', '1982-01-26']),
     	'baptismParish' => $faker->randomElement(['Nyakinama', 'Nyagatare']),
+    	'origin_cell' => 'Nyakizu',
+    	'origin_parish' => 'Nyakinama',
     	'choir_id' => 1,
     	'user_id' => 1,
     	'confirmed' => true,
@@ -238,19 +301,22 @@ $factory->define(App\Member::class, function (Faker\Generator $faker) {
 	];
 });
 */
-$factory->define(App\Baptism::class, function (Faker\Generator $faker) {
+
+$factory->define(App\Bridal::class, function (Faker\Generator $faker) {
 	return [
-		'registration_id' => 1,
-		'date_baptized' => '1981-12-25',
+		'm_bridal_id' => 1,
+		'f_bridal_id' => 2,
+		'origin' => 'Nyakinama',
 		'user_id' => 1,
 	];
 });
 
-$factory->define(App\Bridal::class, function (Faker\Generator $faker) {
+$factory->define(App\Marriage::class, function (Faker\Generator $faker) {
 	return [
 		'registration_id' => 1,
-		'bridalName' => 'MUKESHIMANA',
-		'origin' => 'Nyakinama',
+		'bridal_id' => 2,
+		'date_married' => '2017-11-15',
+		'marriagePlace' => 'Kicukiro',
 		'user_id' => 1,
 	];
 });
@@ -259,6 +325,7 @@ $factory->define(App\Burial::class, function (Faker\Generator $faker) {
 	return [
 		'registration_id' => 2,
 		'date_died' => '2010-10-20',
+		'date_buried' => '2010-10-22',
 		'burialPlace' => 'Heaven',
 		'user_id' => 1,
 	];
@@ -266,7 +333,8 @@ $factory->define(App\Burial::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Kid::class, function (Faker\Generator $faker) {
 	return [
-		'registration_id' => 1,
+		'child_names' => 'KEZA Kevin',
+		'registration_id' => 1, //parent id
 		'date_prayed' => '2010-10-20',
 		'user_id' => 1,
 	];
@@ -280,21 +348,13 @@ $factory->define(App\Literacy::class, function (Faker\Generator $faker) {
 	];
 });
 
-$factory->define(App\Marriage::class, function (Faker\Generator $faker) {
-	return [
-		'registration_id' => 1,
-		'date_married' => '2017-11-15',
-		'marriagePlace' => 'Kicukiro',
-		'user_id' => 1,
-	];
-});
-
 $factory->define(App\Preaching::class, function (Faker\Generator $faker) {
 	return [
-		'registration_id' => 1,		
+		'visitor_names' => 'Pastor Pius',		
 		'topic' => 'Faith and life',
 		'date_preached' => '2017-11-15',
-		'hasRepented' => false,
+		// 'hasRepented' => false,
+		'num_repented' => 10,
 		'user_id' => 1,
 	];
 });
@@ -310,21 +370,12 @@ $factory->define(App\Reception::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Recommendation::class, function (Faker\Generator $faker) {
 	return [
-		'registration_id' => 2,		
+		'registration_id' => 1,
+		// 'type' => 'out',
+		'origin_parish' => 'Burera',
+		'destination_parish' => 'Kinamba',
 		'date_issued' => '2017-10-25',
-		'ownerName' => 'NSHUTI Tresor',
-		'destination' => 'Kinamba',
-		'holderName' => 'KAYUMBA Jules',
 		'date_arrived' => '2017-10-30',
-		'user_id' => 1,
-	];
-});
-
-$factory->define(App\Repenting::class, function (Faker\Generator $faker) {
-	return [
-		'registration_id' => 1,		
-		'date_returned' => '2017-10-26',
-		'authorizer' => 'Pastor Y',
 		'user_id' => 1,
 	];
 });
@@ -333,18 +384,36 @@ $factory->define(App\Suspension::class, function (Faker\Generator $faker) {
 	return [
 		'registration_id' => 1,		
 		'reason' => 'Resistence to Repenting',
-		'authorizer' => 'Bishop X',
+		'suspendor' => 'Bishop X',
+		'date_suspended' => '2017-01-05',
 		'user_id' => 1,
 	];
 });
 
+$factory->define(App\Repenting::class, function (Faker\Generator $faker) {
+	return [
+		'registration_id' => 1,		
+		'date_returned' => '2017-10-26',
+		'reinstator' => 'Pastor Y',
+		'user_id' => 1,
+	];
+});
 
 $factory->define(App\Teaching::class, function (Faker\Generator $faker) {
 	return [
 		'registration_id' => 1,		
 		'cell_id' => 1,
 		'parish_id' => 1,
+		'date_started' => '2018-01-02',
+		'date_ended' => null,
 		'user_id' => 1,
 	];
 });
 
+$factory->define(App\Baptism::class, function (Faker\Generator $faker) {
+	return [
+		'teaching_id' => 1,
+		'date_baptized' => '1981-12-25',
+		'user_id' => 1,
+	];
+});

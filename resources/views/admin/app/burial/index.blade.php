@@ -55,6 +55,7 @@ Burials
                   <th></th>                  
                   <th>REG #</th>
                   <th>DATE DIED</th>
+                  <th>DATE BURIED</th>
                   <th>BURIAL PLACE</th>
                   <th>USER</th>
                   <th>CREATED</th>
@@ -75,6 +76,7 @@ Burials
 
                   <td>{{ $burial->registration_id }}</td>
                   <td>{{ $burial->date_died }}</td>
+                  <td>{{ $burial->date_buried }}</td>
                   <td>{{ $burial->burialPlace }}</td>
                   <td>{{ $burial->user_id }}</td>
                   <td>{{ $burial->created_at }}</td>

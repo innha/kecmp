@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Recommendation extends Model
 {
-    protected $fillable = ['registration_id', 'date_issued', 'ownerName', 'destination', 'holderName', 'date_arrived', 'user_id'];
+    protected $fillable = ['registration_id', 'origin_parish', 'date_issued', 'destination_parish', 'date_arrived', 'user_id'];
 
     public function registration()
     {

@@ -43,10 +43,12 @@ class AdminBridalsController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
+
         $this->validate($request, [
             
-            'registration_id' => 'required|numeric',
-            'bridalName' => 'required',
+            'm_bridal_id' => 'required|numeric',
+            'f_bridal_id' => 'required|numeric',
             'origin' => 'required'
         ]);
 
@@ -54,7 +56,11 @@ class AdminBridalsController extends Controller
 
         $user = Auth::user();
 
+        // dd($user);
+
         $input['user_id'] = $user->id;
+
+        // dd($input);
 
         Bridal::create($input);
 

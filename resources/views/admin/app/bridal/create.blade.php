@@ -23,16 +23,27 @@ Bridal
 			{!! Form::open(['method' => 'POST', 'action' => 'AdminBridalsController@store', 'files' => true]) !!}
 
 				<div class="form-group row">			
-					{!! Form::label('registration_id', 'Registration:', ['class' => 'col-4 col-form-label']) !!}
+					{!! Form::label('m_bridal_id', 'Groom:', ['class' => 'col-4 col-form-label']) !!}
 					<div class="col-6 ui-widget">
-					{!! Form::text('registration_id', Request::get('registration_id'), array('placeholder' => 'Search registration', 'class' => 'form-control typeahead', 'id' => 'registration_id', 'name' => 'registration_id', 'autocomplete' => 'off')) !!}
-					<span class="text-danger">{{ $errors->first('registration_id') }}</span>
+					{!! Form::text('m_bridal_id', Request::get('m_bridal_id'), array('placeholder' => 'Search registration', 'class' => 'form-control typeahead', 'id' => 'm_bridal_id', 'name' => 'm_bridal_id', 'autocomplete' => 'off')) !!}
+					<span class="text-danger">{{ $errors->first('m_bridal_id') }}</span>
 					</div>
 					<div class="col-2">
-                    <span id="loader_registration_id"><i class="fa fa-repeat fa-1x fa-spin"></i></span>
+                    <span id="loader_m_bridal_id"><i class="fa fa-repeat fa-1x fa-spin"></i></span>
                   	</div>					
 				</div>
 
+				<div class="form-group row">			
+					{!! Form::label('f_bridal_id', 'Bride:', ['class' => 'col-4 col-form-label']) !!}
+					<div class="col-6 ui-widget">
+					{!! Form::text('f_bridal_id', Request::get('f_bridal_id'), array('placeholder' => 'Search registration', 'class' => 'form-control typeahead', 'id' => 'f_bridal_id', 'name' => 'f_bridal_id', 'autocomplete' => 'off')) !!}
+					<span class="text-danger">{{ $errors->first('f_bridal_id') }}</span>
+					</div>
+					<div class="col-2">
+                    <span id="loader_f_bridal_id"><i class="fa fa-repeat fa-1x fa-spin"></i></span>
+                  	</div>					
+				</div>
+				<!--
 				<div class="form-group {{$errors->has('bridalName') ? 'has-error' : '' }} row">			
 					{!! Form::label('bridalName', 'Bridal:', ['class' => 'col-4 col-form-label']) !!}
 					<div class="col-8">
@@ -40,7 +51,7 @@ Bridal
 					<span class="text-danger">{{ $errors->first('bridalName') }}</span>
 					</div>
 				</div>
-
+				-->
 				<div class="form-group {{$errors->has('origin') ? 'has-error' : '' }} row">			
 					{!! Form::label('origin', 'Origin:', ['class' => 'col-4 col-form-label']) !!}
 					<div class="col-8">

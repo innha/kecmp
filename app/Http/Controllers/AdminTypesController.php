@@ -16,9 +16,10 @@ class AdminTypesController extends Controller
     public function index()
     {
         // return 'AdminTypesController@index';
-        $types = Type::paginate(5);
+        // $types = Type::paginate(5);
+        $types = Type::all();
 
-        return view('admin.param.type.index', compact('types'));        
+        return view('admin.param.type.index', compact('types'));       
     }
 
     /**
@@ -46,11 +47,11 @@ class AdminTypesController extends Controller
             'name' => 'required|alpha_spaces|unique:types'
         ]);        
 
-        Type::create($request->all());
+        return Type::create($request->all());
 
-        Session::flash('created_type', 'Type created');
+        // Session::flash('created_type', 'Type created');
 
-        return redirect(route('admin.types.index'));
+        // return redirect(route('admin.types.index'));
     }
 
     /**
@@ -84,7 +85,14 @@ class AdminTypesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+
+            'name' => 'required|alpha_spaces'            
+        ]);
+
+        Type::whereId($id)->update($request->all());
+
+        return Type::whereId($id)->first();
     }
 
     /**
@@ -99,8 +107,10 @@ class AdminTypesController extends Controller
 
         $deleted = Type::findOrFail($id)->delete();
 
-        Session::flash('deleted_type', 'Type id ' . $id . ' deleted');
+        // Session::flash('deleted_type', 'Type id ' . $id . ' deleted');
         
-        return redirect(route('admin.types.index'));
+        // return redirect(route('admin.types.index'));
+
+        return response()->json(['status' => 'Delete OK', 'Num deleted' => $deleted, 'ID' => $id], 200);
     }
 }

@@ -24,7 +24,7 @@ class StoreRegistrationRequest extends FormRequest
     public function rules()
     {
         return [
-            'type_id' => 'required|numeric',
+            // 'type_id' => 'required|numeric',
             // 'regNumber' => 'required|numeric|unique:registrations',
             'lastName' => 'required',
             'firstName' => 'required',
@@ -32,6 +32,7 @@ class StoreRegistrationRequest extends FormRequest
             'fFirstName' => 'required',
             'mLastName' => 'required',
             'mFirstName' => 'required',
+            
             'dob' => 'required|date',
             'birthPlace' => 'required',
             // 'phoneOne' => 'numeric',
@@ -58,7 +59,7 @@ class StoreRegistrationRequest extends FormRequest
             // 'baptismDate' => 'date',
             // 'baptismParish' => 'alpha',
             // 'duty_id' => 'numeric',
-            'category_id' => 'required|numeric',
+            'category_id' => 'required',
             // 'service_id' => 'numeric',
             // 'commission_id' => 'numeric',
             // 'choir_id' => 'numeric',

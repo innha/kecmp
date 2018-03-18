@@ -15,12 +15,12 @@ class CreateBaptismsTable extends Migration
     {
         Schema::create('baptisms', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('registration_id')->index()->unsigned()->nullable();
+            $table->integer('teaching_id')->index()->unsigned()->nullable();
             $table->date('date_baptized');
             $table->integer('user_id')->index()->unsigned()->nullable();
             $table->timestamps();
 
-            $table->foreign('registration_id')->references('id')->on('registrations')->onDelete('cascade');
+            $table->foreign('teaching_id')->references('id')->on('teachings')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

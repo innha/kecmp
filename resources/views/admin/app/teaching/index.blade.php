@@ -54,6 +54,8 @@ Teaching
                   <th data-defaultsort="desc">ID</th>
                   <th></th>                  
                   <th>REG #</th>
+                  <th>STARTED</th>
+                  <th>ENDED</th>
                   <th>USER</th>
                   <th>CREATED</th>
                   <th>UPDATED</th>
@@ -71,6 +73,8 @@ Teaching
                     </div>
                   </td>
                   <td>{{ $teaching->registration_id }}</td>
+                  <td>{{ $teaching->date_started }}</td>
+                  <td>{{ $teaching->date_ended }}</td>
                   <td>{{ $teaching->user_id }}</td>
                   <td>{{ $teaching->created_at }}</td>
                   <td>{{ $teaching->updated_at }}</td>

@@ -8,7 +8,6 @@ Dashboard
 
 @endsection
 
-
 @section('content')
 
 <!-- POSTS -->

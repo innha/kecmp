@@ -16,11 +16,11 @@ class CreateRecommendationsTable extends Migration
         Schema::create('recommendations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('registration_id')->index()->unsigned()->nullable();
+            // $table->string('type');          
+            $table->string('origin_parish');
             $table->date('date_issued');
-            $table->string('ownerName');
-            $table->string('destination');
-            $table->string('holderName');
-            $table->date('date_arrived');
+            $table->string('destination_parish');            
+            $table->date('date_arrived')->nullable();
             $table->integer('user_id')->index()->unsigned()->nullable();
             $table->timestamps();
 

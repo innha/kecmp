@@ -53,12 +53,12 @@ Recommendations
                 <tr>
                   <th data-defaultsort="desc">ID</th>
                   <th></th>                  
-                  <th>REG #</th>
+                  <th>REG #</th>                  
+                  <!-- <th>TYPE</th> -->
+                  <th>ORIGIN</th>
                   <th>DATE ISSUED</th>
-                  <th>OWNER</th>
-                  <th>HOLDER</th>
-                  <th>DESTINATION</th>
-                  <th>DATE ARRIVED</th>
+                  <th>DESTINATION</th>                  
+                  <th>DATE RECEIVED</th>
                   <th>USER</th>
                   <th>CREATED</th>
                   <th>UPDATED</th>
@@ -76,10 +76,10 @@ Recommendations
                     </div>
                   </td>                  
                   <td>{{ $recommendation->registration_id }}</td>
+                  <!-- <td>{{ $recommendation->type }}</td> -->
+                  <td>{{ $recommendation->origin_parish }}</td>
                   <td>{{ $recommendation->date_issued }}</td>
-                  <td>{{ $recommendation->ownerName }}</td>
-                  <td>{{ $recommendation->holderName }}</td>
-                  <td>{{ $recommendation->destination }}</td>
+                  <td>{{ $recommendation->destination_parish }}</td>                  
                   <td>{{ $recommendation->date_arrived }}</td>
                   <td>{{ $recommendation->user_id }}</td>
                   <td>{{ $recommendation->created_at }}</td>

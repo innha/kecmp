@@ -33,7 +33,7 @@ Baptism
                   	</div>					
 				</div>
 
-				<div class="form-group row">			
+				<div class="form-group row">
 					{!! Form::label('date_baptized', 'Date Baptized:', ['class' => 'col-4 col-form-label']) !!}
 					<div class="col-8">
 					{!! Form::date('date_baptized', null, ['class' => 'form-control']) !!}
