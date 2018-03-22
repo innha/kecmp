@@ -26,6 +26,7 @@ class AdminParishesController extends Controller
                         ->join('districts', 'parishes.district_id', '=', 'districts.id')
                         // ->select('parishes.*', 'dioceses.name as diocese')
                         ->select('parishes.*', 'districts.name as district', 'dioceses.name as diocese')
+                        // ->select('parishes.*', 'districts.name as district')
                         ->get();                
 
         return view('admin.param.parish.index', compact('parishes'));

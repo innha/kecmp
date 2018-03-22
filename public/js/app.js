@@ -29742,6 +29742,24 @@ var Parish = function Parish(parish) {
 
             window.handleError(e);
         });
+
+        this.axios.get('/admin/param/districts').then(function (resp) {
+
+            // alert('/admin/param/dioceses')
+
+            // console.log(JSON.stringify(resp))
+
+            // alert(JSON.stringify(resp))
+
+            self.districts = resp.data;
+
+            // alert('end /admin/param/dioceses')
+        }).catch(function (e) {
+
+            console.log(e);
+
+            window.handleError(e);
+        });
     },
     data: function data() {
         return {
@@ -41799,11 +41817,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-group"
   }, [_c('div', {
     staticClass: "col-sm"
-  }, [_c('label', {
+  }, [(_vm.editing) ? _c('label', {
     attrs: {
-      "for": "district_id"
+      "for": "district"
     }
-  }, [_vm._v("District")]), _vm._v(" "), _c('select', {
+  }, [_vm._v("District")]) : _vm._e(), _vm._v(" "), _c('select', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -41826,13 +41844,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.$set(_vm.parish, "district_id", $event.target.multiple ? $$selectedVal : $$selectedVal[0])
       }
     }
-  }, _vm._l((_vm.districts), function(value, key) {
+  }, [_c('option', {
+    attrs: {
+      "value": ""
+    }
+  }, [_vm._v("Select district")]), _vm._v(" "), _vm._l((_vm.districts), function(value, key) {
     return _c('option', {
       domProps: {
         "value": key
       }
     }, [_vm._v(_vm._s(value))])
-  }))])]), _vm._v(" "), _c('div', {
+  })], 2)])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('div', {
     staticClass: "col-sm"

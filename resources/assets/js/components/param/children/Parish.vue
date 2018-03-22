@@ -27,9 +27,9 @@
 
                         <div class="form-group">
                             <div class="col-sm">
-                                <label for="district_id">District</label>
+                                <label for="district" v-if="editing">District</label>
                                 <select name="district_id" id="district_id" class="form-control" v-model="parish.district_id">
-                                    <!-- <option value="">Select district</option> -->
+                                    <option value="">Select district</option>
                                     <option v-for="(value, key) in districts" :value="key">{{ value }}</option>
                                 </select>
                             </div>
@@ -174,6 +174,24 @@
                 window.handleError(e)
             })
 
+            this.axios.get('/admin/param/districts').then(resp => {
+
+                // alert('/admin/param/dioceses')
+
+                // console.log(JSON.stringify(resp))
+
+                // alert(JSON.stringify(resp))
+
+                self.districts = resp.data
+
+                // alert('end /admin/param/dioceses')
+
+            }).catch(e => {
+
+                console.log(e)
+
+                window.handleError(e)
+            })
         },
 
         data() {
